@@ -1,10 +1,8 @@
 package az.tarlan.medair.patients.service;
 
-import az.tarlan.medair.analysis.entity.BreastAnalyzes;
 import az.tarlan.medair.patients.patientDAO.PatientDAO;
 import az.tarlan.medair.patients.entity.*;
 import az.tarlan.medair.visits.DAO.VisitDAO;
-import az.tarlan.medair.visits.entity.PatientVisits;
 import az.tarlan.medair.visits.entity.VisitTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,13 +56,11 @@ public class PatientServiceImpl implements PatientService {
         patientDAO.deleteById(theId);
     }
 
-
-
-    @Override
-    @Transactional
-    public void savePatientVisits(PatientVisits patientVisits) {
-        visitDAO.savePatientVisits(patientVisits);
-    }
+//    @Override
+//    @Transactional
+//    public void savePatientVisits(VisitsRegBody visitsRegBody) {
+//        visitDAO.savePatientVisits(visitsRegBody);
+//    }
 
     @Override
     @Transactional
@@ -72,9 +68,4 @@ public class PatientServiceImpl implements PatientService {
         return patientDAO.getPatientId();
     }
 
-
-    @Override
-    public void saveBreastAnalyzes(BreastAnalyzes breastAnalyzes) {
-
     }
-}

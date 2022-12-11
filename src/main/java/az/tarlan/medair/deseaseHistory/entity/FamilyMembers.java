@@ -1,4 +1,4 @@
-package az.tarlan.medair.morby.entity;
+package az.tarlan.medair.deseaseHistory.entity;
 
 import javax.persistence.*;
 
@@ -17,10 +17,10 @@ public class FamilyMembers {
     @Column(name = "family_member")
     private String familyMember;
 
-    @Column(name = "family_member_injury")
+    @Column(name = "family_member_injury_reason")
     private String familyMemberInjury;
 
-    @Column(name = "family_member_died")
+    @Column(name = "family_member_died_reason")
     private String familyMemberDied;
 
     @Column(name = "family_member_current_cancer")

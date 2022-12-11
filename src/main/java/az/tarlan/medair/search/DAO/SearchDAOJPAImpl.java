@@ -47,7 +47,7 @@ public class SearchDAOJPAImpl implements SearchDAO {
         sql=sql+sql_concat("patientSurName", searchForVite.getPatientSurName());
 
         System.out.println("+++++++++++++++++++++++++++++");
-        System.out.println("sql==FROM Patient where "+sql);
+        System.out.println("sql==FROM Vite where "+sql);
         Query theQuery=entityManager.createQuery("FROM Vite where "+sql);
         List<Vite> patients =theQuery.getResultList();
         System.out.println(patients.toString());

@@ -71,8 +71,8 @@ public class PatientDAOJPAImpl implements PatientDAO {
         System.out.println("1==="+patientID);
         Vite dbPatient =entityManager.merge(thePatientVite);
         //update  with id in db ... so we can get generation id for save / insert
-        patientID=dbPatient.getPatientID();
-        thePatientVite.setPatientID(patientID);
+        patientID=dbPatient.getPatientId();
+        thePatientVite.setPatientId(patientID);
         System.out.println("PatientVite==="+thePatientVite.toString());
     }
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "recipe")
+@Table(name = "treatment_recipe")
 
 public class Recipe {
 
@@ -24,8 +24,8 @@ public class Recipe {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "cure_tab_id")
-    private String cureTabId;
+    @Column(name = "cure_tab_name")
+    private String cureTabName;
 
     @Column(name = "cure_tab_dose")
     private String cureTabDose;
@@ -34,29 +34,19 @@ public class Recipe {
     private String cureTabUsing;
 
 
-    @Column(name = "cur_tab_type")
+    @Column(name = "cure_tab_type")
     private String cureTabType;
 
     public Recipe() {}
 
-    public Recipe( int patientId, int recipeId, Date date, String cureTabId, String cureTabDose, String cureTabUsing, String cureTabType) {
-
-        this.patientId = patientId;
+    public Recipe(int recipeId, int patientId, Date date, String cureTabName, String cureTabDose, String cureTabUsing, String cureTabType) {
         this.recipeId = recipeId;
+        this.patientId = patientId;
         this.date = date;
-        this.cureTabId = cureTabId;
+        this.cureTabName = cureTabName;
         this.cureTabDose = cureTabDose;
         this.cureTabUsing = cureTabUsing;
         this.cureTabType = cureTabType;
-    }
-
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
     }
 
     public int getRecipeId() {
@@ -67,6 +57,14 @@ public class Recipe {
         this.recipeId = recipeId;
     }
 
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -75,12 +73,12 @@ public class Recipe {
         this.date = date;
     }
 
-    public String getCureTabId() {
-        return cureTabId;
+    public String getCureTabName() {
+        return cureTabName;
     }
 
-    public void setCureTabId(String cureTabId) {
-        this.cureTabId = cureTabId;
+    public void setCureTabName(String cureTabName) {
+        this.cureTabName = cureTabName;
     }
 
     public String getCureTabDose() {
@@ -109,14 +107,13 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe = {" +
-
-                " patientId=" + patientId +
-                ", recipeId=" + recipeId +
-                ", date=" + date +
-                ", cureTabId='" + cureTabId + '\'' +
-                ", cureTabDose='" + cureTabDose + '\'' +
-                ", cureTabUsing='" + cureTabUsing + '\'' +
+        return "Recipe{" +
+                "recipeId=" + recipeId +"\n"+
+                ", patientId=" + patientId +"\n"+
+                ", date=" + date +"\n"+
+                ", cureTabName='" + cureTabName + '\'' +"\n"+
+                ", cureTabDose='" + cureTabDose + '\'' +"\n"+
+                ", cureTabUsing='" + cureTabUsing + '\'' +"\n"+
                 ", cureTabType='" + cureTabType + '\'' +
                 '}';
     }

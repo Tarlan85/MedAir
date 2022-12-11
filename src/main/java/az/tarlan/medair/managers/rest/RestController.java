@@ -36,6 +36,7 @@ public class RestController {
     }
     @GetMapping("/managers/places")
     public List<VisitPlaces> loadPlacesManager(){
+        System.out.println("loadPlacesManager");
         return managerService.getAllPlaces();
     }
     @PostMapping("/managers/places")

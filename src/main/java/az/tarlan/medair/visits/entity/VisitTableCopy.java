@@ -5,55 +5,28 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
-@Entity
-@Table(name = "visit_table")
-public class VisitTable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name="visit_date")
+public class VisitTableCopy {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Timestamp visitDate;
-
-    @Column(name = "patient_id")
     private int patientId;
-
-    @Column(name="status")
     private String status;
-
-    @Column(name = "patient_name")
     private String patientName;
-
-    @Column(name = "patient_surname")
     private String patientSurName;
-
-    @Column(name = "patient_patronymic")
     private String patientPatronymic;
     @JsonFormat(pattern="yyyy-MM-dd")
-    @Column(name = "birth_date")
     private Date birthDate;
-
-    @Column(name="visit_reason")
     private String visitReason;
-
-    @Column(name="place_name") //foreign key
     private String placeName;
-
-    @Column(name="recommendation_person")
     private String recommendationPerson;
-
-    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Override
     public String toString() {
-        return "VisitTable{" +
-                "id=" + id +
-                ", visitDate=" + visitDate +
+        return "VisitTableCopy{" +
+                " visitDate=" + visitDate +
                 ", patientId=" + patientId +
                 ", status='" + status + '\'' +
                 ", patientName='" + patientName + '\'' +
@@ -65,14 +38,6 @@ public class VisitTable {
                 ", recommendationPerson='" + recommendationPerson + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getStatus() {
@@ -163,12 +128,11 @@ public class VisitTable {
         this.phoneNumber = phoneNumber;
     }
 
-    public VisitTable() {
+    public VisitTableCopy() {
 
     }
 
-    public VisitTable(int id, Timestamp visitDate, int patientId, String status, String patientName, String patientSurName, String patientPatronymic, Date birthDate, String visitReason, String placeName, String recommendationPerson, String phoneNumber) {
-        this.id = id;
+    public VisitTableCopy( Timestamp visitDate, int patientId, String status, String patientName, String patientSurName, String patientPatronymic, Date birthDate, String visitReason, String placeName, String recommendationPerson, String phoneNumber) {
         this.visitDate = visitDate;
         this.patientId = patientId;
         this.status = status;

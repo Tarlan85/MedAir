@@ -1,8 +1,6 @@
 package az.tarlan.medair.patients.service;
 
-import az.tarlan.medair.analysis.entity.BreastAnalyzes;
 import az.tarlan.medair.patients.entity.*;
-import az.tarlan.medair.visits.entity.PatientVisits;
 import az.tarlan.medair.visits.entity.VisitTable;
 
 import java.util.List;
@@ -23,10 +21,9 @@ public interface PatientService {
 
 
 
-    void savePatientVisits(PatientVisits patientVisits);
+//    void savePatientVisits(PatientVisits patientVisits);
 
     int getPatientId();
 
 
-    void saveBreastAnalyzes(BreastAnalyzes breastAnalyzes);
 }

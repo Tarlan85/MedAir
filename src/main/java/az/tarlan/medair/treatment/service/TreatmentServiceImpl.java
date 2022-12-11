@@ -20,6 +20,12 @@ public class TreatmentServiceImpl implements TreatmentService {
     public void saveTreatment(TreatmentReqBody treatmentRB) {
       treatmentDAO.saveTreatment(treatmentRB);
     }
+
+    @Override
+    @Transactional
+    public TreatmentReqBody findTreatmentAnalyses(int patientId) {
+        return treatmentDAO.findTreatmentAnalyses(patientId);
+    }
 //
 //    @Override
 //    @Transactional

@@ -15,6 +15,8 @@ public class PatientVisits {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="visit_id")
     private int visitId;
+    @Column(name="visit_table_status")
+    private int visitTableStatus;
 
     @Column(name="patient_id") //foreign key
     private int patientId;
@@ -26,37 +28,42 @@ public class PatientVisits {
     @Column(name="visit_reason")
     private String visitReason;
 
-    @Column(name="status")
+    @Column(name="visit_status")
     private String status;
 
-    @Column(name="place_name") //foreign key
+    @Column(name="visit_place_name") //foreign key
     private String placeName;
 
-    @Column(name="recommendation_person")
-    private String recommendationPerson;
+
 
     @Column(name="visit_type")
     private String visitType;
     @Column(name="visit_desc")
     private String visitDesc;
 
-    @Column(name="preliminary_diagnosis")
-    private String preliminaryDiagnosis;
+
 
     //define constructor
     public PatientVisits() {}
 
-    public PatientVisits(int visitId, int patientId, Timestamp visitDate, String visitReason, String status, String placeName, String recommendationPerson, String visitType, String visitDesc, String preliminaryDiagnosis) {
+    public PatientVisits(int visitId,int visitTableStatus, int patientId, Timestamp visitDate, String visitReason, String status, String placeName, String visitType, String visitDesc) {
         this.visitId = visitId;
+        this.visitTableStatus = visitTableStatus;
         this.patientId = patientId;
         this.visitDate = visitDate;
         this.visitReason = visitReason;
         this.status = status;
         this.placeName = placeName;
-        this.recommendationPerson = recommendationPerson;
         this.visitType = visitType;
         this.visitDesc = visitDesc;
-        this.preliminaryDiagnosis = preliminaryDiagnosis;
+    }
+
+    public int getVisitTableStatus() {
+        return visitTableStatus;
+    }
+
+    public void setVisitTableStatus(int visitTableStatus) {
+        this.visitTableStatus = visitTableStatus;
     }
 
     public int getVisitId() {
@@ -91,20 +98,20 @@ public class PatientVisits {
         this.visitReason = visitReason;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getPlaceName() {
         return placeName;
     }
 
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
-    }
-
-    public String getRecommendationPerson() {
-        return recommendationPerson;
-    }
-
-    public void setRecommendationPerson(String recomendationPerson) {
-        this.recommendationPerson = recomendationPerson;
     }
 
     public String getVisitType() {
@@ -123,35 +130,18 @@ public class PatientVisits {
         this.visitDesc = visitDesc;
     }
 
-    public String getPreliminaryDiagnosis() {
-        return preliminaryDiagnosis;
-    }
-
-    public void setPreliminaryDiagnosis(String preliminaryDyagnosis) {
-        this.preliminaryDiagnosis = preliminaryDyagnosis;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "PatientVisits{" +
-                "visitId=" + visitId +
-                ", patientId=" + patientId +
-                ", visitDate=" + visitDate +
-                ", visitReason='" + visitReason + '\'' +
-                ", status='" + status + '\'' +
-                ", placeName='" + placeName + '\'' +
-                ", recommendationPerson='" + recommendationPerson + '\'' +
-                ", visitType='" + visitType + '\'' +
+                "visitId=" + visitId +"\n"+
+                "visitTableStatus=" + visitTableStatus +"\n"+
+                ", patientId=" + patientId +"\n"+
+                ", visitDate=" + visitDate +"\n"+
+                ", visitReason='" + visitReason + '\'' +"\n"+
+                ", status='" + status + '\'' +"\n"+
+                ", placeName='" + placeName + '\'' +"\n"+
+                ", visitType='" + visitType + '\'' +"\n"+
                 ", visitDesc='" + visitDesc + '\'' +
-                ", preliminaryDiagnosis='" + preliminaryDiagnosis + '\'' +
                 '}';
     }
 }

@@ -1,9 +1,6 @@
 package az.tarlan.medair.treatment.rest;
 
-import az.tarlan.medair.managers.entity.CureTabs;
-import az.tarlan.medair.managers.entity.VisitPlaces;
-import az.tarlan.medair.managers.service.ManagerService;
-import az.tarlan.medair.treatment.entity.Treatment;
+import az.tarlan.medair.analysis.entity.AnalyzesMedia;
 import az.tarlan.medair.treatment.entity.TreatmentReqBody;
 import az.tarlan.medair.treatment.service.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,11 @@ public class TreatmentRestController {
         System.out.println(treatmentRB.toString());
         treatmentService.saveTreatment(treatmentRB);
         return null;
+    }
+    @GetMapping("/treatment/{patientId}")
+    public TreatmentReqBody findTreatmentByPatientId(@PathVariable int patientId){
+        System.out.println("1. findTreatmentByPatientId \n patientId==="+patientId);
+        return treatmentService.findTreatmentAnalyses(patientId);
     }
 
 }

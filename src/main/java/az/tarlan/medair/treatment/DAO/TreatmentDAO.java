@@ -7,6 +7,8 @@ import az.tarlan.medair.treatment.entity.TreatmentReqBody;
 public interface TreatmentDAO {
 //    public CureTabs findById(int cureTabsId);
     public void saveTreatment(TreatmentReqBody treatmentRB);
+
+    TreatmentReqBody findTreatmentAnalyses(int patientId);
 //
 //    List<CureTabs> getAllTabs();
 //
