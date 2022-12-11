@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "treatment")
+@Table(name = "treatment_static")
 
-public class Treatment {
+public class TreatmentStatic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,15 +17,12 @@ public class Treatment {
 
     @Column(name = "patient_id")
     private int patientId;
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm:ss")
-    @Column(name = "treatment_date")
-    private Date treatmentDate;
 
     @Column(name = "treatment_desc")
     private String treatmentDesc;
 
-    @Column(name = "breast_type")
-    private String breastType;
+//    @Column(name = "breast_type")
+//    private String breastType;
 
     @Column(name = "pre_menapause")
     private String preMenapause;
@@ -33,28 +30,18 @@ public class Treatment {
     @Column(name = "menapause")
     private String menapause;
 
-    @Column(name = "advice")
-    private String advice;
+    @Column(name = "recomendation")
+    private String recomendation;
 
-    public Treatment() {}
+    public TreatmentStatic() {}
 
-    public Treatment(int treatmentId, int patientId, Date treatmentDate, String treatmentDesc, String breastType, String preMenapause, String menapause, String advice) {
+    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recomendation) {
         this.treatmentId = treatmentId;
         this.patientId = patientId;
-        this.treatmentDate = treatmentDate;
         this.treatmentDesc = treatmentDesc;
-        this.breastType = breastType;
         this.preMenapause = preMenapause;
         this.menapause = menapause;
-        this.advice = advice;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+        this.recomendation = recomendation;
     }
 
     public int getTreatmentId() {
@@ -65,12 +52,12 @@ public class Treatment {
         this.treatmentId = treatmentId;
     }
 
-    public Date getTreatmentDate() {
-        return treatmentDate;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setTreatmentDate(Date treatmentDate) {
-        this.treatmentDate = treatmentDate;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getTreatmentDesc() {
@@ -79,14 +66,6 @@ public class Treatment {
 
     public void setTreatmentDesc(String treatmentDesc) {
         this.treatmentDesc = treatmentDesc;
-    }
-
-    public String getBreastType() {
-        return breastType;
-    }
-
-    public void setBreastType(String breastType) {
-        this.breastType = breastType;
     }
 
     public String getPreMenapause() {
@@ -105,25 +84,23 @@ public class Treatment {
         this.menapause = menapause;
     }
 
-    public String getAdvice() {
-        return advice;
+    public String getRecomendation() {
+        return recomendation;
     }
 
-    public void setAdvice(String advice) {
-        this.advice = advice;
+    public void setRecomendation(String recomendation) {
+        this.recomendation = recomendation;
     }
 
     @Override
     public String toString() {
-        return "Treatment = {" +
+        return "Treatment{" +
                 "treatmentId=" + treatmentId +"\n"+
                 ", patientId=" + patientId +"\n"+
-                ", treatmentDate=" + treatmentDate +"\n"+
                 ", treatmentDesc='" + treatmentDesc + '\'' +"\n"+
-                ", breastType='" + breastType + '\'' +"\n"+
                 ", preMenapause='" + preMenapause + '\'' +"\n"+
                 ", menapause='" + menapause + '\'' +"\n"+
-                ", advice='" + advice + '\'' +
+                ", recomendation='" + recomendation + '\'' +
                 '}';
     }
 }

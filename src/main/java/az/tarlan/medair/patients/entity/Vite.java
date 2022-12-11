@@ -18,8 +18,8 @@ public class Vite {
     @Column(name = "patient_surname")
     private String patientSurName;
 
-    @Column(name = "patient_father")
-    private String patientFather;
+    @Column(name = "patient_patronymic")
+    private String patientPatronymic;
 
     @Column(name = "birth_date")
     private Date birthDate;
@@ -31,8 +31,8 @@ public class Vite {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "married")
-    private String married;
+    @Column(name = "marital_status")
+    private String maritalStatus;
 
     @Column(name = "sex_status")
     private String sexStatus;
@@ -58,6 +58,9 @@ public class Vite {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "cure_for_infertility")
+    private String cureForInfertility;
+
     @Column(name = "menopause")
     private String menopause;
 
@@ -79,24 +82,21 @@ public class Vite {
     @Column(name = "artificial_insemination_count")
     private int artificialInseminationCount;
 
+    @Column(name="recommendation_person")
+    private String recommendationPerson;
 
     public Vite() {
     }
 
-    public Vite(int patientId, String patientName, String patientSurName, String patientFather, Date birthDate,
-                String birthPlace, String gender, String married, String sexStatus, double height, double weight,
-                double imt, int smoke, int alkogol, int raiting, String phoneNumber, String menopause, String menarxe,
-                int firstChildbirth, int lastChildbirth, int abortCount, String lactationPeriod,
-                int artificialInseminationCount) {
+    public Vite(int patientId, String patientName, String patientSurName, String patientPatronymic, Date birthDate, String birthPlace, String gender, String maritalStatus, String sexStatus, double height, double weight, double imt, int smoke, int alkogol, int raiting, String phoneNumber, String cureForInfertility, String menopause, String menarxe, int firstChildbirth, int lastChildbirth, int abortCount, String lactationPeriod, int artificialInseminationCount, String recommendationPerson) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.patientSurName = patientSurName;
-        this.patientFather = patientFather;
+        this.patientPatronymic = patientPatronymic;
         this.birthDate = birthDate;
         this.birthPlace = birthPlace;
-
         this.gender = gender;
-        this.married = married;
+        this.maritalStatus = maritalStatus;
         this.sexStatus = sexStatus;
         this.height = height;
         this.weight = weight;
@@ -105,6 +105,7 @@ public class Vite {
         this.alkogol = alkogol;
         this.raiting = raiting;
         this.phoneNumber = phoneNumber;
+        this.cureForInfertility = cureForInfertility;
         this.menopause = menopause;
         this.menarxe = menarxe;
         this.firstChildbirth = firstChildbirth;
@@ -112,13 +113,14 @@ public class Vite {
         this.abortCount = abortCount;
         this.lactationPeriod = lactationPeriod;
         this.artificialInseminationCount = artificialInseminationCount;
+        this.recommendationPerson = recommendationPerson;
     }
 
-    public int getPatientID() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientID(int patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
@@ -138,12 +140,12 @@ public class Vite {
         this.patientSurName = patientSurName;
     }
 
-    public String getPatientFather() {
-        return patientFather;
+    public String getPatientPatronymic() {
+        return patientPatronymic;
     }
 
-    public void setPatientFather(String patientFather) {
-        this.patientFather = patientFather;
+    public void setPatientPatronymic(String patientPatronymic) {
+        this.patientPatronymic = patientPatronymic;
     }
 
     public Date getBirthDate() {
@@ -162,7 +164,6 @@ public class Vite {
         this.birthPlace = birthPlace;
     }
 
-
     public String getGender() {
         return gender;
     }
@@ -171,12 +172,12 @@ public class Vite {
         this.gender = gender;
     }
 
-    public String getMarried() {
-        return married;
+    public String getMaritalStatus() {
+        return maritalStatus;
     }
 
-    public void setMarried(String married) {
-        this.married = married;
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
     }
 
     public String getSexStatus() {
@@ -243,6 +244,14 @@ public class Vite {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getCureForInfertility() {
+        return cureForInfertility;
+    }
+
+    public void setCureForInfertility(String cureForInfertility) {
+        this.cureForInfertility = cureForInfertility;
+    }
+
     public String getMenopause() {
         return menopause;
     }
@@ -299,33 +308,42 @@ public class Vite {
         this.artificialInseminationCount = artificialInseminationCount;
     }
 
+    public String getRecommendationPerson() {
+        return recommendationPerson;
+    }
+
+    public void setRecommendationPerson(String recommendationPerson) {
+        this.recommendationPerson = recommendationPerson;
+    }
+
     @Override
     public String toString() {
         return "Vite{" +
                 "patientId=" + patientId +
                 ", patientName='" + patientName + '\'' +
-                ", patientSurName='" + patientSurName + '\'' +
-                ", patientFather='" + patientFather + '\'' +
+                ", patientSurName='" + patientSurName + '\'' +"\n" +
+                ", patientPatronymic='" + patientPatronymic + '\'' +
                 ", birthDate=" + birthDate +
-                ", birthPlace='" + birthPlace + '\'' +
-
+                ", birthPlace='" + birthPlace + '\'' +"\n" +
                 ", gender='" + gender + '\'' +
-                ", married='" + married + '\'' +
-                ", sexStatus='" + sexStatus + '\'' +
+                ", maritalStatus='" + maritalStatus + '\'' +
+                ", sexStatus='" + sexStatus + '\'' +"\n" +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", imt=" + imt +
+                ", imt=" + imt +"\n" +
                 ", smoke=" + smoke +
                 ", alkogol=" + alkogol +
-                ", raiting=" + raiting +
+                ", raiting=" + raiting +"\n" +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", cureForInfertility='" + cureForInfertility + '\'' +"\n" +
                 ", menopause='" + menopause + '\'' +
-                ", menarxe='" + menarxe + '\'' +
+                ", menarxe='" + menarxe + '\'' +"\n" +
                 ", firstChildbirth=" + firstChildbirth +
-                ", lastChildbirth=" + lastChildbirth +
+                ", lastChildbirth=" + lastChildbirth +"\n" +
                 ", abortCount=" + abortCount +
                 ", lactationPeriod='" + lactationPeriod + '\'' +
-                ", artificialInseminationCount=" + artificialInseminationCount +
+                ", artificialInseminationCount=" + artificialInseminationCount +"\n" +
+                ", recommendationPerson='" + recommendationPerson + '\'' +
                 '}';
     }
 }

@@ -1,20 +1,17 @@
-package az.tarlan.medair.morby.rest;
+package az.tarlan.medair.deseaseHistory.rest;
 
-import az.tarlan.medair.morby.entity.MorbyReqBody;
-import az.tarlan.medair.morby.service.MorbyService;
-import az.tarlan.medair.treatment.entity.TreatmentReqBody;
-import az.tarlan.medair.treatment.service.TreatmentService;
+import az.tarlan.medair.deseaseHistory.service.DeseaseHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})
 @RequestMapping("/api")
-public class MorbyRestController {
-    private MorbyService morbyService;
+public class DeseaseHistoryRestController {
+    private DeseaseHistoryService deseaseHistoryService;
     @Autowired
-    public MorbyRestController(MorbyService morbyService) {
-        this.morbyService=morbyService;
+    public DeseaseHistoryRestController(DeseaseHistoryService deseaseHistoryService) {
+        this.deseaseHistoryService = deseaseHistoryService;
     }
 
 

@@ -51,11 +51,11 @@ public class VisitDAOImpl implements VisitDAO{
 
 
         System.out.println("22222=="+dbPatientVisits.toString());
-        Query theQuery=entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientFather," +
+        Query theQuery=entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientPatronymic," +
                 "birthDate,visitReason,placeName,recommendationPerson,phoneNumber,status)" +
                 " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
-                "vite.patientFather,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +
-                "patientVisits.recommendationPerson,vite.phoneNumber,patientVisits.status FROM PatientVisits patientVisits" +
+                "vite.patientPatronymic,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +
+                "vite.recommendationPerson,vite.phoneNumber,patientVisits.status FROM PatientVisits patientVisits" +
                 " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId where patientVisits.patientId=:patientId");
         theQuery.setParameter("patientId",dbPatientVisits.getPatientId());theQuery.executeUpdate();
 //    }

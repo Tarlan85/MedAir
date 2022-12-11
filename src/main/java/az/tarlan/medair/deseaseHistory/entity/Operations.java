@@ -1,4 +1,4 @@
-package az.tarlan.medair.morby.entity;
+package az.tarlan.medair.deseaseHistory.entity;
 
 import javax.persistence.*;
 
