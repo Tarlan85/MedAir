@@ -319,6 +319,7 @@ public class Vite {
     @Override
     public String toString() {
         return "Vite{" +
+
                 "patientId=" + patientId +"\n" +
                 ", patientName='" + patientName + '\'' +"\n" +
                 ", patientSurName='" + patientSurName + '\'' +"\n" +
@@ -344,6 +345,33 @@ public class Vite {
                 ", lactationPeriod='" + lactationPeriod + '\'' +"\n" +
                 ", artificialInseminationCount=" + artificialInseminationCount +"\n" +
                 ", recommendationPerson='" + recommendationPerson + '\'' +"\n" +
+//=======
+//                "patientId=" + patientId +
+//                ", patientName='" + patientName + '\'' +
+//                ", patientSurName='" + patientSurName + '\'' +"\n" +
+//                ", patientPatronymic='" + patientPatronymic + '\'' +
+//                ", birthDate=" + birthDate +
+//                ", birthPlace='" + birthPlace + '\'' +"\n" +
+//                ", gender='" + gender + '\'' +
+//                ", maritalStatus='" + maritalStatus + '\'' +
+//                ", sexStatus='" + sexStatus + '\'' +"\n" +
+//                ", height=" + height +
+//                ", weight=" + weight +
+//                ", imt=" + imt +"\n" +
+//                ", smoke=" + smoke +
+//                ", alkogol=" + alkogol +
+//                ", raiting=" + raiting +"\n" +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", cureForInfertility='" + cureForInfertility + '\'' +"\n" +
+//                ", menopause='" + menopause + '\'' +
+//                ", menarxe='" + menarxe + '\'' +"\n" +
+//                ", firstChildbirth=" + firstChildbirth +
+//                ", lastChildbirth=" + lastChildbirth +"\n" +
+//                ", abortCount=" + abortCount +
+//                ", lactationPeriod='" + lactationPeriod + '\'' +
+//                ", artificialInseminationCount=" + artificialInseminationCount +"\n" +
+//                ", recommendationPerson='" + recommendationPerson + '\'' +
+//>>>>>>> origin/main
                 '}';
     }
 }

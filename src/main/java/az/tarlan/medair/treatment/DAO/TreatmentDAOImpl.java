@@ -1,6 +1,7 @@
 package az.tarlan.medair.treatment.DAO;
 
 import az.tarlan.medair.analysis.entity.AnalyzesMedia;
+import az.tarlan.medair.treatment.DAO.TreatmentDAO;
 import az.tarlan.medair.treatment.entity.Recipe;
 import az.tarlan.medair.treatment.entity.TreatmentDynamic;
 import az.tarlan.medair.treatment.entity.TreatmentStatic;
@@ -40,12 +41,12 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         Recipe recipe=new Recipe();
         for (int i=0;i<recipeList.size();i++){
             recipeList.get(i).setPatientId(treatmentRB.getPatientId());
-        recipe=  entityManager.merge(recipeList.get(i));
-        recipeList.get(i).setRecipeId(recipe.getRecipeId());
+            recipe=  entityManager.merge(recipeList.get(i));
+            recipeList.get(i).setRecipeId(recipe.getRecipeId());
             System.out.println(recipe.toString());
         }
         List<TreatmentDynamic> treatmentDynamicsList=treatmentRB.getTreatmentDynamics();
-       TreatmentDynamic treatmentDynamic=new TreatmentDynamic();
+        TreatmentDynamic treatmentDynamic=new TreatmentDynamic();
         for (int i=0;i<treatmentDynamicsList.size();i++){
             treatmentDynamicsList.get(i).setPatientId(treatmentRB.getPatientId());
             treatmentDynamic=  entityManager.merge(treatmentDynamicsList.get(i));
@@ -59,9 +60,10 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     public TreatmentReqBody findTreatmentAnalyses(int patientId) {
         System.out.println("2. findTreatmentAnalyses");
         TreatmentReqBody treatmentReqBody=new TreatmentReqBody();
+        System.out.println("From TreatmentStatic where patientId = "+patientId);
         Query theQuery=entityManager.createQuery("From TreatmentStatic where patientId = "+patientId);
         List<TreatmentStatic> treatmentStatic = theQuery.getResultList();
-        System.out.println("3. "+treatmentStatic.toString());
+        System.out.println("3.treatmentStatic =  "+treatmentStatic.toString());
         treatmentReqBody.setrecommendation(treatmentStatic.get(0).getrecommendation());
         treatmentReqBody.setTreatmentId(treatmentStatic.get(0).getTreatmentId());
         treatmentReqBody.setTreatmentDesc(treatmentStatic.get(0).getTreatmentDesc());

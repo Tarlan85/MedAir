@@ -45,6 +45,13 @@ public class VisitDAOImpl implements VisitDAO{
         Query theQuery=entityManager.createQuery("UPDATE VisitTable SET status = '"+visitTable.getStatus()+"'" +
                 " WHERE id='"+visitTable.getId()+"'");
         theQuery.executeUpdate();
+        String date=entityManager.createQuery("Select visitDate from VisitTable where id='"+visitTable.getId()+"'").getResultList().get(0).toString();
+        System.out.println("UPDATE PatientVisits SET status = '"+visitTable.getStatus()+"'" +
+                " WHERE visitDate='"+date+"'");
+         theQuery=entityManager.createQuery("UPDATE PatientVisits SET status = '"+visitTable.getStatus()+"'" +
+                " WHERE date(visitDate)=date('"+date+"')");
+        theQuery.executeUpdate();
+
     }
 
     @Override
@@ -70,18 +77,23 @@ public class VisitDAOImpl implements VisitDAO{
 //        PatientVisits dbPatientVisits=entityManager.merge(patientVisits);
 //        patientVisits.setVisitId(dbPatientVisits.getVisitId());
 
-
-
         Query theQuery=entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientPatronymic," +
                 "birthDate,visitReason,placeName,recommendationPerson,phoneNumber,status)" +
                 " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
                 "vite.patientPatronymic,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +
                 "vite.recommendationPerson,vite.phoneNumber,patientVisits.status FROM PatientVisits patientVisits" +
+
                 " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId where patientVisits.patientId=:patientId and patientVisits.visitTableStatus=0");
+//        " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId where patientVisits.patientId=:patientId");
+
         theQuery.setParameter("patientId",patientId);
         theQuery.executeUpdate();
         theQuery=entityManager.createQuery("UPDATE PatientVisits SET visitTableStatus=1 WHERE visitTableStatus=0");
         theQuery.executeUpdate();
+
+
+//        theQuery.setParameter("patientId",dbPatientVisits.getPatientId());theQuery.executeUpdate();
+
 //    }
 //        else {
 //            System.out.println("Else");

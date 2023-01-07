@@ -19,7 +19,7 @@ public class DeseaseHistoryRestController {
     @PostMapping("/morby")
     public DeseaseReqBody addTreatment(@RequestBody DeseaseReqBody deseaseReqBody){
         System.out.println(">>>>>>>>MORBY<<<<<<<<<");
-       System.out.println(deseaseReqBody.toString());
+        System.out.println(deseaseReqBody.toString());
         deseaseHistoryService.saveDeseaseHistory(deseaseReqBody);
         return null;
     }

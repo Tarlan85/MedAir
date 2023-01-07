@@ -25,6 +25,7 @@ public class TreatmentReqBody  {
     }
 
     public TreatmentReqBody(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, List<TreatmentDynamic> treatmentDynamics, List<Recipe> recipeList) {
+
         this.treatmentId = treatmentId;
         this.patientId = patientId;
         this.treatmentDesc = treatmentDesc;
@@ -75,12 +76,16 @@ public class TreatmentReqBody  {
         this.menapause = menapause;
     }
 
+
     public String getrecommendation() {
         return recommendation;
     }
 
     public void setrecommendation(String recommendation) {
-        this.recommendation = recommendation;
+        this.recommendation = recommendation;}
+
+    public String getRecomendation() {
+        return recommendation;
     }
 
     public List<TreatmentDynamic> getTreatmentDynamics() {
@@ -107,6 +112,7 @@ public class TreatmentReqBody  {
                 ", treatmentDesc='" + treatmentDesc + '\'' +'\n' +
                 ", preMenapause='" + preMenapause + '\'' +'\n' +
                 ", menapause='" + menapause + '\'' +'\n' +
+
                 ", recommendation='" + recommendation + '\'' +'\n' +
                 ", treatmentDynamics=" + treatmentDynamics +'\n' +
                 ", recipeList=" + recipeList +

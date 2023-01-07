@@ -30,17 +30,21 @@ public class TreatmentStatic {
     @Column(name = "menapause")
     private String menapause;
 
+
     @Column(name = "recommendation")
     private String recommendation;
 
     public TreatmentStatic() {}
 
+
     public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation) {
+
         this.treatmentId = treatmentId;
         this.patientId = patientId;
         this.treatmentDesc = treatmentDesc;
         this.preMenapause = preMenapause;
         this.menapause = menapause;
+
         this.recommendation = recommendation;
     }
 
@@ -84,6 +88,7 @@ public class TreatmentStatic {
         this.menapause = menapause;
     }
 
+
     public String getrecommendation() {
         return recommendation;
     }
@@ -91,7 +96,6 @@ public class TreatmentStatic {
     public void setrecommendation(String recommendation) {
         this.recommendation = recommendation;
     }
-
     @Override
     public String toString() {
         return "Treatment{" +

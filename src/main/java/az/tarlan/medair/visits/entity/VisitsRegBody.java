@@ -6,10 +6,17 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class VisitsRegBody {
+
     List<PatientVisits> patientVisitsList;
 
 //    private int visitId;
     private int patientId;
+
+//    List<PatientVisits> patientVisits;
+
+//    private int visitId;
+//    private int patientId;
+
 //    private String initialDiagnosis;
 //
 //    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
@@ -23,12 +30,21 @@ public class VisitsRegBody {
 //    private String preliminaryDiagnosis;
 
 
+
     public VisitsRegBody(List<PatientVisits> patientVisitsList, int patientId) {
         this.patientVisitsList = patientVisitsList;
         this.patientId = patientId;
     }
 
     public VisitsRegBody() {
+    }
+
+    public List<PatientVisits> getPatientVisitsList() {
+        return patientVisitsList;
+    }
+
+    public void setPatientVisitsList(List<PatientVisits> patientVisitsList) {
+        this.patientVisitsList = patientVisitsList;
     }
 
     public int getPatientId() {
@@ -39,17 +55,20 @@ public class VisitsRegBody {
         this.patientId = patientId;
     }
 
-    public List<PatientVisits> getPatientVisitsList() {
-        return patientVisitsList;
-    }
+    //    public VisitsRegBody(List<PatientVisits> patientVisits) {
+//        this.patientVisits = patientVisits;
+//    }
+//
+//    public List<PatientVisits> getPatientVisits() {
+//        return patientVisits;
+//    }
 
-    public void setPatientVisits(List<PatientVisits> patientVisitsList) {
-        this.patientVisitsList = patientVisitsList;
-    }
+
 
     @Override
     public String toString() {
         return "VisitsRegBody{" +
+
                 "patientVisitsList=" + patientVisitsList +
                 ", patientId=" + patientId +
                 '}';

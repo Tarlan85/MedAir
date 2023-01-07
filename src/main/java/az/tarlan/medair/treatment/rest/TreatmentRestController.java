@@ -1,12 +1,8 @@
 package az.tarlan.medair.treatment.rest;
-
-import az.tarlan.medair.analysis.entity.AnalyzesMedia;
 import az.tarlan.medair.treatment.entity.TreatmentReqBody;
 import az.tarlan.medair.treatment.service.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})

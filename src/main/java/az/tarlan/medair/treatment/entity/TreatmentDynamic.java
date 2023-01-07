@@ -19,7 +19,9 @@ public class TreatmentDynamic {
     @Column(name = "patient_id")
     private int patientId;
 
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm")
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+
     @Column(name = "treatment_date")
     private Date treatmentDate;
 
