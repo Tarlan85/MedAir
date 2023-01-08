@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class FamilyMembers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "family_members_id")
+    @Column(name = "family_member_id")
     private int familyMembersId;
 
     @Column(name = "patient_id")
@@ -26,18 +26,21 @@ public class FamilyMembers {
     @Column(name = "family_member_current_cancer")
     private String familyMemberCurrentCancer;
 
+    @Column(name = "family_member_description")
+    private String familyMemberDesc;
 
     public FamilyMembers() {
     }
 
 
-    public FamilyMembers(int familyMembersId, int patientId, String familyMember, String familyMemberInjury, String familyMemberDied, String familyMemberCurrentCancer) {
+    public FamilyMembers(int familyMembersId, int patientId, String familyMember, String familyMemberInjury, String familyMemberDied, String familyMemberCurrentCancer, String familyMemberDesc) {
         this.familyMembersId = familyMembersId;
         this.patientId = patientId;
         this.familyMember = familyMember;
         this.familyMemberInjury = familyMemberInjury;
         this.familyMemberDied = familyMemberDied;
         this.familyMemberCurrentCancer = familyMemberCurrentCancer;
+        this.familyMemberDesc = familyMemberDesc;
     }
 
     public int getFamilyMembersId() {
@@ -88,7 +91,13 @@ public class FamilyMembers {
         this.familyMemberCurrentCancer = familyMemberCurrentCancer;
     }
 
+    public String getFamilyMemberDesc() {
+        return familyMemberDesc;
+    }
 
+    public void setFamilyMemberDesc(String familyMemberDesc) {
+        this.familyMemberDesc = familyMemberDesc;
+    }
 
     @Override
     public String toString() {
@@ -99,6 +108,7 @@ public class FamilyMembers {
                 ", familyMemberInjury='" + familyMemberInjury + '\'' +
                 ", familyMemberDied='" + familyMemberDied + '\'' +
                 ", familyMemberCurrentCancer='" + familyMemberCurrentCancer + '\'' +
+                ", familyMemberDesc='" + familyMemberDesc + '\'' +
                 '}';
     }
 }

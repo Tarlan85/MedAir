@@ -6,6 +6,7 @@ public class DeseaseReqBody {
 
     List<FamilyMembers> familyMembersList;
     List<Operations> operationsList;
+    DeseaseImage deseaseImagesList;
     List<DeseaseHistoryDynamic> deseaseHistoryDynamicsList;
 
     //DeseaseHistoryStatic
@@ -22,7 +23,18 @@ public class DeseaseReqBody {
 
     }
 
-    public DeseaseReqBody(List<FamilyMembers> familyMembersList, List<Operations> operationsList, List<DeseaseHistoryDynamic> deseaseHistoryDynamicsList, int patientId, String allergyAvailability, String ownInjuryReason, String maliqan, String beniqen, String maliqanQuestion, String preliminaryDiagnosis, String medicationTaken) {
+    public DeseaseReqBody(List<FamilyMembers> familyMembersList,
+                          List<Operations> operationsList,
+                          DeseaseImage deseaseImagesList,
+                          List<DeseaseHistoryDynamic> deseaseHistoryDynamicsList,
+                          int patientId,
+                          String allergyAvailability,
+                          String ownInjuryReason,
+                          String maliqan,
+                          String beniqen,
+                          String maliqanQuestion,
+                          String preliminaryDiagnosis,
+                          String medicationTaken) {
         this.familyMembersList = familyMembersList;
         this.operationsList = operationsList;
         this.deseaseHistoryDynamicsList = deseaseHistoryDynamicsList;
@@ -34,6 +46,7 @@ public class DeseaseReqBody {
         this.maliqanQuestion = maliqanQuestion;
         this.preliminaryDiagnosis = preliminaryDiagnosis;
         this.medicationTaken = medicationTaken;
+        this.deseaseImagesList=deseaseImagesList;
     }
 
     public List<FamilyMembers> getFamilyMembersList() {
@@ -72,7 +85,13 @@ public class DeseaseReqBody {
         return allergyAvailability;
     }
 
+    public DeseaseImage getDeseaseImagesList() {
+        return deseaseImagesList;
+    }
 
+    public void setDeseaseImagesList(DeseaseImage deseaseImagesList) {
+        this.deseaseImagesList = deseaseImagesList;
+    }
 
     public void setAllergyAvailability(String allergyAvailability) {
         this.allergyAvailability = allergyAvailability;
@@ -139,6 +158,7 @@ public class DeseaseReqBody {
                 ", maliqanQuestion='" + maliqanQuestion + '\'' +"\n"+
                 ", preliminaryDiagnosis='" + preliminaryDiagnosis + '\'' +"\n"+
                 ", medicationTaken='" + medicationTaken + '\'' +"\n"+
+                ", deseaseImagesList='" + deseaseImagesList + '\'' +
                 '}';
     }
 }

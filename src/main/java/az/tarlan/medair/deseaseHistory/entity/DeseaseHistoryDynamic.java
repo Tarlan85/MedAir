@@ -4,7 +4,7 @@ package az.tarlan.medair.deseaseHistory.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "patients_complaints")
+@Table(name = "desease_history_dynamic")
 
 public class DeseaseHistoryDynamic {
 
@@ -21,6 +21,8 @@ public class DeseaseHistoryDynamic {
 
     @Column(name = "duration_of_illness")
     private String durationOfIllness;
+    @Column(name = "complaint_description")
+    private String complaintDescription;
 
 
     @Column(name = "received_treatment")
@@ -38,17 +40,18 @@ public class DeseaseHistoryDynamic {
     @Column(name = "HER2_FT")
     private String her2FT;
 
-    @Column(name = "IHK_K67")
+    @Column(name = "K67")
     private int k67;
 
 
     public DeseaseHistoryDynamic() {}
 
-    public DeseaseHistoryDynamic(int patientsComplaintsId, int patientId, String complaintBreastType, String durationOfIllness, String receivedTreatment, String erN, String prN, int her2, String her2FT, int k67) {
+    public DeseaseHistoryDynamic(int patientsComplaintsId, int patientId, String complaintBreastType, String durationOfIllness, String complaintDescription, String receivedTreatment, String erN, String prN, int her2, String her2FT, int k67) {
         this.patientsComplaintsId = patientsComplaintsId;
         this.patientId = patientId;
         this.complaintBreastType = complaintBreastType;
         this.durationOfIllness = durationOfIllness;
+        this.complaintDescription = complaintDescription;
         this.receivedTreatment = receivedTreatment;
         this.erN = erN;
         this.prN = prN;
@@ -57,11 +60,11 @@ public class DeseaseHistoryDynamic {
         this.k67 = k67;
     }
 
-    public int getId() {
+    public int getPatientsComplaintsId() {
         return patientsComplaintsId;
     }
 
-    public void setId(int patientsComplaintsId) {
+    public void setPatientsComplaintsId(int patientsComplaintsId) {
         this.patientsComplaintsId = patientsComplaintsId;
     }
 
@@ -87,6 +90,14 @@ public class DeseaseHistoryDynamic {
 
     public void setDurationOfIllness(String durationOfIllness) {
         this.durationOfIllness = durationOfIllness;
+    }
+
+    public String getComplaintDescription() {
+        return complaintDescription;
+    }
+
+    public void setComplaintDescription(String complaintDescription) {
+        this.complaintDescription = complaintDescription;
     }
 
     public String getReceivedTreatment() {
@@ -141,6 +152,7 @@ public class DeseaseHistoryDynamic {
     public String toString() {
         return "DeseaseHistoryDynamic{" +
                 "patientsComplaintsId=" + patientsComplaintsId +"\n"+
+                "complaintDescription=" + complaintDescription +"\n"+
                 ", patientId=" + patientId +"\n"+
                 ", complaintBreastType='" + complaintBreastType + '\'' +"\n"+
                 ", durationOfIllness='" + durationOfIllness + '\'' +"\n"+

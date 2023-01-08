@@ -4,7 +4,7 @@ package az.tarlan.medair.deseaseHistory.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "patients_complaints")
+@Table(name = "desease_history_static")
 
 public class DeseaseHistoryStatic {
 
@@ -22,20 +22,20 @@ public class DeseaseHistoryStatic {
     @Column(name = "own_injury_reason")
     private String ownInjuryReason;
 
-    @Column(name = "maliqan")
-    private String maliqan;
+    @Column(name = "maligant")
+    private String maligant;
 
-    @Column(name = "beniqen")
-    private String beniqen;
+    @Column(name = "benign")
+    private String benign;
 
-    @Column(name = "maliqan_question")
-    private String maliqanQuestion;
+    @Column(name = "maligant_question")
+    private String maligantQuestion;
 
 
 
     @Column(name = "preliminary_diagnosis")
     private String preliminaryDiagnosis;
-
+    
     @Column(name = "medication_taken")
     private String medicationTaken;
 
@@ -43,14 +43,14 @@ public class DeseaseHistoryStatic {
 
     public DeseaseHistoryStatic() {}
 
-    public DeseaseHistoryStatic(int id, int patientId, String allergyAvailability, String ownInjuryReason, String maliqan, String beniqen, String maliqanQuestion, String preliminaryDiagnosis, String medicationTaken) {
+    public DeseaseHistoryStatic(int id, int patientId, String allergyAvailability, String ownInjuryReason, String maligant, String benign, String maligantQuestion, String preliminaryDiagnosis, String medicationTaken) {
         this.id = id;
         this.patientId = patientId;
         this.allergyAvailability = allergyAvailability;
         this.ownInjuryReason = ownInjuryReason;
-        this.maliqan = maliqan;
-        this.beniqen = beniqen;
-        this.maliqanQuestion = maliqanQuestion;
+        this.maligant = maligant;
+        this.benign = benign;
+        this.maligantQuestion = maligantQuestion;
         this.preliminaryDiagnosis = preliminaryDiagnosis;
         this.medicationTaken = medicationTaken;
     }
@@ -87,28 +87,28 @@ public class DeseaseHistoryStatic {
         this.ownInjuryReason = ownInjuryReason;
     }
 
-    public String getMaliqan() {
-        return maliqan;
+    public String getMaligant() {
+        return maligant;
     }
 
-    public void setMaliqan(String maliqan) {
-        this.maliqan = maliqan;
+    public void setMaligant(String maligant) {
+        this.maligant = maligant;
     }
 
-    public String getBeniqen() {
-        return beniqen;
+    public String getBenign() {
+        return benign;
     }
 
-    public void setBeniqen(String beniqen) {
-        this.beniqen = beniqen;
+    public void setBenign(String benign) {
+        this.benign = benign;
     }
 
-    public String getMaliqanQuestion() {
-        return maliqanQuestion;
+    public String getMaligantQuestion() {
+        return maligantQuestion;
     }
 
-    public void setMaliqanQuestion(String maliqanQuestion) {
-        this.maliqanQuestion = maliqanQuestion;
+    public void setMaligantQuestion(String maligantQuestion) {
+        this.maligantQuestion = maligantQuestion;
     }
 
     public String getPreliminaryDiagnosis() {
@@ -130,14 +130,14 @@ public class DeseaseHistoryStatic {
     @Override
     public String toString() {
         return "DeseaseHistoryStatic{" +
-                "id=" + id +"\n"+
-                ", patientId=" + patientId +"\n"+
-                ", allergyAvailability='" + allergyAvailability + '\'' +"\n"+
-                ", ownInjuryReason='" + ownInjuryReason + '\'' +"\n"+
-                ", maliqan='" + maliqan + '\'' +"\n"+
-                ", beniqen='" + beniqen + '\'' +"\n"+
-                ", maliqanQuestion='" + maliqanQuestion + '\'' +"\n"+
-                ", preliminaryDiagnosis='" + preliminaryDiagnosis + '\'' +"\n"+
+                "id=" + id +
+                ", patientId=" + patientId +
+                ", allergyAvailability='" + allergyAvailability + '\'' +
+                ", ownInjuryReason='" + ownInjuryReason + '\'' +
+                ", maligant='" + maligant + '\'' +
+                ", benign='" + benign + '\'' +
+                ", maligantQuestion='" + maligantQuestion + '\'' +
+                ", preliminaryDiagnosis='" + preliminaryDiagnosis + '\'' +
                 ", medicationTaken='" + medicationTaken + '\'' +
                 '}';
     }
