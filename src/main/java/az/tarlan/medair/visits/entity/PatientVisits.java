@@ -41,12 +41,34 @@ public class PatientVisits {
     @Column(name="visit_desc")
     private String visitDesc;
 
+    @Column(name="blood_description")
+    private String bloodDescription;
+
+    @Column(name="lungs_description")
+    private String lungsDescription;
+    @Column(name="usm_description")
+    private String usmDescription;
+
+    @Column(name="maligant_reason_description")
+    private String reasonDescription;
 
 
     //define constructor
     public PatientVisits() {}
 
-    public PatientVisits(int visitId,int visitTableStatus, int patientId, Timestamp visitDate, String visitReason, String status, String placeName, String visitType, String visitDesc) {
+    public PatientVisits(int visitId,
+                         int visitTableStatus,
+                         int patientId,
+                         Timestamp visitDate,
+                         String visitReason,
+                         String status,
+                         String placeName,
+                         String visitType,
+                         String visitDesc,
+                         String bloodDescription,
+                         String lungsDescription,
+                         String usmDescription,
+                         String reasonDescription) {
         this.visitId = visitId;
         this.visitTableStatus = visitTableStatus;
         this.patientId = patientId;
@@ -56,6 +78,10 @@ public class PatientVisits {
         this.placeName = placeName;
         this.visitType = visitType;
         this.visitDesc = visitDesc;
+        this.bloodDescription = bloodDescription;
+        this.lungsDescription = lungsDescription;
+        this.usmDescription = usmDescription;
+        this.reasonDescription = reasonDescription;
     }
 
     public int getVisitTableStatus() {
@@ -130,6 +156,39 @@ public class PatientVisits {
         this.visitDesc = visitDesc;
     }
 
+    public String getBloodDescription() {
+        return bloodDescription;
+    }
+
+    public void setBloodDescription(String bloodDescription) {
+        this.bloodDescription = bloodDescription;
+    }
+
+    public String getLungsDescription() {
+        return lungsDescription;
+    }
+
+    public void setLungsDescription(String lungsDescription) {
+        this.lungsDescription = lungsDescription;
+    }
+
+    public String getUsmDescription() {
+        return usmDescription;
+    }
+
+    public void setUsmDescription(String usmDescription) {
+        this.usmDescription = usmDescription;
+    }
+
+    public String getReasonDescription() {
+        return reasonDescription;
+    }
+
+    public void setReasonDescription(String reasonDescription) {
+        this.reasonDescription = reasonDescription;
+    }
+
+
     @Override
     public String toString() {
         return "PatientVisits{" +
@@ -141,7 +200,11 @@ public class PatientVisits {
                 ", status='" + status + '\'' +"\n"+
                 ", placeName='" + placeName + '\'' +"\n"+
                 ", visitType='" + visitType + '\'' +"\n"+
-                ", visitDesc='" + visitDesc + '\'' +
+                ", visitDesc='" + visitDesc + '\'' +"\n"+
+                ", bloodDescription='" + bloodDescription + '\'' +"\n"+
+                ", lungsDescription='" + lungsDescription + '\'' +"\n"+
+                ", usmDescription='" + usmDescription + '\'' +"\n"+
+                ", reasonDescription='" + reasonDescription + '\'' +
                 '}';
     }
 }
