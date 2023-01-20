@@ -52,23 +52,12 @@ public class PatientVisits {
     @Column(name="maligant_reason_description")
     private String reasonDescription;
 
-
+    @Column(name="benign_description")
+    private String benignDescription;
     //define constructor
     public PatientVisits() {}
 
-    public PatientVisits(int visitId,
-                         int visitTableStatus,
-                         int patientId,
-                         Timestamp visitDate,
-                         String visitReason,
-                         String status,
-                         String placeName,
-                         String visitType,
-                         String visitDesc,
-                         String bloodDescription,
-                         String lungsDescription,
-                         String usmDescription,
-                         String reasonDescription) {
+    public PatientVisits(int visitId, int visitTableStatus, int patientId, Timestamp visitDate, String visitReason, String status, String placeName, String visitType, String visitDesc, String bloodDescription, String lungsDescription, String usmDescription, String reasonDescription, String benignDescription) {
         this.visitId = visitId;
         this.visitTableStatus = visitTableStatus;
         this.patientId = patientId;
@@ -82,6 +71,15 @@ public class PatientVisits {
         this.lungsDescription = lungsDescription;
         this.usmDescription = usmDescription;
         this.reasonDescription = reasonDescription;
+        this.benignDescription = benignDescription;
+    }
+
+    public String getBenignDescription() {
+        return benignDescription;
+    }
+
+    public void setBenignDescription(String benignDescription) {
+        this.benignDescription = benignDescription;
     }
 
     public int getVisitTableStatus() {
@@ -191,9 +189,9 @@ public class PatientVisits {
 
     @Override
     public String toString() {
-        return "PatientVisits{" +
+        return "PatientVisits{" + "\n"+
                 "visitId=" + visitId +"\n"+
-                "visitTableStatus=" + visitTableStatus +"\n"+
+                ", visitTableStatus=" + visitTableStatus +"\n"+
                 ", patientId=" + patientId +"\n"+
                 ", visitDate=" + visitDate +"\n"+
                 ", visitReason='" + visitReason + '\'' +"\n"+
@@ -204,7 +202,8 @@ public class PatientVisits {
                 ", bloodDescription='" + bloodDescription + '\'' +"\n"+
                 ", lungsDescription='" + lungsDescription + '\'' +"\n"+
                 ", usmDescription='" + usmDescription + '\'' +"\n"+
-                ", reasonDescription='" + reasonDescription + '\'' +
+                ", reasonDescription='" + reasonDescription + '\''+"\n"+
+                ", benignDescription='" + benignDescription + '\'' +"\n"+
                 '}';
     }
 }

@@ -100,6 +100,7 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
         deseaseReqBody.setMaliqanQuestion(deseaseHistoryStatics.get(0).getMaligantQuestion());
         deseaseReqBody.setMedicationTaken(deseaseHistoryStatics.get(0).getMedicationTaken());
         deseaseReqBody.setOwnInjuryReason(deseaseHistoryStatics.get(0).getOwnInjuryReason());
+        deseaseReqBody.setPreliminaryDiagnosis(deseaseHistoryStatics.get(0).getPreliminaryDiagnosis());
 
         theQuery=entityManager.createQuery("From DeseaseHistoryDynamic where patientId = "+patientId);
         List<DeseaseHistoryDynamic> deseaseHistoryDynamics = theQuery.getResultList();

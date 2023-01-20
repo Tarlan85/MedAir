@@ -49,6 +49,7 @@ public class PatientRestController {
     public Vite addPatient(@RequestBody Vite thePatientVite){
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
+        if (thePatientVite.getPatientId()<1)
         thePatientVite.setPatientId(0);
         System.out.println("============vite=============");
         System.out.println(thePatientVite.toString());

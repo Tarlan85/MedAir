@@ -27,24 +27,26 @@ public class LogInDAOImpl implements LogInDAO {
         System.out.println(theQuery.getResultList());
         if (theQuery.getResultList().size()<1){
             System.out.println("Token not fount");
-            return null;
+            return "no";
         }
         Token dbToken=(Token) theQuery.getResultList().get(0);
         theQuery=entityManager.createQuery("UPDATE Token SET tokenCreateTime=now() WHERE token='"+token+"'");
         theQuery.executeUpdate();
-
-       return dbToken.getToken();
+return "ok";
+//       return dbToken.getToken();
     }
     @Override
     public LogInReqBody checkLogIn(LogIn logIn) {
         System.out.println("2. checkLogIn");
+        LogInReqBody logInReqBody  = new LogInReqBody();
         Query theQuery=entityManager.createQuery("From LogIn where userName = '"+logIn.getUserName()+"' and userPass='"+logIn.getUserPass()+"'");
         System.out.println(theQuery.getResultList());
         if (theQuery.getResultList().size()<1){
             System.out.println("User not fount");
-            return null;
+//            logInReqBody.setToken("no");
+            return logInReqBody;
         }
-        LogInReqBody logInReqBody  = new LogInReqBody();
+
         logInReqBody.setLogIn((LogIn)theQuery.getResultList().get(0));
         System.out.println("3. "+logInReqBody.getLogIn().toString());
         String token= String.valueOf(UUID.randomUUID());

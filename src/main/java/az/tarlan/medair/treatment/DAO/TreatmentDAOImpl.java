@@ -64,12 +64,13 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         Query theQuery=entityManager.createQuery("From TreatmentStatic where patientId = "+patientId);
         List<TreatmentStatic> treatmentStatic = theQuery.getResultList();
         System.out.println("3.treatmentStatic =  "+treatmentStatic.toString());
-        treatmentReqBody.setrecommendation(treatmentStatic.get(0).getrecommendation());
-        treatmentReqBody.setTreatmentId(treatmentStatic.get(0).getTreatmentId());
-        treatmentReqBody.setTreatmentDesc(treatmentStatic.get(0).getTreatmentDesc());
-        treatmentReqBody.setMenapause(treatmentStatic.get(0).getMenapause());
-        treatmentReqBody.setPreMenapause(treatmentStatic.get(0).getPreMenapause());
-
+        if (treatmentStatic.size()>0) {
+            treatmentReqBody.setrecommendation(treatmentStatic.get(0).getrecommendation());
+            treatmentReqBody.setTreatmentId(treatmentStatic.get(0).getTreatmentId());
+            treatmentReqBody.setTreatmentDesc(treatmentStatic.get(0).getTreatmentDesc());
+            treatmentReqBody.setMenapause(treatmentStatic.get(0).getMenapause());
+            treatmentReqBody.setPreMenapause(treatmentStatic.get(0).getPreMenapause());
+        }
         theQuery=entityManager.createQuery("From TreatmentDynamic where patientId = "+patientId);
         List<TreatmentDynamic> treatmentDynamics = theQuery.getResultList();
         System.out.println("3. "+treatmentDynamics.toString());
