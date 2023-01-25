@@ -88,6 +88,7 @@ public class VisitDAOImpl implements VisitDAO{
 
         theQuery.setParameter("patientId",patientId);
         theQuery.executeUpdate();
+        System.out.println("INSEER");
         theQuery=entityManager.createQuery("UPDATE PatientVisits SET visitTableStatus=1 WHERE visitTableStatus=0");
         theQuery.executeUpdate();
 
