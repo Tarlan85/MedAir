@@ -109,6 +109,7 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 
         theQuery=entityManager.createQuery("From DeseaseImage where patientId = "+patientId);
         List<DeseaseImage> deseaseImages = theQuery.getResultList();
+        if (deseaseImages.size()>0)
         deseaseReqBody.setDeseaseImagesList(deseaseImages.get(0));
         System.out.println("3.deseaseImages = "+deseaseImages.toString());
 
