@@ -21,6 +21,11 @@ public class AnalyzDAOImpl implements AnalyzDAO{
     public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) {
         System.out.println("saveAnalyzes");
         AnalyzesMedia dbAnalyzesMedia;
+        if (analyzesReqBody.getAnalyzesMediaList().size()>0){
+            Query theQuery=entityManager.createQuery("delete from AnalyzesMedia where  patientId=:patientId");
+            theQuery.setParameter("patientId",analyzesReqBody.getPatientId());
+            theQuery.executeUpdate();
+        }
         for(int i=0;i<analyzesReqBody.getAnalyzesMediaList().size();i++){
         dbAnalyzesMedia =entityManager.merge(analyzesReqBody.getAnalyzesMediaList().get(i));
         if(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesId()==0)

@@ -63,9 +63,18 @@ public class VisitDAOImpl implements VisitDAO{
         System.out.println(visitsRegBody.getPatientId());
         PatientVisits dbPatientVisits;
         int patientId=0;
+        if (visitsRegBody.getPatientVisitsList().size()>0){
+            patientId = visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(0).getPatientId() : visitsRegBody.getPatientId();
+            Query theQuery=entityManager.createQuery("delete from VisitTable where patientId=:patientId");
+            theQuery.setParameter("patientId",patientId);
+            theQuery.executeUpdate();
+            theQuery=entityManager.createQuery("delete from PatientVisits where  patientId=:patientId");
+            theQuery.setParameter("patientId",patientId);
+            theQuery.executeUpdate();
+        }
 
         for(int i=0;i<visitsRegBody.getPatientVisitsList().size();i++) {
-            patientId = visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(i).getPatientId() : visitsRegBody.getPatientId();
+//            patientId = visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(i).getPatientId() : visitsRegBody.getPatientId();
             dbPatientVisits = entityManager.merge(visitsRegBody.getPatientVisitsList().get(i));
             if (visitsRegBody.getPatientVisitsList().get(i).getVisitId() == 0)
                 dbPatientVisits.setVisitId(dbPatientVisits.getVisitId());

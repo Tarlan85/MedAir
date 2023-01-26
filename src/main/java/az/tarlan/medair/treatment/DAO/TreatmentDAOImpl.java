@@ -26,6 +26,9 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     @Override
     public void saveTreatment(TreatmentReqBody treatmentRB) {
         System.out.println(">>>>>saveTreatment<<<<<");
+        Query theQuery=entityManager.createQuery("delete from TreatmentStatic where  patientId=:patientId");
+        theQuery.setParameter("patientId",treatmentRB.getPatientId());
+        theQuery.executeUpdate();
         TreatmentStatic dbTreatmentStatic = new TreatmentStatic();
         dbTreatmentStatic.setPatientId(treatmentRB.getPatientId());
         dbTreatmentStatic.setTreatmentDesc(treatmentRB.getTreatmentDesc());
@@ -39,6 +42,10 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
         List<Recipe> recipeList=treatmentRB.getRecipeList();
         Recipe recipe=new Recipe();
+        if (recipeList.size()>0){
+         theQuery=entityManager.createQuery("delete from Recipe where  patientId=:patientId");
+        theQuery.setParameter("patientId",treatmentRB.getPatientId());
+        theQuery.executeUpdate();}
         for (int i=0;i<recipeList.size();i++){
             recipeList.get(i).setPatientId(treatmentRB.getPatientId());
             recipe=  entityManager.merge(recipeList.get(i));
@@ -47,6 +54,10 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         }
         List<TreatmentDynamic> treatmentDynamicsList=treatmentRB.getTreatmentDynamics();
         TreatmentDynamic treatmentDynamic=new TreatmentDynamic();
+        if (treatmentDynamicsList.size()>0){
+            theQuery=entityManager.createQuery("delete from TreatmentDynamic where  patientId=:patientId");
+            theQuery.setParameter("patientId",treatmentRB.getPatientId());
+            theQuery.executeUpdate();}
         for (int i=0;i<treatmentDynamicsList.size();i++){
             treatmentDynamicsList.get(i).setPatientId(treatmentRB.getPatientId());
             treatmentDynamic=  entityManager.merge(treatmentDynamicsList.get(i));
