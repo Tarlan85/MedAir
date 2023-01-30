@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class AnalyzesServiceImpl implements AnalyzesService {
 
     @Override
     @Transactional
-    public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) {
+    public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
         analyzDAO.saveAnalyzes(analyzesReqBody);
     }
 
