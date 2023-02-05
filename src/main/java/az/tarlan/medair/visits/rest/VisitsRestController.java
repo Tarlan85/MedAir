@@ -21,27 +21,26 @@ public class VisitsRestController {
 
     //quick and dirty:inject employee dao(use constructor injection )
     @Autowired
-    public VisitsRestController(VisitsService theVisitsService){
+    public VisitsRestController(VisitsService theVisitsService) {
         visitsService = theVisitsService;
     }
 
     @GetMapping("/visits/{moment}")
-    public List<VisitTable> findAllVisits(@PathVariable String moment){
-        System.out.println(" findAll ==="+moment);
+    public List<VisitTable> findAllVisits(@PathVariable String moment) {
+        System.out.println(" findAll ===" + moment);
 //        System.out.println(visitsService.findAllVisits(moment).toString());
 //        System.out.println(" findAll === end");
         return visitsService.findAllVisits(moment);
     }
+
     @GetMapping("/visits/patientId/{patientId}")
-    public List<PatientVisits> findPatientVisits(@PathVariable int patientId){
-        System.out.println("1. findPatientVisits \n patientId==="+patientId);
-//        System.out.println(visitsService.findPatientVisits(patientId).toString());
-//        System.out.println(" findAll === end");
+    public List<PatientVisits> findPatientVisits(@PathVariable int patientId) {
+        System.out.println("1. findPatientVisits \n patientId===" + patientId);
         return visitsService.findPatientVisits(patientId);
     }
 
     @PostMapping("/visits")
-    public VisitsRegBody addPatientVisit(@RequestBody VisitsRegBody visitsRegBody){
+    public VisitsRegBody addPatientVisit(@RequestBody VisitsRegBody visitsRegBody) {
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
 //        if (patientVisits.getVisitId()<1)
@@ -50,30 +49,47 @@ public class VisitsRestController {
 //        System.out.println(patientVisits.toString());
         System.out.println("addPatientVisit");
         System.out.println(visitsRegBody.toString());
-        if (visitsRegBody.getPatientVisitsList()!=null){
+        if (visitsRegBody.getPatientVisitsList() != null) {
             System.out.println("VISITDATE");
             System.out.println(visitsRegBody.getPatientVisitsList().get(0).getVisitDate());
-               visitsService.savePatientVisits(visitsRegBody);}
+            visitsService.savePatientVisits(visitsRegBody);
+        }
+        return visitsRegBody;
+    }
+
+    @PostMapping("/visitsformcalendar")
+    public VisitsRegBody addPatientVisitsFromCalendar(@RequestBody VisitsRegBody visitsRegBody) {
+        //also, just  in case  the pass an id  in JSON ... set id to 0
+        //this is to force a save of new item ... instead of update
+        System.out.println("addPatientVisit");
+        System.out.println(visitsRegBody.toString());
+        if (visitsRegBody.getPatientVisitsList() != null) {
+            System.out.println(visitsRegBody.getPatientVisitsList().get(0).getVisitDate());
+            System.out.println(visitsRegBody.getPatientVisitsList().get(0).getPatientId());
+            System.out.println(visitsRegBody.getPatientId());
+            visitsService.addPatientVisitsFromCalendar(visitsRegBody);
+        }
         return visitsRegBody;
     }
 
     @PostMapping("/visittable")
-    public VisitTable updateVisitTable(@RequestBody VisitTable visitTable){
+    public VisitTable updateVisitTable(@RequestBody VisitTable visitTable) {
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
 
-        System.out.println("visitTable()====="+visitTable.getId());
+        System.out.println("visitTable()=====" + visitTable.getId());
         System.out.println(visitTable.toString());
         visitsService.saveVisitTable(visitTable);
         return visitTable;
     }
+
     @DeleteMapping("/visits/{id}")
-    public String deletePatient(@PathVariable int id){
+    public String deletePatient(@PathVariable int id) {
         PatientVisits patientVisit = visitsService.findById(id);
         //throw  exception if null
-        if(patientVisit ==null)
-            throw new RuntimeException("Visit Id not found - "+id);
+        if (patientVisit == null)
+            throw new RuntimeException("Visit Id not found - " + id);
         visitsService.deleteById(id);
-        return "Delete Visit id - "+id;
+        return "Delete Visit id - " + id;
     }
 }

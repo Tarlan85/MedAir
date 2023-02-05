@@ -12,12 +12,13 @@ import java.util.List;
 
 @Service
 public class VisitisServiceImpl implements VisitsService {
-    private VisitDAO  visitDAO;
+    private VisitDAO visitDAO;
 
     @Autowired
-    public VisitisServiceImpl( VisitDAO  theVisitDAO){
-        visitDAO=theVisitDAO;
+    public VisitisServiceImpl(VisitDAO theVisitDAO) {
+        visitDAO = theVisitDAO;
     }
+
     @Override
     @Transactional
     public List<VisitTable> findAllVisits(String visDate) {
@@ -28,6 +29,12 @@ public class VisitisServiceImpl implements VisitsService {
     @Transactional
     public void savePatientVisits(VisitsRegBody patientVisits) {
         visitDAO.savePatientVisits(patientVisits);
+    }
+
+    @Override
+    @Transactional
+    public void addPatientVisitsFromCalendar(VisitsRegBody patientVisits) {
+        visitDAO.addPatientVisitsFromCalendar(patientVisits);
     }
 
     @Override
@@ -45,7 +52,7 @@ public class VisitisServiceImpl implements VisitsService {
     @Override
     @Transactional
     public PatientVisits findById(int id) {
-        return visitDAO.findById (id);
+        return visitDAO.findById(id);
     }
 
     @Override

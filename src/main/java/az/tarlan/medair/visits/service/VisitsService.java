@@ -10,6 +10,7 @@ public interface VisitsService {
 
     List<VisitTable> findAllVisits(String visDate);
     void savePatientVisits(VisitsRegBody visitsRegBody);
+    void addPatientVisitsFromCalendar(VisitsRegBody visitsRegBody);
     public PatientVisits findById(int id);
     public void deleteById(int theId);
     void saveVisitTable(VisitTable visitTable);

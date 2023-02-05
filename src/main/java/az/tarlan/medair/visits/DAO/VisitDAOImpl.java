@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class VisitDAOImpl implements VisitDAO{
+public class VisitDAOImpl implements VisitDAO {
     private EntityManager entityManager;
     private int patientID;
 
@@ -20,8 +20,8 @@ public class VisitDAOImpl implements VisitDAO{
 
     public List<VisitTable> findAllVisits(String visDate) {
 //        Query theQuery=entityManager.createQuery("From VisitTable where visitDate>=now() ");
-        System.out.println("========== "+visDate);
-        Query theQuery=entityManager.createQuery("From VisitTable where date(visitDate) >= date('"+visDate+"')");
+        System.out.println("========== " + visDate);
+        Query theQuery = entityManager.createQuery("From VisitTable where date(visitDate) >= date('" + visDate + "')");
 
 //        Query theQuery=  entityManager.createQuery(
 //                " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
@@ -33,23 +33,20 @@ public class VisitDAOImpl implements VisitDAO{
         List<VisitTable> patients = theQuery.getResultList();
         return patients;
     }
+
     @Override
     public void saveVisitTable(VisitTable visitTable) {
-        System.out.println("VisitID == "+visitTable.getId());
-//        if (patientVisits.getVisitId()==0){
-//            System.out.println("THEN");
-//        VisitTable dbVisitTable=entityManager.merge(visitTable);
-//        visitTable.setId(dbVisitTable.getId());
-        System.out.println("UPDATE VisitTable SET status = '"+visitTable.getStatus()+"'" +
-                " WHERE id='"+visitTable.getId()+"'");
-        Query theQuery=entityManager.createQuery("UPDATE VisitTable SET status = '"+visitTable.getStatus()+"'" +
-                " WHERE id='"+visitTable.getId()+"'");
+        System.out.println("VisitID == " + visitTable.getId());
+        System.out.println("UPDATE VisitTable SET status = '" + visitTable.getStatus() + "'" +
+                " WHERE id='" + visitTable.getId() + "'");
+        Query theQuery = entityManager.createQuery("UPDATE VisitTable SET status = '" + visitTable.getStatus() + "'" +
+                " WHERE id='" + visitTable.getId() + "'");
         theQuery.executeUpdate();
-        String date=entityManager.createQuery("Select visitDate from VisitTable where id='"+visitTable.getId()+"'").getResultList().get(0).toString();
-        System.out.println("UPDATE PatientVisits SET status = '"+visitTable.getStatus()+"'" +
-                " WHERE visitDate='"+date+"'");
-         theQuery=entityManager.createQuery("UPDATE PatientVisits SET status = '"+visitTable.getStatus()+"'" +
-                " WHERE date(visitDate)=date('"+date+"')");
+        String date = entityManager.createQuery("Select visitDate from VisitTable where id='" + visitTable.getId() + "'").getResultList().get(0).toString();
+        System.out.println("UPDATE PatientVisits SET status = '" + visitTable.getStatus() + "'" +
+                " WHERE visitDate='" + date + "'");
+        theQuery = entityManager.createQuery("UPDATE PatientVisits SET status = '" + visitTable.getStatus() + "'" +
+                " WHERE date(visitDate)=date('" + date + "')");
         theQuery.executeUpdate();
 
     }
@@ -62,20 +59,21 @@ public class VisitDAOImpl implements VisitDAO{
         System.out.println("savePatientVisits");
         System.out.println(visitsRegBody.getPatientId());
         PatientVisits dbPatientVisits;
-        int patientId=0;
-        if (visitsRegBody.getPatientVisitsList().size()>0){
+        int patientId = 0;
+        if (visitsRegBody.getPatientVisitsList().size() > 0) {
             patientId = visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(0).getPatientId() : visitsRegBody.getPatientId();
-            Query theQuery=entityManager.createQuery("delete from VisitTable where patientId=:patientId");
-            theQuery.setParameter("patientId",patientId);
+            Query theQuery = entityManager.createQuery("delete from VisitTable where patientId=:patientId");
+            theQuery.setParameter("patientId", patientId);
             theQuery.executeUpdate();
-            theQuery=entityManager.createQuery("delete from PatientVisits where  patientId=:patientId");
-            theQuery.setParameter("patientId",patientId);
+            theQuery = entityManager.createQuery("delete from PatientVisits where  patientId=:patientId");
+            theQuery.setParameter("patientId", patientId);
             theQuery.executeUpdate();
         }
 
-        for(int i=0;i<visitsRegBody.getPatientVisitsList().size();i++) {
+        for (int i = 0; i < visitsRegBody.getPatientVisitsList().size(); i++) {
 //            patientId = visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(i).getPatientId() : visitsRegBody.getPatientId();
             dbPatientVisits = entityManager.merge(visitsRegBody.getPatientVisitsList().get(i));
+            dbPatientVisits.setVisitTableStatus(0);
             if (visitsRegBody.getPatientVisitsList().get(i).getVisitId() == 0)
                 dbPatientVisits.setVisitId(dbPatientVisits.getVisitId());
 //            dbPatientVisits.setPatientId(visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(i).getPatientId() : visitsRegBody.getPatientId());
@@ -86,7 +84,7 @@ public class VisitDAOImpl implements VisitDAO{
 //        PatientVisits dbPatientVisits=entityManager.merge(patientVisits);
 //        patientVisits.setVisitId(dbPatientVisits.getVisitId());
 
-        Query theQuery=entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientPatronymic," +
+        Query theQuery = entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientPatronymic," +
                 "birthDate,visitReason,placeName,recommendationPerson,phoneNumber,status)" +
                 " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
                 "vite.patientPatronymic,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +
@@ -95,10 +93,10 @@ public class VisitDAOImpl implements VisitDAO{
                 " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId where patientVisits.patientId=:patientId and patientVisits.visitTableStatus=0");
 //        " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId where patientVisits.patientId=:patientId");
 
-        theQuery.setParameter("patientId",patientId);
+        theQuery.setParameter("patientId", patientId);
         theQuery.executeUpdate();
         System.out.println("INSEER");
-        theQuery=entityManager.createQuery("UPDATE PatientVisits SET visitTableStatus=1 WHERE visitTableStatus=0");
+        theQuery = entityManager.createQuery("UPDATE PatientVisits SET visitTableStatus=1 WHERE visitTableStatus=0");
         theQuery.executeUpdate();
 
 
@@ -111,29 +109,64 @@ public class VisitDAOImpl implements VisitDAO{
 //            patientVisits.setVisitId(dbPatientVisits.getVisitId());
 //        }
     }
+
     @Override
     public PatientVisits findById(int id) {
         //get patient
-        PatientVisits patientVisit =entityManager.find(PatientVisits.class,id);
+        PatientVisits patientVisit = entityManager.find(PatientVisits.class, id);
         //return result
         return patientVisit;
     }
+
     @Override
     public void deleteById(int id) {
         //delete  object with primary key
-        Query theQuery=entityManager.createQuery("delete from VisitTable where id=:id");
-        theQuery.setParameter("id",id);
+        Query theQuery = entityManager.createQuery("delete from VisitTable where id=:id");
+        theQuery.setParameter("id", id);
         theQuery.executeUpdate();
     }
 
     @Override
     public List<PatientVisits> findPatientVisits(int patientId) {
         System.out.println("2. findPatientVisits");
-        Query theQuery=entityManager.createQuery("From PatientVisits where patientId = "+patientId);
+        Query theQuery = entityManager.createQuery("From PatientVisits where patientId = " + patientId);
 //        theQuery.setParameter("id",patientId);
 //        theQuery.executeUpdate();
         List<PatientVisits> visitTable = theQuery.getResultList();
-        System.out.println("3. "+visitTable.toString());
+        System.out.println("3. " + visitTable.toString());
         return visitTable;
+    }
+
+    @Override
+    public void addPatientVisitsFromCalendar(VisitsRegBody visitsRegBody) {
+
+        System.out.println("addPatientVisitsFromCalendar");
+        System.out.println(visitsRegBody.getPatientId());
+        PatientVisits dbPatientVisits;
+        int patientId = 0;
+
+        for (int i = 0; i < visitsRegBody.getPatientVisitsList().size(); i++) {
+            patientId = visitsRegBody.getPatientId() == 0 ? visitsRegBody.getPatientVisitsList().get(0).getPatientId() : visitsRegBody.getPatientId();
+            dbPatientVisits = entityManager.merge(visitsRegBody.getPatientVisitsList().get(i));
+            dbPatientVisits.setVisitTableStatus(0);
+            if (visitsRegBody.getPatientVisitsList().get(i).getVisitId() == 0)
+                dbPatientVisits.setVisitId(dbPatientVisits.getVisitId());
+            dbPatientVisits.setPatientId(patientId);
+            System.out.println("add==" + dbPatientVisits.toString());
+
+        }
+
+        Query theQuery = entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientPatronymic," +
+                "birthDate,visitReason,placeName,recommendationPerson,phoneNumber,status)" +
+                " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
+                "vite.patientPatronymic,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +
+                "vite.recommendationPerson,vite.phoneNumber,patientVisits.status FROM PatientVisits patientVisits" +
+
+                " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId where patientVisits.patientId=:patientId and patientVisits.visitTableStatus=0");
+        theQuery.setParameter("patientId", patientId);
+        theQuery.executeUpdate();
+        System.out.println("INSEER");
+        theQuery = entityManager.createQuery("UPDATE PatientVisits SET visitTableStatus=1 WHERE visitTableStatus=0");
+        theQuery.executeUpdate();
     }
 }
