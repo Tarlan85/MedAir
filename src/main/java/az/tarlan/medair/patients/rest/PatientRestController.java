@@ -19,7 +19,7 @@ public class PatientRestController {
     }
 
 
-    @GetMapping("/patients/{patientId}")
+    @GetMapping("/vite/{patientId}")
     public Vite getPatientById(@PathVariable int patientId){
         Vite thePatient = patientService.findById(patientId);
         if(thePatient ==null){
@@ -60,7 +60,7 @@ public class PatientRestController {
 
 
 
-    @DeleteMapping("/patients/{patientId}")
+    @DeleteMapping("/vite/{patientId}")
     public String deletePatient(@PathVariable int patientId){
         Vite tempPatient = patientService.findById(patientId);
         //throw  exception if null
