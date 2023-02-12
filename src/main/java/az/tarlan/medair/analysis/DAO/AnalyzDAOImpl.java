@@ -49,8 +49,14 @@ public class AnalyzDAOImpl implements AnalyzDAO{
     public List<AnalyzesMedia> findPatientAnalyses(int patientId) {
         System.out.println("2. findPatientAnalyses");
         Query theQuery=entityManager.createQuery("From AnalyzesMedia where patientId = "+patientId);
-        List<AnalyzesMedia> analyzesMedia = theQuery.getResultList();
-        System.out.println("3. "+analyzesMedia.toString());
+        List<AnalyzesMedia> analyzesMedia=null;
+        try {
+            analyzesMedia = theQuery.getResultList();
+        }catch (Exception e){
+            System.out.println("err");
+        }
+
+//        System.out.println("3. "+analyzesMedia.toString());
         return analyzesMedia;
     }
 }
