@@ -19,7 +19,7 @@ public class PatientRestController {
     }
 
 
-    @GetMapping("/vite/{patientId}")
+    @GetMapping("/patients/{patientId}")
     public Vite getPatientById(@PathVariable int patientId){
         Vite thePatient = patientService.findById(patientId);
         if(thePatient ==null){

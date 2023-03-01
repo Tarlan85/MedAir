@@ -52,13 +52,24 @@ public class RestController {
     }
 
     @DeleteMapping("/managers/tabs/{cureTabId}")
-    public String deletePatient(@PathVariable String cureTabId){
+    public String deleteCureTab(@PathVariable String cureTabId){
         System.out.println("Integer.parseInt(cureTabId) = "+Integer.parseInt(cureTabId));
         CureTabs tempPatient = managerService.findById(Integer.parseInt(cureTabId));
         //throw  exception if null
         if(tempPatient ==null)
-            throw new RuntimeException("Patient Id not found - "+cureTabId);
+            throw new RuntimeException("unsuccessful");
         managerService.deleteByIdCureTabs(Integer.parseInt(cureTabId));
-        return "Delete patient id - "+cureTabId;
+        return "success";
+    }
+    @DeleteMapping("/managers/places/{visitPlacesId}")
+    public String deleteVisitPlaces(@PathVariable String visitPlacesId){
+        System.out.println("Integer.parseInt(cureTabId) = "+Integer.parseInt(visitPlacesId));
+        VisitPlaces visitPlaces = managerService.findVisitPlacesById(Integer.parseInt(visitPlacesId));
+        //throw  exception if null
+        if(visitPlaces ==null)
+            throw new RuntimeException("unsuccessful");
+
+        managerService.deleteVisitPlacesById(Integer.parseInt(visitPlacesId));
+        return "success";
     }
 }

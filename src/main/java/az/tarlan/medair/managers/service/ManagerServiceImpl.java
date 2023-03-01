@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
-public class ManagerServiceImpl  implements ManagerService{
+public class ManagerServiceImpl implements ManagerService {
     private ManagerDAO managerDAO;
+
     @Autowired
     public ManagerServiceImpl(ManagerDAO managerDAO) {
-        this.managerDAO=managerDAO;
+        this.managerDAO = managerDAO;
     }
 
     @Override
@@ -28,6 +30,14 @@ public class ManagerServiceImpl  implements ManagerService{
         managerDAO.deleteByIdCureTabs(cureTabsId);
         return cureTabsId;
     }
+
+    @Override
+    @Transactional
+    public int deleteVisitPlacesById(int visitPlacesId) {
+        managerDAO.deleteVisitPlacesById(visitPlacesId);
+        return visitPlacesId;
+    }
+
     @Override
     @Transactional
     public List<CureTabs> getAllTabs() {
@@ -50,6 +60,11 @@ public class ManagerServiceImpl  implements ManagerService{
     @Transactional
     public CureTabs findById(int cureTabId) {
         return managerDAO.findById(cureTabId);
+    }
+
+    @Override
+    public VisitPlaces findVisitPlacesById(int visitPlacesId) {
+        return managerDAO.findVisitPlacesById(visitPlacesId);
     }
 
 }

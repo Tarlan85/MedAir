@@ -7,13 +7,18 @@ import java.util.List;
 
 public interface ManagerDAO {
     public CureTabs findById(int cureTabsId);
+
     public void saveCureTabs(CureTabs cureTabs);
 
     List<CureTabs> getAllTabs();
 
+    void deleteByIdCureTabs(int cureTabsId);
+
+    public VisitPlaces findVisitPlacesById(int visitPlacesId);
     List<VisitPlaces> getAllPlaces();
 
     void saveVisitPlaces(VisitPlaces visitPlaces);
 
-    void deleteByIdCureTabs(int cureTabsId);
+
+    void deleteVisitPlacesById(int visitPlacesId);
 }

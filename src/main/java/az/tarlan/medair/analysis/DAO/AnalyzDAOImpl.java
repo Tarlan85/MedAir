@@ -11,15 +11,39 @@ import java.io.IOException;
 import java.util.List;
 
 @Repository
-public class AnalyzDAOImpl implements AnalyzDAO{
+public class AnalyzDAOImpl implements AnalyzDAO {
     private EntityManager entityManager;
 
     public AnalyzDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
     @Override
     public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
-    }
+        System.out.println("saveAnalyzes");
+        AnalyzesMedia dbAnalyzesMedia = new AnalyzesMedia();
+        if (analyzesReqBody.getAnalyzesMediaList().size() > 0) {
+            Query theQuery = entityManager.createQuery("delete from AnalyzesMedia where  patientId=:patientId");
+            theQuery.setParameter("patientId", analyzesReqBody.getPatientId());
+            theQuery.executeUpdate();
+        }
+        for (int i = 0; i < analyzesReqBody.getAnalyzesMediaList().size(); i++) {
+            dbAnalyzesMedia.setAnalyzesDesc(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesDesc());
+            dbAnalyzesMedia.setAnalyzesType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesType());
+            dbAnalyzesMedia.setAnalyzesContentName(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesContentName());
+            dbAnalyzesMedia.setAnalyzesSubeType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesSubeType());
+            dbAnalyzesMedia.setDate(analyzesReqBody.getAnalyzesMediaList().get(i).getDate());
+
+//        dbAnalyzesMedia =entityManager.merge(analyzesReqBody.getAnalyzesMediaList().get(i));
+        dbAnalyzesMedia =entityManager.merge(dbAnalyzesMedia);
+        if(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesId()==0)
+        dbAnalyzesMedia.setAnalyzesId(dbAnalyzesMedia.getAnalyzesId());
+                dbAnalyzesMedia.setPatientId(analyzesReqBody.getPatientId());
+        }
+        //update  with id in db ... so we can get generation id for save / insert
+//        dbBreastAnalyzes.setAnalyzId(dbBreastAnalyzes.getAnalyzId());
+
+        }
 //    @Override
 //    public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
 //        System.out.println("saveAnalyzes");
@@ -45,18 +69,18 @@ public class AnalyzDAOImpl implements AnalyzDAO{
 //        //update  with id in db ... so we can get generation id for save / insert
 ////        dbBreastAnalyzes.setAnalyzId(dbBreastAnalyzes.getAnalyzId());
 //    }
-    @Override
-    public List<AnalyzesMedia> findPatientAnalyses(int patientId) {
-        System.out.println("2. findPatientAnalyses");
-        Query theQuery=entityManager.createQuery("From AnalyzesMedia where patientId = "+patientId);
-        List<AnalyzesMedia> analyzesMedia=null;
-        try {
-            analyzesMedia = theQuery.getResultList();
-        }catch (Exception e){
-            System.out.println("err");
-        }
+        @Override
+        public List<AnalyzesMedia> findPatientAnalyses ( int patientId){
+            System.out.println("2. findPatientAnalyses");
+            Query theQuery = entityManager.createQuery("From AnalyzesMedia where patientId = " + patientId);
+            List<AnalyzesMedia> analyzesMedia = null;
+            try {
+                analyzesMedia = theQuery.getResultList();
+            } catch (Exception e) {
+                System.out.println("err");
+            }
 
 //        System.out.println("3. "+analyzesMedia.toString());
-        return analyzesMedia;
+            return analyzesMedia;
+        }
     }
-}

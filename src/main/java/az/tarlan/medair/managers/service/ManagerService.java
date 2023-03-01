@@ -9,6 +9,7 @@ public interface ManagerService {
 
 
     public int deleteByIdCureTabs(int cureTabsId);
+    public int deleteVisitPlacesById(int visitPlacesId);
     public void saveCureTabs(CureTabs cureTabs);
     List<CureTabs> getAllTabs();
 
@@ -17,4 +18,5 @@ public interface ManagerService {
     void saveVisitPlace(VisitPlaces visitPlaces);
 
     public CureTabs findById(int cureTabId);
+    public VisitPlaces findVisitPlacesById(int visitPlacesId);
 }

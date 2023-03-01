@@ -27,13 +27,13 @@ public class AnalyzesRestController {
         this.analyzesService = analyzesService;
     }
 
-//    @PostMapping("/analyses")
-//    public AnalyzesReqBody addAnalyses(@RequestBody AnalyzesReqBody analizList) throws IOException {
-//        System.out.println("addAnalyses");
-//        System.out.println(analizList.toString());
-//        analyzesService.saveAnalyzes(analizList);
-//        return analizList;
-//    }
+    @PostMapping("/analyses")
+    public AnalyzesReqBody addAnalyses(@RequestBody AnalyzesReqBody analizList) throws IOException {
+        System.out.println("addAnalyses");
+        System.out.println(analizList.toString());
+        analyzesService.saveAnalyzes(analizList);
+        return analizList;
+    }
 
     @PostMapping("/analysesImage")
     public String addAnalyzesImage(@RequestParam("file") MultipartFile file) throws IOException {
