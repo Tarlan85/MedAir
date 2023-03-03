@@ -20,13 +20,22 @@ public class PatientRestController {
 
 
     @GetMapping("/patients/{patientId}")
-    public Vite getPatientById(@PathVariable int patientId){
+    public Vite getPatientIdBy(@PathVariable int patientId){
         Vite thePatient = patientService.findById(patientId);
         if(thePatient ==null){
 //            throw new RuntimeException("Patient id not found - "+patientId);
 //            thePatient.setPatientName("Patient id not found - "+patientId);
         }
     return thePatient;
+    }
+    @GetMapping("/vite/{patientId}")
+    public Vite getPatientById(@PathVariable int patientId){
+        Vite thePatient = patientService.findById(patientId);
+        if(thePatient ==null){
+//            throw new RuntimeException("Patient id not found - "+patientId);
+//            thePatient.setPatientName("Patient id not found - "+patientId);
+        }
+        return thePatient;
     }
     //
     @GetMapping("/patientid")
