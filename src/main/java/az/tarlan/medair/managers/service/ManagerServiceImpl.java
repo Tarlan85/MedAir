@@ -1,6 +1,7 @@
 package az.tarlan.medair.managers.service;
 
 import az.tarlan.medair.managers.entity.CureTabs;
+import az.tarlan.medair.managers.entity.PathologistsList;
 import az.tarlan.medair.managers.entity.VisitPlaces;
 import az.tarlan.medair.managers.managerDAO.ManagerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,56 @@ public class ManagerServiceImpl implements ManagerService {
         this.managerDAO = managerDAO;
     }
 
+
+    @Override
+    @Transactional
+    public List<CureTabs> getAllTabs() {
+        return managerDAO.getAllTabs();
+    }
+
+    @Override
+    @Transactional
+    public List<VisitPlaces> getAllPlaces() {
+        return managerDAO.getAllPlaces();
+    }
+
+    @Override
+    public List<PathologistsList> getAllPathologists() {
+        return managerDAO.getAllPathologists();
+    }
+
     @Override
     @Transactional
     public void saveCureTabs(CureTabs cureTabs) {
         managerDAO.saveCureTabs(cureTabs);
+    }
+
+    @Override
+    @Transactional
+    public void saveVisitPlace(VisitPlaces visitPlaces) {
+        managerDAO.saveVisitPlaces(visitPlaces);
+    }
+
+    @Override
+    public void savePathologistsList(PathologistsList pathologistsList) {
+        managerDAO.savePathologistsList(pathologistsList);
+    }
+
+    @Override
+    @Transactional
+    public CureTabs findCureTabById(int cureTabId) {
+        return managerDAO.findCureTabById(cureTabId);
+    }
+
+    @Override
+    @Transactional
+    public VisitPlaces findVisitPlacesById(int visitPlacesId) {
+        return managerDAO.findVisitPlacesById(visitPlacesId);
+    }
+
+    @Override
+    public PathologistsList findPathologistById(int pathologistsId) {
+        return managerDAO.findPathologistById( pathologistsId);
     }
 
     @Override
@@ -39,32 +86,8 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    @Transactional
-    public List<CureTabs> getAllTabs() {
-        return managerDAO.getAllTabs();
+    public int deletePathologistById(int pathologistsId) {
+        managerDAO.deletePathologistById(pathologistsId);
+        return pathologistsId;
     }
-
-    @Override
-    @Transactional
-    public List<VisitPlaces> getAllPlaces() {
-        return managerDAO.getAllPlaces();
-    }
-
-    @Override
-    @Transactional
-    public void saveVisitPlace(VisitPlaces visitPlaces) {
-        managerDAO.saveVisitPlaces(visitPlaces);
-    }
-
-    @Override
-    @Transactional
-    public CureTabs findById(int cureTabId) {
-        return managerDAO.findById(cureTabId);
-    }
-
-    @Override
-    public VisitPlaces findVisitPlacesById(int visitPlacesId) {
-        return managerDAO.findVisitPlacesById(visitPlacesId);
-    }
-
 }

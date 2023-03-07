@@ -1,6 +1,7 @@
 package az.tarlan.medair.managers.rest;
 
 import az.tarlan.medair.managers.entity.CureTabs;
+import az.tarlan.medair.managers.entity.PathologistsList;
 import az.tarlan.medair.managers.entity.VisitPlaces;
 
 import az.tarlan.medair.managers.service.ManagerService;
@@ -14,62 +15,96 @@ import java.util.List;
 @RequestMapping("/api")
 public class RestController {
     private ManagerService managerService;
+
     @Autowired
     public RestController(ManagerService managerService) {
-        this.managerService=managerService;
+        this.managerService = managerService;
     }
 
     @GetMapping("/managers/tabs")
-    public List<CureTabs> loadTabsManager(){
+    public List<CureTabs> loadTabsManager() {
         return managerService.getAllTabs();
     }
+
+    @GetMapping("/managers/places")
+    public List<VisitPlaces> loadPlacesManager() {
+        System.out.println("loadPlacesManager");
+        return managerService.getAllPlaces();
+    }
+
+    @GetMapping("/managers/pathologists")
+    public List<PathologistsList> loadPathologistsManager() {
+        System.out.println("loadPathologistsManager");
+        return managerService.getAllPathologists();
+    }
+
     @PostMapping("/managers/tabs")
-    public CureTabs addCureTab(@RequestBody CureTabs cureTabs){
+    public CureTabs addCureTab(@RequestBody CureTabs cureTabs) {
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
-        if (cureTabs.getCureTabId()>0)System.out.println(cureTabs.toString());
+        if (cureTabs.getCureTabId() > 0) System.out.println(cureTabs.toString());
         else
             cureTabs.setCureTabId(0);
         System.out.println(cureTabs.toString());
         managerService.saveCureTabs(cureTabs);
         return cureTabs;
     }
-    @GetMapping("/managers/places")
-    public List<VisitPlaces> loadPlacesManager(){
-        System.out.println("loadPlacesManager");
-        return managerService.getAllPlaces();
-    }
+
     @PostMapping("/managers/places")
-    public VisitPlaces addPlaces(@RequestBody VisitPlaces visitPlaces){
+    public VisitPlaces addPlaces(@RequestBody VisitPlaces visitPlaces) {
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
-        if (visitPlaces.getVisitPlaceId()>0)System.out.println(visitPlaces.toString());
+        if (visitPlaces.getVisitPlaceId() > 0) System.out.println(visitPlaces.toString());
         else
             visitPlaces.setVisitPlaceId(0);
         System.out.println(visitPlaces.toString());
         managerService.saveVisitPlace(visitPlaces);
         return visitPlaces;
     }
+    @PostMapping("/managers/pathologists")
+    public PathologistsList addPlaces(@RequestBody PathologistsList pathologistsList) {
+        //also, just  in case  the pass an id  in JSON ... set id to 0
+        //this is to force a save of new item ... instead of update
+        if (pathologistsList.getPathologistId() > 0) System.out.println(pathologistsList.toString());
+        else
+            pathologistsList.setPathologistId(0);
+        System.out.println(pathologistsList.toString());
+        managerService.savePathologistsList(pathologistsList);
+        return pathologistsList;
+    }
 
     @DeleteMapping("/managers/tabs/{cureTabId}")
-    public String deleteCureTab(@PathVariable String cureTabId){
-        System.out.println("Integer.parseInt(cureTabId) = "+Integer.parseInt(cureTabId));
-        CureTabs tempPatient = managerService.findById(Integer.parseInt(cureTabId));
+    public String deleteCureTab(@PathVariable String cureTabId) {
+        System.out.println("Integer.parseInt(cureTabId) = " + Integer.parseInt(cureTabId));
+        CureTabs tempPatient = managerService.findCureTabById(Integer.parseInt(cureTabId));
         //throw  exception if null
-        if(tempPatient ==null)
+        if (tempPatient == null)
             throw new RuntimeException("unsuccessful");
         managerService.deleteByIdCureTabs(Integer.parseInt(cureTabId));
         return "success";
     }
+
     @DeleteMapping("/managers/places/{visitPlacesId}")
-    public String deleteVisitPlaces(@PathVariable String visitPlacesId){
-        System.out.println("Integer.parseInt(cureTabId) = "+Integer.parseInt(visitPlacesId));
+    public String deleteVisitPlaces(@PathVariable String visitPlacesId) {
+        System.out.println("Integer.parseInt(cureTabId) = " + Integer.parseInt(visitPlacesId));
         VisitPlaces visitPlaces = managerService.findVisitPlacesById(Integer.parseInt(visitPlacesId));
         //throw  exception if null
-        if(visitPlaces ==null)
+        if (visitPlaces == null)
             throw new RuntimeException("unsuccessful");
 
         managerService.deleteVisitPlacesById(Integer.parseInt(visitPlacesId));
+        return "success";
+    }
+
+    @DeleteMapping("/managers/pathologists/{pathologistsId}")
+    public String deletePathologist(@PathVariable String pathologistsId) {
+        System.out.println("Integer.parseInt(pathologistsId) = " + Integer.parseInt(pathologistsId));
+        VisitPlaces visitPlaces = managerService.findPathologistById(Integer.parseInt(pathologistsId));
+        //throw  exception if null
+        if (visitPlaces == null)
+            throw new RuntimeException("unsuccessful");
+
+        managerService.deletePathologistById(Integer.parseInt(pathologistsId));
         return "success";
     }
 }

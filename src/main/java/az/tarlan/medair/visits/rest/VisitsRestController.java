@@ -28,7 +28,7 @@ public class VisitsRestController {
     @GetMapping("/visits/{moment}")
     public List<VisitTable> findAllVisits(@PathVariable String moment) {
         System.out.println(" findAll ===" + moment);
-//        System.out.println(visitsService.findAllVisits(moment).toString());
+        System.out.println(visitsService.findAllVisits(moment).toString());
 //        System.out.println(" findAll === end");
         return visitsService.findAllVisits(moment);
     }
