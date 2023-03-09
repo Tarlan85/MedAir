@@ -99,9 +99,9 @@ public class RestController {
     @DeleteMapping("/managers/pathologists/{pathologistsId}")
     public String deletePathologist(@PathVariable String pathologistsId) {
         System.out.println("Integer.parseInt(pathologistsId) = " + Integer.parseInt(pathologistsId));
-        VisitPlaces visitPlaces = managerService.findPathologistById(Integer.parseInt(pathologistsId));
+        PathologistsList pathologistsList = managerService.findPathologistById(Integer.parseInt(pathologistsId));
         //throw  exception if null
-        if (visitPlaces == null)
+        if (pathologistsList == null)
             throw new RuntimeException("unsuccessful");
 
         managerService.deletePathologistById(Integer.parseInt(pathologistsId));

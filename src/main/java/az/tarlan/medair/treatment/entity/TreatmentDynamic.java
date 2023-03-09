@@ -58,9 +58,47 @@ public class TreatmentDynamic {
     @Column(name = "axilla_desection_mts")
     private int axillaDesectionMts;
 
+    @Column(name = "ER_N")
+    private String erN;
+
+    @Column(name = "PR_N")
+    private String prN;
+
+    @Column(name = "HER2")
+    private int her2;
+    @Column(name = "HER2_FT")
+    private String her2FT;
+
+
+    @Column(name = "K67")
+    private int k67;
+
+    @Column(name = "pathologist")
+    private String pathologist;
+
+
     public TreatmentDynamic() {}
 
-    public TreatmentDynamic(int treatmentId, int patientId, Date treatmentDate, String treatmentTypeName, String treatmentSubType, String treatmentSubSubType, String treatmentTypeDesc, String breastType, String histologyUrgent, String histologyFinal, int slnbReactive, int slnbMts, int axillaDesectionReactive, int axillaDesectionMts) {
+    public TreatmentDynamic(int treatmentId,
+                            int patientId,
+                            Date treatmentDate,
+                            String treatmentTypeName,
+                            String treatmentSubType,
+                            String treatmentSubSubType,
+                            String treatmentTypeDesc,
+                            String breastType,
+                            String histologyUrgent,
+                            String histologyFinal,
+                            int slnbReactive,
+                            int slnbMts,
+                            int axillaDesectionReactive,
+                            int axillaDesectionMts,
+                            String erN,
+                            String prN,
+                            int her2,
+                            String her2FT,
+                            int k67,
+                            String pathologist) {
         this.treatmentId = treatmentId;
         this.patientId = patientId;
         this.treatmentDate = treatmentDate;
@@ -75,6 +113,60 @@ public class TreatmentDynamic {
         this.slnbMts = slnbMts;
         this.axillaDesectionReactive = axillaDesectionReactive;
         this.axillaDesectionMts = axillaDesectionMts;
+        this.erN = erN;
+        this.prN = prN;
+        this.her2 = her2;
+        this.her2FT = her2FT;
+        this.k67 = k67;
+        this.pathologist = pathologist;
+    }
+
+    public String getErN() {
+        return erN;
+    }
+
+    public void setErN(String erN) {
+        this.erN = erN;
+    }
+
+    public String getPrN() {
+        return prN;
+    }
+
+    public void setPrN(String prN) {
+        this.prN = prN;
+    }
+
+    public int getHer2() {
+        return her2;
+    }
+
+    public void setHer2(int her2) {
+        this.her2 = her2;
+    }
+
+    public String getHer2FT() {
+        return her2FT;
+    }
+
+    public void setHer2FT(String her2FT) {
+        this.her2FT = her2FT;
+    }
+
+    public int getK67() {
+        return k67;
+    }
+
+    public void setK67(int k67) {
+        this.k67 = k67;
+    }
+
+    public String getPathologist() {
+        return pathologist;
+    }
+
+    public void setPathologist(String pathologist) {
+        this.pathologist = pathologist;
     }
 
     public int getTreatmentId() {
@@ -206,6 +298,12 @@ public class TreatmentDynamic {
                 ", slnbMts=" + slnbMts +'\n' +
                 ", axillaDesectionReactive=" + axillaDesectionReactive +'\n' +
                 ", axillaDesectionMts=" + axillaDesectionMts +'\n' +
+                ", erN='" + erN + '\'' +"\n"+
+                ", prN='" + prN + '\'' +"\n"+
+                ", her2=" + her2 +"\n"+
+                ", her2FT='" + her2FT + '\'' +"\n"+
+                ", k67=" + k67 +'\'' +"\n"+
+                ", pathologist='" + pathologist +
                 '}';
     }
 }

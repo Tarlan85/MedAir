@@ -40,24 +40,36 @@ public class DeseaseHistoryDynamic {
     @Column(name = "HER2_FT")
     private String her2FT;
 
+
     @Column(name = "K67")
     private int k67;
 
+    @Column(name = "pathologist")
+    private String pathologist;
 
     public DeseaseHistoryDynamic() {}
 
-    public DeseaseHistoryDynamic(int patientsComplaintsId, int patientId, String complaintBreastType, String durationOfIllness, String complaintDescription, String receivedTreatment, String erN, String prN, int her2, String her2FT, int k67) {
+    public DeseaseHistoryDynamic(int patientsComplaintsId, int patientId,String pathologist, String complaintBreastType, String durationOfIllness, String complaintDescription, String receivedTreatment, String erN, String prN, int her2, String her2FT, int k67) {
         this.patientsComplaintsId = patientsComplaintsId;
         this.patientId = patientId;
         this.complaintBreastType = complaintBreastType;
         this.durationOfIllness = durationOfIllness;
         this.complaintDescription = complaintDescription;
         this.receivedTreatment = receivedTreatment;
+        this.pathologist = pathologist;
         this.erN = erN;
         this.prN = prN;
         this.her2 = her2;
         this.her2FT = her2FT;
         this.k67 = k67;
+    }
+
+    public String getPathologist() {
+        return pathologist;
+    }
+
+    public void setPathologist(String pathologist) {
+        this.pathologist = pathologist;
     }
 
     public int getPatientsComplaintsId() {
@@ -161,7 +173,9 @@ public class DeseaseHistoryDynamic {
                 ", prN='" + prN + '\'' +"\n"+
                 ", her2=" + her2 +"\n"+
                 ", her2FT='" + her2FT + '\'' +"\n"+
-                ", k67=" + k67 +
+
+                ", k67=" + k67 +'\'' +"\n"+
+                ", pathologist='" + pathologist +
                 '}';
     }
 }

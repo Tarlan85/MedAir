@@ -33,6 +33,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Transactional
     public List<PathologistsList> getAllPathologists() {
         return managerDAO.getAllPathologists();
     }
@@ -50,6 +51,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Transactional
     public void savePathologistsList(PathologistsList pathologistsList) {
         managerDAO.savePathologistsList(pathologistsList);
     }
@@ -67,6 +69,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Transactional
     public PathologistsList findPathologistById(int pathologistsId) {
         return managerDAO.findPathologistById( pathologistsId);
     }
@@ -86,6 +89,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Transactional
     public int deletePathologistById(int pathologistsId) {
         managerDAO.deletePathologistById(pathologistsId);
         return pathologistsId;
