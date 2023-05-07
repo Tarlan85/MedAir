@@ -24,6 +24,12 @@ public class AnalyzesServiceImpl implements AnalyzesService {
 
     @Override
     @Transactional
+    public int getAnalysId() {
+        return analyzDAO.getAnalysId();
+    }
+
+    @Override
+    @Transactional
     public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
         analyzDAO.saveAnalyzes(analyzesReqBody);
     }

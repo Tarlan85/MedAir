@@ -31,15 +31,9 @@ public class AnalyzesMedia {
 
     @Column(name = "analyzes_content_name")
     private String analyzesContentName;
-//    @Column(name = "analyzes_content_original_file_name")
-//    private String analyzesContentOriginalFileName;
-//    @Column(name = "analyzes_content_size")
-//    private long analyzesContentSize;
-//    @Lob
-//    @Column(name = "analyzes_content_byte")
-//    private byte[] analyzesContentByte;
-//    @Column(name = "analyzes_content_type")
-//    private String analyzesContentType;
+
+    @Column(name = "analyzes_content_url")
+    private String analyzesContentUrl;
 
     public AnalyzesMedia() {
     }
@@ -51,10 +45,7 @@ public class AnalyzesMedia {
                          String analyzesSubeType,
                          String analyzesDesc,
                          String analyzesContentName,
-                         String analyzesContentOriginalFileName,
-                         int analyzes_content_size,
-                         byte[] analyzesContentByte,
-                         String analyzesContentType) {
+                         String analyzesContentUrl) {
         this.analyzesId = analyzesId;
         this.patientId = patientId;
         this.date = date;
@@ -62,10 +53,15 @@ public class AnalyzesMedia {
         this.analyzesSubeType = analyzesSubeType;
         this.analyzesDesc = analyzesDesc;
         this.analyzesContentName = analyzesContentName;
-//        this.analyzesContentOriginalFileName = analyzesContentOriginalFileName;
-//        this.analyzesContentSize = analyzes_content_size;
-//        this.analyzesContentByte = analyzesContentByte;
-//        this.analyzesContentType = analyzesContentType;
+        this.analyzesContentUrl = analyzesContentUrl;
+    }
+
+    public String getAnalyzesContentUrl() {
+        return analyzesContentUrl;
+    }
+
+    public void setAnalyzesContentUrl(String analyzesContentUrl) {
+        this.analyzesContentUrl = analyzesContentUrl;
     }
 
     public int getAnalyzesId() {
@@ -109,7 +105,6 @@ public class AnalyzesMedia {
     }
 
 
-
     public String getAnalyzesDesc() {
         return analyzesDesc;
     }
@@ -126,52 +121,17 @@ public class AnalyzesMedia {
         this.analyzesContentName = analyzesContentName;
     }
 
-//    public String getAnalyzesContentOriginalFileName() {
-//        return analyzesContentOriginalFileName;
-//    }
-//
-//    public void setAnalyzesContentOriginalFileName(String analyzesContentOriginalFileName) {
-//        this.analyzesContentOriginalFileName = analyzesContentOriginalFileName;
-//    }
-//
-//    public long getAnalyzes_content_size() {
-//        return analyzesContentSize;
-//    }
-//
-//    public void setAnalyzesContentSize(long analyzesContentSize) {
-//        this.analyzesContentSize = analyzesContentSize;
-//    }
-//
-//    public byte[] getAnalyzesContentByte() {
-//        return analyzesContentByte;
-//    }
-//
-//    public void setAnalyzesContentByte(byte[] analyzesContentByte) {
-//        this.analyzesContentByte = analyzesContentByte;
-//    }
-//
-//    public String getAnalyzesContentType() {
-//        return analyzesContentType;
-//    }
-//
-//    public void setAnalyzesContentType(String analyzesContentType) {
-//        this.analyzesContentType = analyzesContentType;
-//    }
-
     @Override
     public String toString() {
         return "AnalyzesMedia{" +
-                "analyzesId=" + analyzesId +"\n" +
-                ", patientId=" + patientId +"\n" +
-                ", date=" + date +"\n" +
-                ", analyzesType='" + analyzesType + '\'' +"\n" +
-                ", analyzesSubeType='" + analyzesSubeType + '\'' +"\n" +
-                ", analyzesDesc='" + analyzesDesc + '\'' +"\n" +
-                ", analyzesContentName='" + analyzesContentName + '\'' +"\n" +
-//                ", analyzesContentOriginalFileName='" + analyzesContentOriginalFileName + '\'' +"\n" +
-//                ", analyzesContentSize=" + analyzesContentSize +"\n" +
-//                ", analyzesContentByte=" + Arrays.toString(analyzesContentByte) +"\n" +
-//                ", analyzesContentType='" + analyzesContentType + '\'' +
+                "analyzesId=" + analyzesId + "\n" +
+                ", patientId=" + patientId + "\n" +
+                ", date=" + date + "\n" +
+                ", analyzesType='" + analyzesType + '\'' + "\n" +
+                ", analyzesSubeType='" + analyzesSubeType + '\'' + "\n" +
+                ", analyzesDesc='" + analyzesDesc + '\'' + "\n" +
+                ", analyzesContentName='" + analyzesContentName + '\'' + "\n" +
+                ", analyzesContentUrl='" + analyzesContentUrl + '\'' +
                 '}';
     }
 }

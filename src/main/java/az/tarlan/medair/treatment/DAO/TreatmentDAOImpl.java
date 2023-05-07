@@ -25,7 +25,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
     @Override
     public void saveTreatment(TreatmentReqBody treatmentRB) {
-        System.out.println(">>>>>saveTreatment<<<<<");
+        //System.out.println(">>>>>saveTreatment<<<<<");
         Query theQuery=entityManager.createQuery("delete from TreatmentStatic where  patientId=:patientId");
         theQuery.setParameter("patientId",treatmentRB.getPatientId());
         theQuery.executeUpdate();
@@ -38,7 +38,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
         TreatmentStatic treatmentStatic = entityManager.merge(dbTreatmentStatic);
         dbTreatmentStatic.setTreatmentId(treatmentStatic.getTreatmentId());
-        System.out.println(treatmentStatic.toString());
+        //System.out.println(treatmentStatic.toString());
 
         List<Recipe> recipeList=treatmentRB.getRecipeList();
         Recipe recipe=new Recipe();
@@ -50,7 +50,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
             recipeList.get(i).setPatientId(treatmentRB.getPatientId());
             recipe=  entityManager.merge(recipeList.get(i));
             recipeList.get(i).setRecipeId(recipe.getRecipeId());
-            System.out.println(recipe.toString());
+            //System.out.println(recipe.toString());
         }
         List<TreatmentDynamic> treatmentDynamicsList=treatmentRB.getTreatmentDynamics();
         TreatmentDynamic treatmentDynamic=new TreatmentDynamic();
@@ -62,19 +62,19 @@ public class TreatmentDAOImpl implements TreatmentDAO {
             treatmentDynamicsList.get(i).setPatientId(treatmentRB.getPatientId());
             treatmentDynamic=  entityManager.merge(treatmentDynamicsList.get(i));
             treatmentDynamicsList.get(i).setTreatmentId(treatmentDynamic.getTreatmentId());
-            System.out.println(treatmentDynamic.toString());
+            //System.out.println(treatmentDynamic.toString());
         }
 
     }
 
     @Override
     public TreatmentReqBody findTreatmentAnalyses(int patientId) {
-        System.out.println("2. findTreatmentAnalyses");
+        //System.out.println("2. findTreatmentAnalyses");
         TreatmentReqBody treatmentReqBody=new TreatmentReqBody();
-        System.out.println("From TreatmentStatic where patientId = "+patientId);
+        //System.out.println("From TreatmentStatic where patientId = "+patientId);
         Query theQuery=entityManager.createQuery("From TreatmentStatic where patientId = "+patientId);
         List<TreatmentStatic> treatmentStatic = theQuery.getResultList();
-        System.out.println("3.treatmentStatic =  "+treatmentStatic.toString());
+        //System.out.println("3.treatmentStatic =  "+treatmentStatic.toString());
         if (treatmentStatic.size()>0) {
             treatmentReqBody.setrecommendation(treatmentStatic.get(0).getrecommendation());
             treatmentReqBody.setTreatmentId(treatmentStatic.get(0).getTreatmentId());
@@ -84,11 +84,11 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         }
         theQuery=entityManager.createQuery("From TreatmentDynamic where patientId = "+patientId);
         List<TreatmentDynamic> treatmentDynamics = theQuery.getResultList();
-        System.out.println("3. "+treatmentDynamics.toString());
+        //System.out.println("3. "+treatmentDynamics.toString());
         treatmentReqBody.setTreatmentDynamics(treatmentDynamics);
         theQuery=entityManager.createQuery("From Recipe where patientId = "+patientId);
         List<Recipe> recipeList = theQuery.getResultList();
-        System.out.println("3. "+recipeList.toString());
+        //System.out.println("3. "+recipeList.toString());
         treatmentReqBody.setRecipeList(recipeList);
         return treatmentReqBody;
     }

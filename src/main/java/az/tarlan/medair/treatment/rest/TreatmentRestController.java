@@ -17,17 +17,19 @@ public class TreatmentRestController {
 
     @PostMapping("/treatment")
     public TreatmentReqBody addTreatment(@RequestBody TreatmentReqBody treatmentRB){
-        System.out.println(">>>>>>>>TREATMENT<<<<<<<<<");
-        if (treatmentRB.getTreatmentId()>0)System.out.println(treatmentRB.toString());
+        //System.out.println(">>>>>>>>TREATMENT<<<<<<<<<");
+        if (treatmentRB.getTreatmentId()>0)
+            System.out.println("");
+//            System.out.println(treatmentRB.toString());
         else
             treatmentRB.setTreatmentId(0);
-        System.out.println(treatmentRB.toString());
+        //System.out.println(treatmentRB.toString());
         treatmentService.saveTreatment(treatmentRB);
         return null;
     }
     @GetMapping("/treatment/{patientId}")
     public TreatmentReqBody findTreatmentByPatientId(@PathVariable int patientId){
-        System.out.println("1. findTreatmentByPatientId \n patientId==="+patientId);
+        //System.out.println("1. findTreatmentByPatientId \n patientId==="+patientId);
         return treatmentService.findTreatmentAnalyses(patientId);
     }
 

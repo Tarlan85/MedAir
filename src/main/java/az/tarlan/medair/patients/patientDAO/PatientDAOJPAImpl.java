@@ -40,9 +40,9 @@ public class PatientDAOJPAImpl implements PatientDAO {
     }
 //    @Override
 //    public List<PatientVisits> findByFirstName(PatientVisits patientVisits) {
-//        System.out.println("findByFirstName====k="+k);
+//        //System.out.println("findByFirstName====k="+k);
 //        k=0;
-//        System.out.println("findByFirstName==1==k="+k);
+//        //System.out.println("findByFirstName==1==k="+k);
 //        String sql="";
 //
 //        sql=sql_concat("visit_id",String.valueOf(patientVisits.getVisitId()));
@@ -55,11 +55,11 @@ public class PatientDAOJPAImpl implements PatientDAO {
 //        sql=sql+sql_concat("visit_desc", patientVisits.getVisitDesc());
 //        sql=sql+sql_concat("preliminary_diagnosis", patientVisits.getPreliminaryDiagnosis());
 //
-//        System.out.println("+++++++++++++++++++++++++++++");
-//        System.out.println("sql==FROM Patient where "+sql);
+//        //System.out.println("+++++++++++++++++++++++++++++");
+//        //System.out.println("sql==FROM Patient where "+sql);
 //        Query theQuery=entityManager.createQuery("FROM Patient where "+sql);
 //        List<PatientVisits> patients =theQuery.getResultList();
-//        System.out.println(patients.toString());
+//        //System.out.println(patients.toString());
 //        //execute query and get result list
 //            if (patients.toString().equals("[]")) patients= null;
 //        k=0;
@@ -68,23 +68,23 @@ public class PatientDAOJPAImpl implements PatientDAO {
 
     @Override
     public void saveThePatientVite(Vite thePatientVite) {
-        System.out.println("1==="+patientID);
+        //System.out.println("1==="+patientID);
         Vite dbPatient =entityManager.merge(thePatientVite);
         //update  with id in db ... so we can get generation id for save / insert
         patientID=dbPatient.getPatientId();
         thePatientVite.setPatientId(patientID);
-        System.out.println("PatientVite==="+thePatientVite.toString());
+        //System.out.println("PatientVite==="+thePatientVite.toString());
     }
 
     @Override
     public int getPatientId() {
         Query theQuery=entityManager.createQuery(" Select max(patientId) from Vite ");
-        System.out.println(theQuery.getResultList());
+        //System.out.println(theQuery.getResultList());
         List list=theQuery.getResultList();
         if(list.get(0) == null) return 1;
         patientID= (int) list.get(0);
         patientID=patientID+1;
-        System.out.println("return for front=="+patientID);
+        //System.out.println("return for front=="+patientID);
         return patientID;
     }
 

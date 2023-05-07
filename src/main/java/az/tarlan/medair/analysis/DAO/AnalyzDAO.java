@@ -9,4 +9,6 @@ import java.util.List;
 public interface AnalyzDAO {
     public List<AnalyzesMedia> findPatientAnalyses(int patientId);
     public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException;
+
+    public int getAnalysId();
 }

@@ -3,7 +3,6 @@ package az.tarlan.medair.analysis.rest;
 import az.tarlan.medair.analysis.entity.AnalyzesMedia;
 import az.tarlan.medair.analysis.entity.AnalyzesReqBody;
 import az.tarlan.medair.analysis.service.AnalyzesService;
-import az.tarlan.medair.deseaseHistory.service.DeseaseHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -21,54 +20,56 @@ public class AnalyzesRestController {
     private AnalyzesService analyzesService;
     @Value("${upload.path}")
     private String uploadPath;
+    @Value("${server.ip}")
+    private String serverIp;
 
     @Autowired
     public AnalyzesRestController(AnalyzesService analyzesService) {
         this.analyzesService = analyzesService;
     }
 
+    @GetMapping("/analysid")
+    public int getPatientId(){
+        int newAnalysId = analyzesService.getAnalysId();
+        return newAnalysId ;
+    }
     @PostMapping("/analyses")
     public AnalyzesReqBody addAnalyses(@RequestBody AnalyzesReqBody analizList) throws IOException {
-        System.out.println("addAnalyses");
-        System.out.println(analizList.toString());
+        //System.out.println("addAnalyses");
+        //System.out.println(analizList.toString());
         analyzesService.saveAnalyzes(analizList);
         return analizList;
     }
 
     @PostMapping("/analysesImage")
     public String addAnalyzesImage(@RequestParam("file") MultipartFile file) throws IOException {
-        String result="";
-        System.out.println(file.toString());
-        System.out.println(file.getName());
-        System.out.println(file.getOriginalFilename());
-        System.out.println(file.getContentType());
-        System.out.println(file.getSize());
-        System.out.println(file.getBytes());
+        //System.out.println("addAnalyzesImage");
+        String result = "";
+        //System.out.println("analyzesContentName = " + file.getOriginalFilename());
+        //System.out.println(file.getSize());
 
-//        System.out.println("src/main/resources/"+file.getOriginalFilename());
-//        File file1 = new File("src/main/resources/"+file.getOriginalFilename());
-//        file.transferTo(file1);
         if (file != null) {
-            System.out.println(uploadPath);
+            //System.out.println(uploadPath);
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
-                System.out.println("dont");
+                //System.out.println("dont");
                 uploadDir.mkdir();
             }
+            System.currentTimeMillis();
             String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + "." + file.getOriginalFilename();
-             result=uploadPath + "/" + resultFileName;
-            System.out.println(result);
-            file.transferTo(new File("/" + resultFileName));
 
+            String resultFileName = System.currentTimeMillis()+"." + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")+1,file.getOriginalFilename().length());
+            result = serverIp + "/" + resultFileName;
+            //System.out.println("analyzesContentUrl = " + result);
+            file.transferTo(new File(uploadPath + "/" + resultFileName));
         }
-        file:///C:/uploads/4336621f-6395-4d2a-a32d-b37b380cea0f.rrrr.jpg
         return result;
     }
 
     @GetMapping("/analyses/{patientId}")
     public List<AnalyzesMedia> findAnalysesByPatientId(@PathVariable int patientId) {
-        System.out.println("1. findAnalysesByPatientId \n patientId===" + patientId);
+        //System.out.println("1. findAnalysesByPatientId \n patientId===" + patientId);
+        //System.out.println(analyzesService.findPatientAnalyses(patientId));
         return analyzesService.findPatientAnalyses(patientId);
     }
 

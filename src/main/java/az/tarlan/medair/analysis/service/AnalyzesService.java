@@ -10,5 +10,8 @@ import java.util.List;
 
 public interface AnalyzesService {
     void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException;
+
     public List<AnalyzesMedia> findPatientAnalyses(int patientId);
+
+    int getAnalysId();
 }

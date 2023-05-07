@@ -36,9 +36,9 @@ public class SearchDAOJPAImpl implements SearchDAO {
     }
     @Override
     public List<Vite> find(SearchForVite searchForVite) {
-        System.out.println("find====k="+k);
+        //System.out.println("find====k="+k);
         k=0;
-        System.out.println("find==1==k="+k);
+        //System.out.println("find==1==k="+k);
         String sql="";
 
         sql=sql_concat("patientId",String.valueOf(searchForVite.getPatientId()));
@@ -46,11 +46,11 @@ public class SearchDAOJPAImpl implements SearchDAO {
         sql=sql+sql_concat("phoneNumber", searchForVite.getPhoneNumber());
         sql=sql+sql_concat("patientSurName", searchForVite.getPatientSurName());
 
-        System.out.println("+++++++++++++++++++++++++++++");
-        System.out.println("sql==FROM Vite where "+sql);
+        //System.out.println("+++++++++++++++++++++++++++++");
+        //System.out.println("sql==FROM Vite where "+sql);
         Query theQuery=entityManager.createQuery("FROM Vite where "+sql);
         List<Vite> patients =theQuery.getResultList();
-        System.out.println(patients.toString());
+        //System.out.println(patients.toString());
         //execute query and get result list
             if (patients.toString().equals("[]")) patients= null;
         k=0;

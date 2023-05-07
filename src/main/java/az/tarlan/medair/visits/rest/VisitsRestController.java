@@ -27,15 +27,15 @@ public class VisitsRestController {
 
     @GetMapping("/visits/{moment}")
     public List<VisitTable> findAllVisits(@PathVariable String moment) {
-        System.out.println(" findAll ===" + moment);
-        System.out.println(visitsService.findAllVisits(moment).toString());
-//        System.out.println(" findAll === end");
+        //System.out.println(" findAll ===" + moment);
+        //System.out.println(visitsService.findAllVisits(moment).toString());
+//        //System.out.println(" findAll === end");
         return visitsService.findAllVisits(moment);
     }
 
     @GetMapping("/visits/patientId/{patientId}")
     public List<PatientVisits> findPatientVisits(@PathVariable int patientId) {
-        System.out.println("1. findPatientVisits \n patientId===" + patientId);
+        //System.out.println("1. findPatientVisits \n patientId===" + patientId);
         return visitsService.findPatientVisits(patientId);
     }
 
@@ -45,13 +45,13 @@ public class VisitsRestController {
         //this is to force a save of new item ... instead of update
 //        if (patientVisits.getVisitId()<1)
 //        patientVisits.setVisitId(0);
-//        System.out.println("patientVisitId()====="+patientVisits.getVisitId());
-//        System.out.println(patientVisits.toString());
-        System.out.println("addPatientVisit");
-        System.out.println(visitsRegBody.toString());
+//        //System.out.println("patientVisitId()====="+patientVisits.getVisitId());
+//        //System.out.println(patientVisits.toString());
+        //System.out.println("addPatientVisit");
+        //System.out.println(visitsRegBody.toString());
         if (visitsRegBody.getPatientVisitsList() != null) {
-            System.out.println("VISITDATE");
-            System.out.println(visitsRegBody.getPatientVisitsList().get(0).getVisitDate());
+            //System.out.println("VISITDATE");
+            //System.out.println(visitsRegBody.getPatientVisitsList().get(0).getVisitDate());
             visitsService.savePatientVisits(visitsRegBody);
         }
         return visitsRegBody;
@@ -61,12 +61,12 @@ public class VisitsRestController {
     public VisitsRegBody addPatientVisitsFromCalendar(@RequestBody VisitsRegBody visitsRegBody) {
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
-        System.out.println("addPatientVisit");
-        System.out.println(visitsRegBody.toString());
+        //System.out.println("addPatientVisit");
+        //System.out.println(visitsRegBody.toString());
         if (visitsRegBody.getPatientVisitsList() != null) {
-            System.out.println(visitsRegBody.getPatientVisitsList().get(0).getVisitDate());
-            System.out.println(visitsRegBody.getPatientVisitsList().get(0).getPatientId());
-            System.out.println(visitsRegBody.getPatientId());
+            //System.out.println(visitsRegBody.getPatientVisitsList().get(0).getVisitDate());
+            //System.out.println(visitsRegBody.getPatientVisitsList().get(0).getPatientId());
+            //System.out.println(visitsRegBody.getPatientId());
             visitsService.addPatientVisitsFromCalendar(visitsRegBody);
         }
         return visitsRegBody;
@@ -77,8 +77,8 @@ public class VisitsRestController {
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
 
-        System.out.println("visitTable()=====" + visitTable.getId());
-        System.out.println(visitTable.toString());
+        //System.out.println("visitTable()=====" + visitTable.getId());
+        //System.out.println(visitTable.toString());
         visitsService.saveVisitTable(visitTable);
         return visitTable;
     }

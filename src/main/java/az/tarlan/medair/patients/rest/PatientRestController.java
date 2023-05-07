@@ -60,9 +60,9 @@ public class PatientRestController {
         //this is to force a save of new item ... instead of update
         if (thePatientVite.getPatientId()<1)
         thePatientVite.setPatientId(0);
-        System.out.println("============vite=============");
-        System.out.println(thePatientVite.toString());
-        System.out.println("=============vite============");
+        //System.out.println("============vite=============");
+        //System.out.println(thePatientVite.toString());
+        //System.out.println("=============vite============");
         patientService.saveThePatientVita(thePatientVite);
         return thePatientVite;
     }

@@ -33,9 +33,9 @@ public class SearchRestController {
 //    }
     @PostMapping("/search")
     public List<Vite> getPatient(@RequestBody(required = false) SearchForVite searchBody){
-        System.out.println("getPatient");
+        //System.out.println("getPatient");
         if (searchBody.toString()==null) return null;
-        System.out.println(searchBody.toString());
+        //System.out.println(searchBody.toString());
         List<Vite> thePatient = searchService.find(searchBody);
 //        Vite thePatient = patientService.findById(patientVite.getPatientId());
         if(thePatient ==null){

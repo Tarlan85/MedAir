@@ -11,7 +11,6 @@ import java.util.List;
 
 public class AnalyzesReqBody {
     List<AnalyzesMedia> analyzesMediaList;
-//    List<MultipartFile> analyzesMediaList;
     private int patientId;
 
     public AnalyzesReqBody() {

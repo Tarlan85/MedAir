@@ -21,13 +21,13 @@ public class LogInRestController {
 
     @PostMapping("/login")
     public LogInReqBody checkLogIn(@RequestBody LogIn logIn){
-        System.out.println("checkLogIn");
-        System.out.println(logIn.toString());
+        //System.out.println("checkLogIn");
+        //System.out.println(logIn.toString());
         return  logInService.checkLogIn(logIn);
     }
     @GetMapping("/token/{token}")
     public String findToken(@PathVariable String token){
-        System.out.println("1. checkToken \n token==="+token);
+        //System.out.println("1. checkToken \n token==="+token);
         return logInService.checkToken(token);
     }
 

@@ -22,28 +22,28 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     @Override
     public List<CureTabs> getAllTabs() {
-        System.out.println("getAllTabs");
+        //System.out.println("getAllTabs");
         Query theQuery = entityManager.createQuery("From CureTabs");
         List<CureTabs> dbCureTabs = theQuery.getResultList();
-        System.out.println(dbCureTabs.toString());
+        //System.out.println(dbCureTabs.toString());
         return dbCureTabs;
 //        return (List<CureTabs>) dbCureTabs;
     }
 
     @Override
     public List<VisitPlaces> getAllPlaces() {
-        System.out.println("getAllPlaces");
+        //System.out.println("getAllPlaces");
         Query theQuery = entityManager.createQuery("From VisitPlaces");
         List<VisitPlaces> dbVisitPlaces = theQuery.getResultList();
-        System.out.println(dbVisitPlaces.toString());
+        //System.out.println(dbVisitPlaces.toString());
         return dbVisitPlaces;
     }
     @Override
     public List<PathologistsList> getAllPathologists() {
-        System.out.println("getAllPathologists");
+        //System.out.println("getAllPathologists");
         Query theQuery = entityManager.createQuery("From PathologistsList");
         List<PathologistsList> dbPathologistsLists = theQuery.getResultList();
-        System.out.println(dbPathologistsLists.toString());
+        //System.out.println(dbPathologistsLists.toString());
         return dbPathologistsLists;
     }
 
@@ -66,7 +66,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     @Override
     public void saveCureTabs(CureTabs cureTabs) {
-        System.out.println("saveCureTabs");
+        //System.out.println("saveCureTabs");
         CureTabs dbCureTabs = entityManager.merge(cureTabs);
         //update  with id in db ... so we can get generation id for save / insert
         cureTabs.setCureTabId(dbCureTabs.getCureTabId());
@@ -76,7 +76,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     @Override
     public void saveVisitPlaces(VisitPlaces visitPlaces) {
-        System.out.println("saveVisitPlaces");
+        //System.out.println("saveVisitPlaces");
         VisitPlaces dbVisitPlaces = entityManager.merge(visitPlaces);
         //update  with id in db ... so we can get generation id for save / insert
         visitPlaces.setVisitPlaceId(dbVisitPlaces.getVisitPlaceId());
@@ -84,7 +84,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     @Override
     public void savePathologistsList(PathologistsList pathologistsList) {
-        System.out.println("savePathologistsList");
+        //System.out.println("savePathologistsList");
         PathologistsList dbPathologistsList = entityManager.merge(pathologistsList);
         //update  with id in db ... so we can get generation id for save / insert
         pathologistsList.setPathologistId(dbPathologistsList.getPathologistId());
@@ -101,7 +101,7 @@ public class ManagerDAOImpl implements ManagerDAO {
     @Override
     public void deleteVisitPlacesById(int visitPlacesId) {
         //delete  object with primary key
-        System.out.println("deleteVisitPlacesById==" + visitPlacesId);
+        //System.out.println("deleteVisitPlacesById==" + visitPlacesId);
         Query theQuery = entityManager.createQuery("delete from VisitPlaces where id=:visitPlacesId");
         theQuery.setParameter("visitPlacesId", visitPlacesId);
         theQuery.executeUpdate();
@@ -114,7 +114,7 @@ public class ManagerDAOImpl implements ManagerDAO {
     @Override
     public void deletePathologistById(int pathologistsId) {
         //delete  object with primary key
-        System.out.println("deletePathologistById==" + pathologistsId);
+        //System.out.println("deletePathologistById==" + pathologistsId);
         Query theQuery = entityManager.createQuery("delete from PathologistsList where id=:pathologistsId");
         theQuery.setParameter("pathologistsId", pathologistsId);
         theQuery.executeUpdate();

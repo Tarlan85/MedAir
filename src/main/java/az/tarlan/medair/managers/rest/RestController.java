@@ -28,13 +28,13 @@ public class RestController {
 
     @GetMapping("/managers/places")
     public List<VisitPlaces> loadPlacesManager() {
-        System.out.println("loadPlacesManager");
+        //System.out.println("loadPlacesManager");
         return managerService.getAllPlaces();
     }
 
     @GetMapping("/managers/pathologists")
     public List<PathologistsList> loadPathologistsManager() {
-        System.out.println("loadPathologistsManager");
+        //System.out.println("loadPathologistsManager");
         return managerService.getAllPathologists();
     }
 
@@ -45,7 +45,7 @@ public class RestController {
         if (cureTabs.getCureTabId() > 0) System.out.println(cureTabs.toString());
         else
             cureTabs.setCureTabId(0);
-        System.out.println(cureTabs.toString());
+        //System.out.println(cureTabs.toString());
         managerService.saveCureTabs(cureTabs);
         return cureTabs;
     }
@@ -57,7 +57,7 @@ public class RestController {
         if (visitPlaces.getVisitPlaceId() > 0) System.out.println(visitPlaces.toString());
         else
             visitPlaces.setVisitPlaceId(0);
-        System.out.println(visitPlaces.toString());
+        //System.out.println(visitPlaces.toString());
         managerService.saveVisitPlace(visitPlaces);
         return visitPlaces;
     }
@@ -68,14 +68,14 @@ public class RestController {
         if (pathologistsList.getPathologistId() > 0) System.out.println(pathologistsList.toString());
         else
             pathologistsList.setPathologistId(0);
-        System.out.println(pathologistsList.toString());
+        //System.out.println(pathologistsList.toString());
         managerService.savePathologistsList(pathologistsList);
         return pathologistsList;
     }
 
     @DeleteMapping("/managers/tabs/{cureTabId}")
     public String deleteCureTab(@PathVariable String cureTabId) {
-        System.out.println("Integer.parseInt(cureTabId) = " + Integer.parseInt(cureTabId));
+        //System.out.println("Integer.parseInt(cureTabId) = " + Integer.parseInt(cureTabId));
         CureTabs tempPatient = managerService.findCureTabById(Integer.parseInt(cureTabId));
         //throw  exception if null
         if (tempPatient == null)
@@ -86,7 +86,7 @@ public class RestController {
 
     @DeleteMapping("/managers/places/{visitPlacesId}")
     public String deleteVisitPlaces(@PathVariable String visitPlacesId) {
-        System.out.println("Integer.parseInt(cureTabId) = " + Integer.parseInt(visitPlacesId));
+        //System.out.println("Integer.parseInt(cureTabId) = " + Integer.parseInt(visitPlacesId));
         VisitPlaces visitPlaces = managerService.findVisitPlacesById(Integer.parseInt(visitPlacesId));
         //throw  exception if null
         if (visitPlaces == null)
@@ -98,7 +98,7 @@ public class RestController {
 
     @DeleteMapping("/managers/pathologists/{pathologistsId}")
     public String deletePathologist(@PathVariable String pathologistsId) {
-        System.out.println("Integer.parseInt(pathologistsId) = " + Integer.parseInt(pathologistsId));
+        //System.out.println("Integer.parseInt(pathologistsId) = " + Integer.parseInt(pathologistsId));
         PathologistsList pathologistsList = managerService.findPathologistById(Integer.parseInt(pathologistsId));
         //throw  exception if null
         if (pathologistsList == null)

@@ -19,14 +19,14 @@ public class LogInDAOImpl implements LogInDAO {
 
     @Override
     public String checkToken(String token) {
-        System.out.println("checkToken");
+        //System.out.println("checkToken");
         Query theQuery=entityManager.createQuery("delete from Token where (now()-tokenCreateTime)>40000");
         theQuery.executeUpdate();
          theQuery=entityManager.createQuery("From Token where token = '"+token+"' and  " +
                 "(now()-tokenCreateTime)<40000");
-        System.out.println(theQuery.getResultList());
+        //System.out.println(theQuery.getResultList());
         if (theQuery.getResultList().size()<1){
-            System.out.println("Token not fount");
+            //System.out.println("Token not fount");
             return "no";
         }
         Token dbToken=(Token) theQuery.getResultList().get(0);
@@ -37,20 +37,20 @@ return "ok";
     }
     @Override
     public LogInReqBody checkLogIn(LogIn logIn) {
-        System.out.println("2. checkLogIn");
+        //System.out.println("2. checkLogIn");
         LogInReqBody logInReqBody  = new LogInReqBody();
         Query theQuery=entityManager.createQuery("From LogIn where userName = '"+logIn.getUserName()+"' and userPass='"+logIn.getUserPass()+"'");
-        System.out.println(theQuery.getResultList());
+        //System.out.println(theQuery.getResultList());
         if (theQuery.getResultList().size()<1){
-            System.out.println("User not fount");
+            //System.out.println("User not fount");
 //            logInReqBody.setToken("no");
             return logInReqBody;
         }
 
         logInReqBody.setLogIn((LogIn)theQuery.getResultList().get(0));
-        System.out.println("3. "+logInReqBody.getLogIn().toString());
+        //System.out.println("3. "+logInReqBody.getLogIn().toString());
         String token= String.valueOf(UUID.randomUUID());
-        System.out.println("token = "+token);
+        //System.out.println("token = "+token);
 //        theQuery=entityManager.createQuery("INsert into Token (token,tokenCreateTime) values('"+token+"',now())");
         theQuery=entityManager.createNativeQuery(
                 "INsert into tokens (token,token_create_time) values('"+token+"',now())");
