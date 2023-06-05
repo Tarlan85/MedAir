@@ -74,6 +74,23 @@ public class PatientDAOJPAImpl implements PatientDAO {
         patientID=dbPatient.getPatientId();
         thePatientVite.setPatientId(patientID);
         //System.out.println("PatientVite==="+thePatientVite.toString());
+//        Query query1 = entityManager.createNativeQuery("SET SQL_SAFE_UPDATES = 0;");
+//        query1.executeUpdate();
+//
+//        Query query2 = entityManager.createNativeQuery("UPDATE visit_table " +
+//                "JOIN patient_vite ON visit_table.patient_id = patient_vite.patient_id " +
+//                "SET visit_table.patient_name = patient_vite.patient_name, " +
+//                "visit_table.patient_surname = patient_vite.patient_surname, " +
+//                "visit_table.patient_patronymic = patient_vite.patient_patronymic, " +
+//                "visit_table.birth_date = patient_vite.birth_date, " +
+//                "visit_table.recommendation_person = patient_vite.recommendation_person, " +
+//                "visit_table.phone_number = patient_vite.phone_number " +
+//                "WHERE visit_table.patient_id =patient_vite.patient_id;");
+//        query2.executeUpdate();
+////
+//        Query query3 = entityManager.createNativeQuery("SET SQL_SAFE_UPDATES = 1;");
+//        query3.executeUpdate();
+
     }
 
     @Override

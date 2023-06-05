@@ -24,7 +24,7 @@ public class AnalyzesMedia {
     @Column(name = "analyzes_type")
     private String analyzesType;
     @Column(name = "analyzes_subtype")
-    private String analyzesSubeType;
+    private String analyzesSubType;
 
     @Column(name = "analyzes_desc")
     private String analyzesDesc;
@@ -42,7 +42,7 @@ public class AnalyzesMedia {
                          int patientId,
                          Timestamp date,
                          String analyzesType,
-                         String analyzesSubeType,
+                         String analyzesSubType,
                          String analyzesDesc,
                          String analyzesContentName,
                          String analyzesContentUrl) {
@@ -50,7 +50,7 @@ public class AnalyzesMedia {
         this.patientId = patientId;
         this.date = date;
         this.analyzesType = analyzesType;
-        this.analyzesSubeType = analyzesSubeType;
+        this.analyzesSubType = analyzesSubType;
         this.analyzesDesc = analyzesDesc;
         this.analyzesContentName = analyzesContentName;
         this.analyzesContentUrl = analyzesContentUrl;
@@ -96,12 +96,12 @@ public class AnalyzesMedia {
         this.analyzesType = analyzesType;
     }
 
-    public String getAnalyzesSubeType() {
-        return analyzesSubeType;
+    public String getAnalyzesSubType() {
+        return analyzesSubType;
     }
 
-    public void setAnalyzesSubeType(String analyzesSubeType) {
-        this.analyzesSubeType = analyzesSubeType;
+    public void setAnalyzesSubType(String analyzesSubType) {
+        this.analyzesSubType = analyzesSubType;
     }
 
 
@@ -128,7 +128,7 @@ public class AnalyzesMedia {
                 ", patientId=" + patientId + "\n" +
                 ", date=" + date + "\n" +
                 ", analyzesType='" + analyzesType + '\'' + "\n" +
-                ", analyzesSubeType='" + analyzesSubeType + '\'' + "\n" +
+                ", analyzesSubType='" + analyzesSubType + '\'' + "\n" +
                 ", analyzesDesc='" + analyzesDesc + '\'' + "\n" +
                 ", analyzesContentName='" + analyzesContentName + '\'' + "\n" +
                 ", analyzesContentUrl='" + analyzesContentUrl + '\'' +

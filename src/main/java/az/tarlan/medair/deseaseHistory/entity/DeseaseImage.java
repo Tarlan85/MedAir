@@ -14,8 +14,8 @@ import javax.persistence.*;
     @Column(name = "patient_id")
     private int patientId;
 
-    @Column(name = "desease_image_desc")
-    private String deseaseImageDesc;
+    @Column(name = "desease_image1_desc")
+    private String deseaseImage1Desc;
     @Column(name = "desease_image2_desc")
     private String deseaseImage2Desc;
     @Column(name = "desease_image3_desc")
@@ -39,10 +39,10 @@ import javax.persistence.*;
 
     public DeseaseImage() {}
 
-    public DeseaseImage(int id, int patientId, String deseaseImageDesc, String deseaseImage2Desc, String deseaseImage3Desc, String deseaseImage4Desc, String deseaseImage5Desc, String deseaseImage1Data, String deseaseImage2Data, String deseaseImage3Data, String deseaseImage4Data, String deseaseImage5Data) {
+    public DeseaseImage(int id, int patientId, String deseaseImage1Desc, String deseaseImage2Desc, String deseaseImage3Desc, String deseaseImage4Desc, String deseaseImage5Desc, String deseaseImage1Data, String deseaseImage2Data, String deseaseImage3Data, String deseaseImage4Data, String deseaseImage5Data) {
         this.id = id;
         this.patientId = patientId;
-        this.deseaseImageDesc = deseaseImageDesc;
+        this.deseaseImage1Desc = deseaseImage1Desc;
         this.deseaseImage2Desc = deseaseImage2Desc;
         this.deseaseImage3Desc = deseaseImage3Desc;
         this.deseaseImage4Desc = deseaseImage4Desc;
@@ -70,12 +70,12 @@ import javax.persistence.*;
         this.patientId = patientId;
     }
 
-    public String getDeseaseImageDesc() {
-        return deseaseImageDesc;
+    public String getDeseaseImage1Desc() {
+        return deseaseImage1Desc;
     }
 
-    public void setDeseaseImageDesc(String deseaseImageDesc) {
-        this.deseaseImageDesc = deseaseImageDesc;
+    public void setDeseaseImage1Desc(String deseaseImage1Desc) {
+        this.deseaseImage1Desc = deseaseImage1Desc;
     }
 
     public String getDeseaseImage2Desc() {
@@ -155,7 +155,7 @@ import javax.persistence.*;
         return "DeseaseImage{" +
                 "id=" + id +
                 ", patientId=" + patientId +
-                ", deseaseImageDesc='" + deseaseImageDesc + '\'' +"\n"+
+                ", deseaseImageDesc='" + deseaseImage1Desc + '\'' +"\n"+
                 ", deseaseImage2Desc='" + deseaseImage2Desc + '\'' +"\n"+
                 ", deseaseImage3Desc='" + deseaseImage3Desc + '\'' +"\n"+
                 ", deseaseImage4Desc='" + deseaseImage4Desc + '\'' +"\n"+

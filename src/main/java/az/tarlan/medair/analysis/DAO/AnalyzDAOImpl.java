@@ -45,7 +45,7 @@ public class AnalyzDAOImpl implements AnalyzDAO {
             dbAnalyzesMedia.setAnalyzesDesc(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesDesc());
             dbAnalyzesMedia.setAnalyzesType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesType());
             dbAnalyzesMedia.setAnalyzesContentName(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesContentName());
-            dbAnalyzesMedia.setAnalyzesSubeType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesSubeType());
+            dbAnalyzesMedia.setAnalyzesSubType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesSubType());
             dbAnalyzesMedia.setDate(analyzesReqBody.getAnalyzesMediaList().get(i).getDate());
             dbAnalyzesMedia.setAnalyzesContentUrl(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesContentUrl());
             System.out.println(dbAnalyzesMedia.toString());

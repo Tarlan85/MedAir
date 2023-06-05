@@ -85,9 +85,9 @@ public class VisitsRestController {
 
     @DeleteMapping("/visits/{id}")
     public String deletePatient(@PathVariable int id) {
-        PatientVisits patientVisit = visitsService.findById(id);
+        VisitTable visitTable = visitsService.findByIdFromVT(id);
         //throw  exception if null
-        if (patientVisit == null)
+        if (visitTable == null)
             throw new RuntimeException("Visit Id not found - " + id);
         visitsService.deleteById(id);
         return "Delete Visit id - " + id;

@@ -12,6 +12,7 @@ public interface VisitsService {
     void savePatientVisits(VisitsRegBody visitsRegBody);
     void addPatientVisitsFromCalendar(VisitsRegBody visitsRegBody);
     public PatientVisits findById(int id);
+    public VisitTable findByIdFromVT(int id);
     public void deleteById(int theId);
     void saveVisitTable(VisitTable visitTable);
 

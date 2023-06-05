@@ -24,7 +24,8 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 
     @Override
     public void saveDeseaseHistory(DeseaseReqBody deseaseReqBody) {
-        //System.out.println(">>>>saveMorby<<<");
+        System.out.println(">>>>saveMorby<<<");
+        System.out.println(deseaseReqBody.getDeseaseImagesList().toString());
         //Insert in Desease History Static
         if (deseaseReqBody.getPatientId()>0){
             Query theQuery=entityManager.createQuery("delete from DeseaseHistoryStatic where  patientId=:patientId");
@@ -54,26 +55,19 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 //            //System.out.println(dbOperations.toString());
 //        }
 //        else //System.out.println("Operation is empty");
-        //desease image list
 
+        //desease image list
+        System.out.println(">>>>saveMorby__desease image list<<<");
         Query theQuery=entityManager.createQuery("delete from DeseaseImage where  patientId=:patientId");
         theQuery.setParameter("patientId",deseaseReqBody.getPatientId());
         theQuery.executeUpdate();
+        System.out.println("11111");
         DeseaseImage deseaseImagesList = deseaseReqBody.getDeseaseImagesList();
         deseaseImagesList.setPatientId(deseaseReqBody.getPatientId());
-
-        DeseaseImage         dbDeseaseImage = entityManager.merge(deseaseImagesList);
+        System.out.println("22222");
+        DeseaseImage dbDeseaseImage = entityManager.merge(deseaseImagesList);
                 deseaseImagesList.setId(dbDeseaseImage.getId());
-                //System.out.println(dbDeseaseImage.toString());
-//        if (deseaseImagesList != null)
-//            for (int i = 0; i < deseaseImagesList.size(); i++) {
-//                deseaseImagesList.get(i).setPatientId(deseaseReqBody.getPatientId());
-//                dbDeseaseImage = entityManager.merge(deseaseImagesList.get(i));
-//                deseaseImagesList.get(i).setId(dbDeseaseImage.getId());
-//                //System.out.println(dbDeseaseImage.toString());
-//            }
-//        else //System.out.println("Image is empty");
-        //Insert in FamilyMembers
+        System.out.println("3333");
         List<FamilyMembers> familyMembersList = deseaseReqBody.getFamilyMembersList();
         FamilyMembers dbFamilyMembers = new FamilyMembers();
         if (familyMembersList!=null){
@@ -106,36 +100,36 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 
     @Override
     public DeseaseReqBody findDeseaseHistoryByPatientId(int patientId) {
-        //System.out.println("2. findDeseaseHistoryByPatientId");
+        System.out.println("2. findDeseaseHistoryByPatientId");
         DeseaseReqBody deseaseReqBody=new DeseaseReqBody();
-
-        //System.out.println("From DeseaseHistoryStatic where patientId = "+patientId);
+        System.out.println("From DeseaseHistoryStatic where patientId = "+patientId);
         Query theQuery=entityManager.createQuery("From DeseaseHistoryStatic where patientId = "+patientId);
         List<DeseaseHistoryStatic> deseaseHistoryStatics = theQuery.getResultList();
-        //System.out.println("3.deseaseHistoryStatics =  "+deseaseHistoryStatics.toString());
-        deseaseReqBody.setAllergyAvailability(deseaseHistoryStatics.get(0).getAllergyAvailability());
-        deseaseReqBody.setBeniqen(deseaseHistoryStatics.get(0).getBenign());
-        deseaseReqBody.setMaliqan(deseaseHistoryStatics.get(0).getMaligant());
-        deseaseReqBody.setMaliqanQuestion(deseaseHistoryStatics.get(0).getMaligantQuestion());
-        deseaseReqBody.setMedicationTaken(deseaseHistoryStatics.get(0).getMedicationTaken());
-        deseaseReqBody.setOwnInjuryReason(deseaseHistoryStatics.get(0).getOwnInjuryReason());
-        deseaseReqBody.setPreliminaryDiagnosis(deseaseHistoryStatics.get(0).getPreliminaryDiagnosis());
-
+//        System.out.println("3.deseaseHistoryStatics =  "+deseaseHistoryStatics.toString());
+        if (deseaseHistoryStatics.size()>0) {
+            deseaseReqBody.setAllergyAvailability(deseaseHistoryStatics.get(0).getAllergyAvailability());
+            deseaseReqBody.setBeniqen(deseaseHistoryStatics.get(0).getBenign());
+            deseaseReqBody.setMaliqan(deseaseHistoryStatics.get(0).getMaligant());
+            deseaseReqBody.setMaliqanQuestion(deseaseHistoryStatics.get(0).getMaligantQuestion());
+            deseaseReqBody.setMedicationTaken(deseaseHistoryStatics.get(0).getMedicationTaken());
+            deseaseReqBody.setOwnInjuryReason(deseaseHistoryStatics.get(0).getOwnInjuryReason());
+            deseaseReqBody.setPreliminaryDiagnosis(deseaseHistoryStatics.get(0).getPreliminaryDiagnosis());
+        }
         theQuery=entityManager.createQuery("From DeseaseHistoryDynamic where patientId = "+patientId);
         List<DeseaseHistoryDynamic> deseaseHistoryDynamics = theQuery.getResultList();
-        //System.out.println("3. deseaseHistoryDynamics= "+deseaseHistoryDynamics.toString());
+//        System.out.println("3. deseaseHistoryDynamics= "+deseaseHistoryDynamics.toString());
         deseaseReqBody.setDeseaseHistoryDynamicsList(deseaseHistoryDynamics);
 
         theQuery=entityManager.createQuery("From DeseaseImage where patientId = "+patientId);
         List<DeseaseImage> deseaseImages = theQuery.getResultList();
         if (deseaseImages.size()>0)
         deseaseReqBody.setDeseaseImagesList(deseaseImages.get(0));
-        //System.out.println("3.deseaseImages = "+deseaseImages.toString());
+        System.out.println("3.deseaseImages = "+deseaseImages.toString());
 
         theQuery=entityManager.createQuery("From FamilyMembers where patientId = "+patientId);
         List<FamilyMembers> familyMembersList = theQuery.getResultList();
         deseaseReqBody.setFamilyMembersList(familyMembersList);
-        //System.out.println("3.familyMembersList = "+familyMembersList.toString());
+//        System.out.println("3.familyMembersList = "+familyMembersList.toString());
 
         return deseaseReqBody;
     }

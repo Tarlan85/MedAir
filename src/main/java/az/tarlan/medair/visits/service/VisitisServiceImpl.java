@@ -57,6 +57,12 @@ public class VisitisServiceImpl implements VisitsService {
 
     @Override
     @Transactional
+    public VisitTable findByIdFromVT(int id) {
+        return visitDAO.findByIdFromVT(id);
+    }
+
+    @Override
+    @Transactional
     public void deleteById(int id) {
         visitDAO.deleteById(id);
     }

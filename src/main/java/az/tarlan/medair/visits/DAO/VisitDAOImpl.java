@@ -117,6 +117,13 @@ public class VisitDAOImpl implements VisitDAO {
         //return result
         return patientVisit;
     }
+    @Override
+    public VisitTable findByIdFromVT(int id) {
+        //get patient
+        VisitTable visitTable = entityManager.find(VisitTable.class, id);
+        //return result
+        return visitTable;
+    }
 
     @Override
     public void deleteById(int id) {
@@ -156,7 +163,8 @@ public class VisitDAOImpl implements VisitDAO {
 
         }
 
-        Query theQuery = entityManager.createQuery("insert into VisitTable (visitDate,patientId,patientName,patientSurName,patientPatronymic," +
+        Query theQuery = entityManager.createQuery("insert into VisitTable (visitDate,patientId," +
+                "patientName,patientSurName,patientPatronymic," +
                 "birthDate,visitReason,placeName,recommendationPerson,phoneNumber,status)" +
                 " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
                 "vite.patientPatronymic,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +

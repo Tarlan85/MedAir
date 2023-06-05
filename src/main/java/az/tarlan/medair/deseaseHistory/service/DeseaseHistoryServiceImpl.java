@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 
 @Service
 public class DeseaseHistoryServiceImpl implements DeseaseHistoryService {
@@ -19,8 +17,9 @@ public class DeseaseHistoryServiceImpl implements DeseaseHistoryService {
 
     @Override
     @Transactional
-    public void saveDeseaseHistory(DeseaseReqBody deseaseReqBody) {
+    public DeseaseReqBody saveDeseaseHistory(DeseaseReqBody deseaseReqBody) {
       deseaseHistoryDAO.saveDeseaseHistory(deseaseReqBody);
+        return deseaseReqBody;
     }
 
     @Override

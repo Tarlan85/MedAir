@@ -13,6 +13,7 @@ public interface VisitDAO {
     public void addPatientVisitsFromCalendar(VisitsRegBody visitsRegBody);
     void saveVisitTable(VisitTable visitTable);
     public PatientVisits findById(int id);
+    public VisitTable findByIdFromVT(int id);
     public void deleteById(int id);
 
     List<PatientVisits> findPatientVisits(int patientId);

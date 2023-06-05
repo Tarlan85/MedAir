@@ -21,14 +21,14 @@ public class DeseaseHistoryRestController {
 
     @PostMapping("/morby")
     public DeseaseReqBody addTreatment(@RequestBody DeseaseReqBody deseaseReqBody){
-        //System.out.println(">>>>>>>>MORBY<<<<<<<<<");
-        //System.out.println(deseaseReqBody.toString());
-        deseaseHistoryService.saveDeseaseHistory(deseaseReqBody);
-        return null;
+        System.out.println(">>>>>>>>MORBY<<<<<<<<<");
+        System.out.println(deseaseReqBody.toString());
+        return deseaseHistoryService.saveDeseaseHistory(deseaseReqBody);
+
     }
     @GetMapping("/morby/{patientId}")
     public DeseaseReqBody findDeseaseHistoryByPatientId(@PathVariable int patientId){
-        //System.out.println("1. findDeseaseHistoryByPatientId \n patientId==="+patientId);
+        System.out.println("1. findDeseaseHistoryByPatientId \n patientId==="+patientId);
         return deseaseHistoryService.findDeseaseHistoryByPatientId(patientId);
     }
 }
