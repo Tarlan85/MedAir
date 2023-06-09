@@ -2,8 +2,12 @@ package az.tarlan.medair.analysis.DAO;
 
 import az.tarlan.medair.analysis.entity.AnalyzesMedia;
 import az.tarlan.medair.analysis.entity.AnalyzesReqBody;
+import az.tarlan.medair.analysis.rest.AnalyzesRestController;
 import az.tarlan.medair.visits.entity.PatientVisits;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.server.DelegatingServerHttpResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -12,15 +16,17 @@ import java.io.IOException;
 import java.util.List;
 
 @Repository
+@Component
 public class AnalyzDAOImpl implements AnalyzDAO {
     private EntityManager entityManager;
-
+    private static final Logger logger= LoggerFactory.getLogger(AnalyzDAOImpl.class);
     public AnalyzDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
     public int getAnalysId() {
+        logger.info("getAnalysId");
         Query theQuery = entityManager.createQuery(" Select max(analyzesId) from AnalyzesMedia ");
         List list = theQuery.getResultList();
         if (list.get(0) == null) return 1;
@@ -31,6 +37,7 @@ public class AnalyzDAOImpl implements AnalyzDAO {
 
     @Override
     public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
+        logger.info("saveAnalyzes");
         int analyzId = 0;
         System.out.println("saveAnalyzes");
         AnalyzesMedia dbAnalyzesMedia = new AnalyzesMedia();
@@ -88,6 +95,7 @@ public class AnalyzDAOImpl implements AnalyzDAO {
 //    }
     @Override
     public List<AnalyzesMedia> findPatientAnalyses(int patientId) {
+        logger.info("findPatientAnalyses");
         //System.out.println("2. findPatientAnalyses");
         Query theQuery = entityManager.createQuery("From AnalyzesMedia where patientId = " + patientId);
         List<AnalyzesMedia> analyzesMedia = null;

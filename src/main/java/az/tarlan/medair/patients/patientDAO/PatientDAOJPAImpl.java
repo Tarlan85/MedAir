@@ -2,18 +2,23 @@ package az.tarlan.medair.patients.patientDAO;
 
 
 import az.tarlan.medair.patients.entity.Vite;
+import az.tarlan.medair.patients.rest.PatientRestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 @Repository
+@Component
 public class PatientDAOJPAImpl implements PatientDAO {
     int k=0;
     private EntityManager entityManager;
     private int patientID;
-
+    private static final Logger logger= LoggerFactory.getLogger(PatientRestController.class);
     @Autowired
     public PatientDAOJPAImpl(EntityManager theEntityManager) {
         entityManager = theEntityManager;
@@ -21,6 +26,7 @@ public class PatientDAOJPAImpl implements PatientDAO {
 
     @Override
     public Vite findById(int theId) {
+        logger.info("findById");
         //get patient
         Vite thePatient =entityManager.find(Vite.class,theId);
         //return result
@@ -68,6 +74,7 @@ public class PatientDAOJPAImpl implements PatientDAO {
 
     @Override
     public void saveThePatientVite(Vite thePatientVite) {
+        logger.info("saveThePatientVite");
         //System.out.println("1==="+patientID);
         Vite dbPatient =entityManager.merge(thePatientVite);
         //update  with id in db ... so we can get generation id for save / insert
@@ -95,6 +102,7 @@ public class PatientDAOJPAImpl implements PatientDAO {
 
     @Override
     public int getPatientId() {
+        logger.info("getPatientId");
         Query theQuery=entityManager.createQuery(" Select max(patientId) from Vite ");
         //System.out.println(theQuery.getResultList());
         List list=theQuery.getResultList();
@@ -107,6 +115,7 @@ public class PatientDAOJPAImpl implements PatientDAO {
 
     @Override
     public void deleteById(int theId) {
+        logger.info("deleteById");
         //delete  object with primary key
         Query theQuery=entityManager.createQuery("delete from Patient where id=:patientId");
         theQuery.setParameter("patientId",theId);

@@ -1,10 +1,14 @@
 package az.tarlan.medair.search.rest;
 
 import az.tarlan.medair.patients.entity.Vite;
+import az.tarlan.medair.patients.rest.PatientRestController;
 import az.tarlan.medair.patients.service.PatientService;
 import az.tarlan.medair.search.entity.SearchForVite;
 import az.tarlan.medair.search.service.SearchService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +17,10 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})
 @RequestMapping("/api")
+@Component
 public class SearchRestController {
 //    private PatientService patientService;
+private static final Logger logger= LoggerFactory.getLogger(SearchRestController.class);
     private SearchService searchService;
     //quick and dirty:inject employee dao(use constructor injection )
     @Autowired
@@ -33,6 +39,7 @@ public class SearchRestController {
 //    }
     @PostMapping("/search")
     public List<Vite> getPatient(@RequestBody(required = false) SearchForVite searchBody){
+        logger.info("getPatient");
         //System.out.println("getPatient");
         if (searchBody.toString()==null) return null;
         //System.out.println(searchBody.toString());

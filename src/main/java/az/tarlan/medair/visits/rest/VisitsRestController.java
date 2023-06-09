@@ -2,12 +2,16 @@ package az.tarlan.medair.visits.rest;
 
 import az.tarlan.medair.patients.entity.Vite;
 import az.tarlan.medair.patients.service.PatientService;
+import az.tarlan.medair.visits.DAO.VisitDAOImpl;
 import az.tarlan.medair.visits.entity.PatientVisits;
 import az.tarlan.medair.visits.entity.VisitTable;
 import az.tarlan.medair.visits.entity.VisitTableCopy;
 import az.tarlan.medair.visits.entity.VisitsRegBody;
 import az.tarlan.medair.visits.service.VisitsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +20,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = {"*"}, allowedHeaders = {"*"})
 @RequestMapping("/api")
+@Component
 public class VisitsRestController {
+    private static final Logger logger= LoggerFactory.getLogger(VisitsRestController.class);
     private VisitsService visitsService;
 
     //quick and dirty:inject employee dao(use constructor injection )
@@ -27,6 +33,7 @@ public class VisitsRestController {
 
     @GetMapping("/visits/{moment}")
     public List<VisitTable> findAllVisits(@PathVariable String moment) {
+        logger.info("findAllVisits");
         //System.out.println(" findAll ===" + moment);
         //System.out.println(visitsService.findAllVisits(moment).toString());
 //        //System.out.println(" findAll === end");
@@ -35,12 +42,14 @@ public class VisitsRestController {
 
     @GetMapping("/visits/patientId/{patientId}")
     public List<PatientVisits> findPatientVisits(@PathVariable int patientId) {
+        logger.info("findPatientVisits");
         //System.out.println("1. findPatientVisits \n patientId===" + patientId);
         return visitsService.findPatientVisits(patientId);
     }
 
     @PostMapping("/visits")
     public VisitsRegBody addPatientVisit(@RequestBody VisitsRegBody visitsRegBody) {
+        logger.info("addPatientVisit");
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
 //        if (patientVisits.getVisitId()<1)
@@ -59,6 +68,7 @@ public class VisitsRestController {
 
     @PostMapping("/visitsformcalendar")
     public VisitsRegBody addPatientVisitsFromCalendar(@RequestBody VisitsRegBody visitsRegBody) {
+        logger.info("addPatientVisitsFromCalendar");
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
         //System.out.println("addPatientVisit");
@@ -74,6 +84,7 @@ public class VisitsRestController {
 
     @PostMapping("/visittable")
     public VisitTable updateVisitTable(@RequestBody VisitTable visitTable) {
+        logger.info("updateVisitTable");
         //also, just  in case  the pass an id  in JSON ... set id to 0
         //this is to force a save of new item ... instead of update
 
@@ -85,6 +96,7 @@ public class VisitsRestController {
 
     @DeleteMapping("/visits/{id}")
     public String deletePatient(@PathVariable int id) {
+        logger.info("deletePatient");
         VisitTable visitTable = visitsService.findByIdFromVT(id);
         //throw  exception if null
         if (visitTable == null)

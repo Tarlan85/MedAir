@@ -1,12 +1,16 @@
 package az.tarlan.medair.treatment.DAO;
 
 import az.tarlan.medair.analysis.entity.AnalyzesMedia;
+import az.tarlan.medair.search.DAO.SearchDAOJPAImpl;
 import az.tarlan.medair.treatment.DAO.TreatmentDAO;
 import az.tarlan.medair.treatment.entity.Recipe;
 import az.tarlan.medair.treatment.entity.TreatmentDynamic;
 import az.tarlan.medair.treatment.entity.TreatmentStatic;
 import az.tarlan.medair.treatment.entity.TreatmentReqBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,10 +18,11 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
+@Component
 public class TreatmentDAOImpl implements TreatmentDAO {
 
     private EntityManager entityManager;
-
+    private static final Logger logger= LoggerFactory.getLogger(TreatmentDAOImpl.class);
     @Autowired
     public TreatmentDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -25,6 +30,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
     @Override
     public void saveTreatment(TreatmentReqBody treatmentRB) {
+        logger.info("saveTreatment");
         //System.out.println(">>>>>saveTreatment<<<<<");
         Query theQuery=entityManager.createQuery("delete from TreatmentStatic where  patientId=:patientId");
         theQuery.setParameter("patientId",treatmentRB.getPatientId());
@@ -69,6 +75,7 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 
     @Override
     public TreatmentReqBody findTreatmentAnalyses(int patientId) {
+        logger.info("TreatmentReqBody");
         //System.out.println("2. findTreatmentAnalyses");
         TreatmentReqBody treatmentReqBody=new TreatmentReqBody();
         //System.out.println("From TreatmentStatic where patientId = "+patientId);

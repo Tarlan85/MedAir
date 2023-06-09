@@ -1,8 +1,11 @@
 package az.tarlan.medair.visits.DAO;
 
+import az.tarlan.medair.treatment.rest.TreatmentRestController;
 import az.tarlan.medair.visits.entity.PatientVisits;
 import az.tarlan.medair.visits.entity.VisitTable;
 import az.tarlan.medair.visits.entity.VisitsRegBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,12 +16,13 @@ import java.util.List;
 public class VisitDAOImpl implements VisitDAO {
     private EntityManager entityManager;
     private int patientID;
-
+    private static final Logger logger= LoggerFactory.getLogger(VisitDAOImpl.class);
     public VisitDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     public List<VisitTable> findAllVisits(String visDate) {
+        logger.info("findAllVisits");
 //        Query theQuery=entityManager.createQuery("From VisitTable where visitDate>=now() ");
         //System.out.println("========== " + visDate);
         Query theQuery = entityManager.createQuery("From VisitTable where date(visitDate) >= date('" + visDate + "')");
@@ -36,6 +40,7 @@ public class VisitDAOImpl implements VisitDAO {
 
     @Override
     public void saveVisitTable(VisitTable visitTable) {
+        logger.info("saveVisitTable");
         //System.out.println("VisitID == " + visitTable.getId());
         //System.out.println("UPDATE VisitTable SET status = '" + visitTable.getStatus() + "'" +
 //                " WHERE id='" + visitTable.getId() + "'");
@@ -53,6 +58,7 @@ public class VisitDAOImpl implements VisitDAO {
 
     @Override
     public void savePatientVisits(VisitsRegBody visitsRegBody) {
+        logger.info("savePatientVisits");
 //        //System.out.println("VisitID == "+patientVisits.getVisitId());
 //        if (patientVisits.getVisitId()==0){
 //            //System.out.println("THEN");
@@ -112,6 +118,7 @@ public class VisitDAOImpl implements VisitDAO {
 
     @Override
     public PatientVisits findById(int id) {
+        logger.info("findById");
         //get patient
         PatientVisits patientVisit = entityManager.find(PatientVisits.class, id);
         //return result
@@ -119,6 +126,7 @@ public class VisitDAOImpl implements VisitDAO {
     }
     @Override
     public VisitTable findByIdFromVT(int id) {
+        logger.info("findByIdFromVT");
         //get patient
         VisitTable visitTable = entityManager.find(VisitTable.class, id);
         //return result
@@ -127,6 +135,7 @@ public class VisitDAOImpl implements VisitDAO {
 
     @Override
     public void deleteById(int id) {
+        logger.info("deleteById");
         //delete  object with primary key
         Query theQuery = entityManager.createQuery("delete from VisitTable where id=:id");
         theQuery.setParameter("id", id);
@@ -135,6 +144,7 @@ public class VisitDAOImpl implements VisitDAO {
 
     @Override
     public List<PatientVisits> findPatientVisits(int patientId) {
+        logger.info("findPatientVisits");
         //System.out.println("2. findPatientVisits");
         Query theQuery = entityManager.createQuery("From PatientVisits where patientId = " + patientId);
 //        theQuery.setParameter("id",patientId);
@@ -146,6 +156,7 @@ public class VisitDAOImpl implements VisitDAO {
 
     @Override
     public void addPatientVisitsFromCalendar(VisitsRegBody visitsRegBody) {
+        logger.info("addPatientVisitsFromCalendar");
 
         //System.out.println("addPatientVisitsFromCalendar");
         //System.out.println(visitsRegBody.getPatientId());

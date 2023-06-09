@@ -1,11 +1,15 @@
 package az.tarlan.medair.deseaseHistory.DAO;
 
+import az.tarlan.medair.analysis.DAO.AnalyzDAOImpl;
 import az.tarlan.medair.deseaseHistory.entity.*;
 import az.tarlan.medair.treatment.entity.Recipe;
 import az.tarlan.medair.treatment.entity.TreatmentDynamic;
 import az.tarlan.medair.treatment.entity.TreatmentReqBody;
 import az.tarlan.medair.treatment.entity.TreatmentStatic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,8 +17,9 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
+@Component
 public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
-
+    private static final Logger logger= LoggerFactory.getLogger(DeseaseHistoryDAOImpl.class);
     private EntityManager entityManager;
 
     @Autowired
@@ -24,9 +29,11 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 
     @Override
     public void saveDeseaseHistory(DeseaseReqBody deseaseReqBody) {
-        System.out.println(">>>>saveMorby<<<");
-        System.out.println(deseaseReqBody.getDeseaseImagesList().toString());
+        logger.info("saveDeseaseHistory\n");
+//        System.out.println(">>>>saveMorby<<<");
+//        System.out.println(deseaseReqBody.getDeseaseImagesList().toString());
         //Insert in Desease History Static
+        logger.info("Insert in Desease History Static\n");
         if (deseaseReqBody.getPatientId()>0){
             Query theQuery=entityManager.createQuery("delete from DeseaseHistoryStatic where  patientId=:patientId");
             theQuery.setParameter("patientId",deseaseReqBody.getPatientId());
@@ -57,17 +64,19 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 //        else //System.out.println("Operation is empty");
 
         //desease image list
+        logger.info("Insert in desease image list\n");
         System.out.println(">>>>saveMorby__desease image list<<<");
         Query theQuery=entityManager.createQuery("delete from DeseaseImage where  patientId=:patientId");
         theQuery.setParameter("patientId",deseaseReqBody.getPatientId());
         theQuery.executeUpdate();
-        System.out.println("11111");
+//        System.out.println("11111");
         DeseaseImage deseaseImagesList = deseaseReqBody.getDeseaseImagesList();
         deseaseImagesList.setPatientId(deseaseReqBody.getPatientId());
-        System.out.println("22222");
+//        System.out.println("22222");
         DeseaseImage dbDeseaseImage = entityManager.merge(deseaseImagesList);
                 deseaseImagesList.setId(dbDeseaseImage.getId());
-        System.out.println("3333");
+//        System.out.println("3333");
+        logger.info("Insert in family Members list\n");
         List<FamilyMembers> familyMembersList = deseaseReqBody.getFamilyMembersList();
         FamilyMembers dbFamilyMembers = new FamilyMembers();
         if (familyMembersList!=null){
@@ -82,6 +91,7 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
             //System.out.println(dbFamilyMembers.toString());
         }}else System.out.println("Family Members  is empty");
         //Insert in DeseaseHistoryDynamic
+        logger.info("Insert in DeseaseHistoryDynamic\n");
         List<DeseaseHistoryDynamic> deseaseHistoryDynamicsList = deseaseReqBody.getDeseaseHistoryDynamicsList();
         DeseaseHistoryDynamic dbDeseaseHistoryDynamics = new DeseaseHistoryDynamic();
         if (deseaseHistoryDynamicsList!=null){
@@ -100,7 +110,8 @@ public class DeseaseHistoryDAOImpl implements DeseaseHistoryDAO {
 
     @Override
     public DeseaseReqBody findDeseaseHistoryByPatientId(int patientId) {
-        System.out.println("2. findDeseaseHistoryByPatientId");
+        logger.info("findDeseaseHistoryByPatientId\n");
+//        System.out.println("2. findDeseaseHistoryByPatientId");
         DeseaseReqBody deseaseReqBody=new DeseaseReqBody();
         System.out.println("From DeseaseHistoryStatic where patientId = "+patientId);
         Query theQuery=entityManager.createQuery("From DeseaseHistoryStatic where patientId = "+patientId);
