@@ -25,11 +25,11 @@ public class TreatmentRestController {
     public TreatmentReqBody addTreatment(@RequestBody TreatmentReqBody treatmentRB){
         logger.info("TreatmentReqBody");
         //System.out.println(">>>>>>>>TREATMENT<<<<<<<<<");
-        if (treatmentRB.getTreatmentId()>0)
+        if (treatmentRB.getTreatmentStatic().getTreatmentId()>0)
             System.out.println("");
 //            System.out.println(treatmentRB.toString());
         else
-            treatmentRB.setTreatmentId(0);
+            treatmentRB.getTreatmentStatic().setTreatmentId(0);
         //System.out.println(treatmentRB.toString());
         treatmentService.saveTreatment(treatmentRB);
         return null;

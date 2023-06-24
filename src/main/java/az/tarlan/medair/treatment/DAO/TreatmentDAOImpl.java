@@ -32,15 +32,12 @@ public class TreatmentDAOImpl implements TreatmentDAO {
     public void saveTreatment(TreatmentReqBody treatmentRB) {
         logger.info("saveTreatment");
         //System.out.println(">>>>>saveTreatment<<<<<");
+        //delet all for patient
         Query theQuery=entityManager.createQuery("delete from TreatmentStatic where  patientId=:patientId");
         theQuery.setParameter("patientId",treatmentRB.getPatientId());
         theQuery.executeUpdate();
-        TreatmentStatic dbTreatmentStatic = new TreatmentStatic();
+        TreatmentStatic dbTreatmentStatic = treatmentRB.getTreatmentStatic();
         dbTreatmentStatic.setPatientId(treatmentRB.getPatientId());
-        dbTreatmentStatic.setTreatmentDesc(treatmentRB.getTreatmentDesc());
-        dbTreatmentStatic.setMenapause(treatmentRB.getMenapause());
-        dbTreatmentStatic.setPreMenapause(treatmentRB.getPreMenapause());
-        dbTreatmentStatic.setrecommendation(treatmentRB.getrecommendation());
 
         TreatmentStatic treatmentStatic = entityManager.merge(dbTreatmentStatic);
         dbTreatmentStatic.setTreatmentId(treatmentStatic.getTreatmentId());
@@ -83,11 +80,13 @@ public class TreatmentDAOImpl implements TreatmentDAO {
         List<TreatmentStatic> treatmentStatic = theQuery.getResultList();
         //System.out.println("3.treatmentStatic =  "+treatmentStatic.toString());
         if (treatmentStatic.size()>0) {
-            treatmentReqBody.setrecommendation(treatmentStatic.get(0).getrecommendation());
-            treatmentReqBody.setTreatmentId(treatmentStatic.get(0).getTreatmentId());
-            treatmentReqBody.setTreatmentDesc(treatmentStatic.get(0).getTreatmentDesc());
-            treatmentReqBody.setMenapause(treatmentStatic.get(0).getMenapause());
-            treatmentReqBody.setPreMenapause(treatmentStatic.get(0).getPreMenapause());
+            System.out.println(treatmentStatic.get(0));
+            treatmentReqBody.setTreatmentStatic(treatmentStatic.get(0));
+//            treatmentReqBody.setrecommendation(treatmentStatic.get(0).getrecommendation());
+//            treatmentReqBody.setTreatmentId(treatmentStatic.get(0).getTreatmentId());
+//            treatmentReqBody.setTreatmentDesc(treatmentStatic.get(0).getTreatmentDesc());
+//            treatmentReqBody.setMenapause(treatmentStatic.get(0).getMenapause());
+//            treatmentReqBody.setPreMenapause(treatmentStatic.get(0).getPreMenapause());
         }
         theQuery=entityManager.createQuery("From TreatmentDynamic where patientId = "+patientId);
         List<TreatmentDynamic> treatmentDynamics = theQuery.getResultList();

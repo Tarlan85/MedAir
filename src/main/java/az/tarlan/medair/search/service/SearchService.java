@@ -9,4 +9,5 @@ public interface SearchService {
 
     public Vite findById(int theId);
     public List<Vite> find(SearchForVite searchForVite);
+    List<Vite> findAll();
 }

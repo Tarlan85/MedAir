@@ -33,9 +33,9 @@ public class SearchDAOJPAImpl implements SearchDAO {
         if (param!=null){
             if( !param.equals("") & !param.equals("0") )
             if (k == 0){
-                sql=sql+ tableName+"='"+param+"'";
+                sql=sql+ tableName+" LIKE '%"+param+"%'";
                 k++;}
-            else    sql=sql+" and "+tableName+"='"+param+"'";
+            else    sql=sql+" and "+tableName+" LIKE '%"+param+"%'";
         }
         return sql;
     }
@@ -53,13 +53,21 @@ public class SearchDAOJPAImpl implements SearchDAO {
         sql=sql+sql_concat("patientSurName", searchForVite.getPatientSurName());
 
         //System.out.println("+++++++++++++++++++++++++++++");
-        //System.out.println("sql==FROM Vite where "+sql);
+        System.out.println("sql==FROM Vite where "+sql);
         Query theQuery=entityManager.createQuery("FROM Vite where "+sql);
         List<Vite> patients =theQuery.getResultList();
         //System.out.println(patients.toString());
         //execute query and get result list
             if (patients.toString().equals("[]")) patients= null;
         k=0;
+        return patients;
+    }
+
+    @Override
+    public List<Vite> findAll() {
+        logger.info("findAll");
+        Query theQuery=entityManager.createQuery("FROM Vite  ORDER BY patientId DESC");
+        List<Vite> patients =theQuery.getResultList();
         return patients;
     }
 }

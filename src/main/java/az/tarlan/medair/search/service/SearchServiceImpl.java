@@ -28,5 +28,11 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     @Transactional
-    public List<Vite> find(SearchForVite searchForVite){return searchDAO.find(searchForVite);};
+    public List<Vite> find(SearchForVite searchForVite){return searchDAO.find(searchForVite);}
+
+    @Override
+    @Transactional
+    public List<Vite> findAll() {
+        return searchDAO.findAll();
+    }
     }

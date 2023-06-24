@@ -9,13 +9,13 @@ import java.util.List;
 
 public class TreatmentReqBody  {
     //Treatment Static
-    private int treatmentId;
+//    private int treatmentId;
     private int patientId;
-    private String treatmentDesc;
-    private String preMenapause;
-    private String menapause;
-    private String recommendation;
-
+//    private String treatmentDesc;
+//    private String preMenapause;
+//    private String menapause;
+//    private String recommendation;
+    TreatmentStatic treatmentStatic;
     //Treatment Dynamic
     List<TreatmentDynamic> treatmentDynamics;
     //Recipe
@@ -24,24 +24,11 @@ public class TreatmentReqBody  {
     public TreatmentReqBody() {
     }
 
-    public TreatmentReqBody(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, List<TreatmentDynamic> treatmentDynamics, List<Recipe> recipeList) {
-
-        this.treatmentId = treatmentId;
+    public TreatmentReqBody(int patientId, TreatmentStatic treatmentStatic, List<TreatmentDynamic> treatmentDynamics, List<Recipe> recipeList) {
         this.patientId = patientId;
-        this.treatmentDesc = treatmentDesc;
-        this.preMenapause = preMenapause;
-        this.menapause = menapause;
-        this.recommendation = recommendation;
+        this.treatmentStatic = treatmentStatic;
         this.treatmentDynamics = treatmentDynamics;
         this.recipeList = recipeList;
-    }
-
-    public int getTreatmentId() {
-        return treatmentId;
-    }
-
-    public void setTreatmentId(int treatmentId) {
-        this.treatmentId = treatmentId;
     }
 
     public int getPatientId() {
@@ -52,40 +39,12 @@ public class TreatmentReqBody  {
         this.patientId = patientId;
     }
 
-    public String getTreatmentDesc() {
-        return treatmentDesc;
+    public TreatmentStatic getTreatmentStatic() {
+        return treatmentStatic;
     }
 
-    public void setTreatmentDesc(String treatmentDesc) {
-        this.treatmentDesc = treatmentDesc;
-    }
-
-    public String getPreMenapause() {
-        return preMenapause;
-    }
-
-    public void setPreMenapause(String preMenapause) {
-        this.preMenapause = preMenapause;
-    }
-
-    public String getMenapause() {
-        return menapause;
-    }
-
-    public void setMenapause(String menapause) {
-        this.menapause = menapause;
-    }
-
-
-    public String getrecommendation() {
-        return recommendation;
-    }
-
-    public void setrecommendation(String recommendation) {
-        this.recommendation = recommendation;}
-
-    public String getRecomendation() {
-        return recommendation;
+    public void setTreatmentStatic(TreatmentStatic treatmentStatic) {
+        this.treatmentStatic = treatmentStatic;
     }
 
     public List<TreatmentDynamic> getTreatmentDynamics() {
@@ -107,13 +66,8 @@ public class TreatmentReqBody  {
     @Override
     public String toString() {
         return "TreatmentReqBody{" +
-                "treatmentId=" + treatmentId +'\n' +
-                ", patientId=" + patientId +'\n' +
-                ", treatmentDesc='" + treatmentDesc + '\'' +'\n' +
-                ", preMenapause='" + preMenapause + '\'' +'\n' +
-                ", menapause='" + menapause + '\'' +'\n' +
-
-                ", recommendation='" + recommendation + '\'' +'\n' +
+                "patientId=" + patientId +'\n' +
+                "treatmentStatic=" + treatmentStatic +'\n' +
                 ", treatmentDynamics=" + treatmentDynamics +'\n' +
                 ", recipeList=" + recipeList +
                 '}';

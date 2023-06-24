@@ -34,18 +34,37 @@ public class TreatmentStatic {
     @Column(name = "recommendation")
     private String recommendation;
 
+    @Column(name = "advise")
+    private String advise;
+
+
     public TreatmentStatic() {}
 
 
-    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation) {
-
+    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, String advise) {
         this.treatmentId = treatmentId;
         this.patientId = patientId;
         this.treatmentDesc = treatmentDesc;
         this.preMenapause = preMenapause;
         this.menapause = menapause;
-
         this.recommendation = recommendation;
+        this.advise = advise;
+    }
+
+    public String getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(String recommendation) {
+        this.recommendation = recommendation;
+    }
+
+    public String getAdvise() {
+        return advise;
+    }
+
+    public void setAdvise(String advise) {
+        this.advise = advise;
     }
 
     public int getTreatmentId() {
@@ -88,14 +107,6 @@ public class TreatmentStatic {
         this.menapause = menapause;
     }
 
-
-    public String getrecommendation() {
-        return recommendation;
-    }
-
-    public void setrecommendation(String recommendation) {
-        this.recommendation = recommendation;
-    }
     @Override
     public String toString() {
         return "Treatment{" +
@@ -104,7 +115,8 @@ public class TreatmentStatic {
                 ", treatmentDesc='" + treatmentDesc + '\'' +"\n"+
                 ", preMenapause='" + preMenapause + '\'' +"\n"+
                 ", menapause='" + menapause + '\'' +"\n"+
-                ", recommendation='" + recommendation + '\'' +
+                ", recommendation='" + recommendation + '\''+"\n"+
+                ", advise='" + advise + '\'' +
                 '}';
     }
 }
