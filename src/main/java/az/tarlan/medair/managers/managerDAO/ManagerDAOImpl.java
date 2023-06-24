@@ -20,6 +20,7 @@ public class ManagerDAOImpl implements ManagerDAO {
         this.entityManager = entityManager;
     }
 
+
     @Override
     public List<CureTabs> getAllTabs() {
         //System.out.println("getAllTabs");
@@ -38,6 +39,7 @@ public class ManagerDAOImpl implements ManagerDAO {
         //System.out.println(dbVisitPlaces.toString());
         return dbVisitPlaces;
     }
+
     @Override
     public List<PathologistsList> getAllPathologists() {
         //System.out.println("getAllPathologists");
@@ -58,6 +60,7 @@ public class ManagerDAOImpl implements ManagerDAO {
         VisitPlaces visitPlaces = entityManager.find(VisitPlaces.class, visitPlacesId);
         return visitPlaces;
     }
+
     @Override
     public PathologistsList findPathologistById(int pathologistsId) {
         PathologistsList pathologistsList = entityManager.find(PathologistsList.class, pathologistsId);
@@ -70,7 +73,6 @@ public class ManagerDAOImpl implements ManagerDAO {
         CureTabs dbCureTabs = entityManager.merge(cureTabs);
         //update  with id in db ... so we can get generation id for save / insert
         cureTabs.setCureTabId(dbCureTabs.getCureTabId());
-
     }
 
 
@@ -108,9 +110,6 @@ public class ManagerDAOImpl implements ManagerDAO {
     }
 
 
-
-
-
     @Override
     public void deletePathologistById(int pathologistsId) {
         //delete  object with primary key
@@ -118,6 +117,5 @@ public class ManagerDAOImpl implements ManagerDAO {
         Query theQuery = entityManager.createQuery("delete from PathologistsList where id=:pathologistsId");
         theQuery.setParameter("pathologistsId", pathologistsId);
         theQuery.executeUpdate();
-
     }
 }

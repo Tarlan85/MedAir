@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface SearchDAO {
     public List<Vite> find(SearchForVite searchForVite);
+    public List<Vite> findAll();
+
 }
