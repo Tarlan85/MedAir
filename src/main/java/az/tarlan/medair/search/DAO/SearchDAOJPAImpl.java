@@ -26,8 +26,6 @@ public class SearchDAOJPAImpl implements SearchDAO {
     public List<Vite> find(SearchForVite searchForVite) {
         logger.info("find");
         String sql = buildSqlQuery(searchForVite);
-        System.out.println("Find search");
-        System.out.println(sql);
         Query theQuery = entityManager.createQuery("FROM Vite WHERE " + sql);
         List<Vite> patients = theQuery.getResultList();
         return patients.isEmpty() ? null : patients;
@@ -36,10 +34,7 @@ public class SearchDAOJPAImpl implements SearchDAO {
     @Override
     public List<Vite> findAll() {
         logger.info("findAll");
-        System.out.println("Find All");
         Query theQuery = entityManager.createQuery("FROM Vite ORDER BY patientId DESC");
-        List<Vite> patients = theQuery.getResultList();
-        System.out.println(patients.toString());
         return theQuery.getResultList();
     }
 
@@ -61,12 +56,13 @@ public class SearchDAOJPAImpl implements SearchDAO {
             }
         }
     }
+
     private void appendConditionForId(StringBuilder sql, String colName, String param) {
         if (param != null && !param.isEmpty() && !"0".equals(param)) {
             if (sql.length() == 0) {
-                sql.append(colName).append(" ='").append(param).append("'");
+                sql.append(colName).append(" = '").append(param).append("'");
             } else {
-                sql.append(" AND ").append(colName).append(" ='").append(param).append("'");
+                sql.append(" AND ").append(colName).append(" = '").append(param).append("'");
             }
         }
     }

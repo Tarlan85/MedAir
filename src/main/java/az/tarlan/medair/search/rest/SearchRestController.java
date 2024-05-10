@@ -21,20 +21,11 @@ import java.util.List;
 public class SearchRestController {
     private static final Logger logger = LoggerFactory.getLogger(SearchRestController.class);
     private SearchService searchService;
-
     //quick and dirty:inject employee dao(use constructor injection )
     @Autowired
     public SearchRestController(SearchService searchService) {
         this.searchService = searchService;
     }
-    //    @GetMapping("/search/{patientId}")
-//    public Vite getPatientById(@PathVariable int patientId){
-//        Vite thePatient = patientService.findById(patientId);
-//        if(thePatient ==null){
-//            throw new RuntimeException("Patient id not found - "+patientId);
-//        }
-//    return thePatient;
-//    }
     @PostMapping("/search")
     public List<Vite> getPatient(@RequestBody(required = false) SearchForVite searchBody) {
         logger.info("getPatient");
