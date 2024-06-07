@@ -23,20 +23,23 @@ public class VisitDAOImpl implements VisitDAO {
 
     public List<VisitTable> findAllVisits(String visDate) {
         logger.info("findAllVisits");
-//        Query theQuery=entityManager.createQuery("From VisitTable where visitDate>=now() ");
+//       Query theQuery=entityManager.createQuery("From VisitTable where visitDate>=now() ");
         //System.out.println("========== " + visDate);
-        Query theQuery = entityManager.createQuery("From VisitTable where date(visitDate) >= date('" + visDate + "')");
+        // Query theQuery = entityManager.createQuery("From VisitTable where date(visitDate) >= date('" + visDate + "')");
+        Query theQuery = entityManager.createQuery("FROM VisitTable WHERE date(visitDate) >= date(:visDate) ORDER BY visitDate ASC");
+        theQuery.setParameter("visDate", visDate);
 
-//        Query theQuery=  entityManager.createQuery(
+
+
+        List<VisitTable> patients = theQuery.getResultList();
+        return patients;
+    }
+    //        Query theQuery=  entityManager.createQuery(
 //                " SELECT patientVisits.visitDate,vite.patientId, vite.patientName,vite.patientSurName," +
 //                        "vite.patientPatronymic,vite.birthDate,patientVisits.visitReason,patientVisits.placeName," +
 //                        "vite.recommendationPerson,vite.phoneNumber,patientVisits.status FROM PatientVisits patientVisits " +
 //                        " INNER JOIN Vite vite  ON patientVisits.patientId=vite.patientId "+
 //                        "where date(patientVisits.visitDate) >= date('"+visDate+"')");
-
-        List<VisitTable> patients = theQuery.getResultList();
-        return patients;
-    }
 
     @Override
     public void saveVisitTable(VisitTable visitTable) {

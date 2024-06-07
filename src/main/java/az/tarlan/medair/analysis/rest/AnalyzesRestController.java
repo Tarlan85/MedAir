@@ -41,8 +41,6 @@ public class AnalyzesRestController {
     @PostMapping("/analyses")
     public AnalyzesReqBody addAnalyses(@RequestBody AnalyzesReqBody analizList) throws IOException {
         logger.info("AnalyzesReqBody");
-        //System.out.println("addAnalyses");
-        //System.out.println(analizList.toString());
         analyzesService.saveAnalyzes(analizList);
         return analizList;
     }

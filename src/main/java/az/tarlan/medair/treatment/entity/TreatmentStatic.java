@@ -37,11 +37,21 @@ public class TreatmentStatic {
     @Column(name = "advise")
     private String advise;
 
+    @Column(name = "url_after")
+    private String urlAfter;
+
+    @Column(name = "url_during")
+    private String urlDuring;
+
+    @Column(name = "url_before")
+    private String urlBefore;
+
+
 
     public TreatmentStatic() {}
 
 
-    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, String advise) {
+    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, String advise, String urlAfter, String urlDuring, String urlBefore) {
         this.treatmentId = treatmentId;
         this.patientId = patientId;
         this.treatmentDesc = treatmentDesc;
@@ -49,6 +59,33 @@ public class TreatmentStatic {
         this.menapause = menapause;
         this.recommendation = recommendation;
         this.advise = advise;
+        this.urlAfter = urlAfter;
+        this.urlDuring = urlDuring;
+        this.urlBefore = urlBefore;
+    }
+
+    public String getUrlAfter() {
+        return urlAfter;
+    }
+
+    public void setUrlAfter(String urlAfter) {
+        this.urlAfter = urlAfter;
+    }
+
+    public String getUrlDuring() {
+        return urlDuring;
+    }
+
+    public void setUrlDuring(String urlDuring) {
+        this.urlDuring = urlDuring;
+    }
+
+    public String getUrlBefore() {
+        return urlBefore;
+    }
+
+    public void setUrlBefore(String urlBefore) {
+        this.urlBefore = urlBefore;
     }
 
     public String getRecommendation() {
@@ -117,6 +154,9 @@ public class TreatmentStatic {
                 ", menapause='" + menapause + '\'' +"\n"+
                 ", recommendation='" + recommendation + '\''+"\n"+
                 ", advise='" + advise + '\'' +
+                ", urlAfter='" + urlAfter + '\'' +
+                ", urlBefore='" + urlBefore + '\'' +
+                ", urlDuring='" + urlDuring + '\'' +
                 '}';
     }
 }
