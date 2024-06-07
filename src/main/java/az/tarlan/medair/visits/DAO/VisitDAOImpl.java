@@ -23,14 +23,8 @@ public class VisitDAOImpl implements VisitDAO {
 
     public List<VisitTable> findAllVisits(String visDate) {
         logger.info("findAllVisits");
-//       Query theQuery=entityManager.createQuery("From VisitTable where visitDate>=now() ");
-        //System.out.println("========== " + visDate);
-        // Query theQuery = entityManager.createQuery("From VisitTable where date(visitDate) >= date('" + visDate + "')");
         Query theQuery = entityManager.createQuery("FROM VisitTable WHERE date(visitDate) >= date(:visDate) ORDER BY visitDate ASC");
         theQuery.setParameter("visDate", visDate);
-
-
-
         List<VisitTable> patients = theQuery.getResultList();
         return patients;
     }

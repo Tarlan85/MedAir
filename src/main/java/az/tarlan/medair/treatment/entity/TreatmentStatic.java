@@ -38,20 +38,27 @@ public class TreatmentStatic {
     private String advise;
 
     @Column(name = "url_after")
-    private String urlAfter;
+    private String imageAfterUrl;
 
     @Column(name = "url_during")
-    private String urlDuring;
+    private String imageDuringUrl;
 
     @Column(name = "url_before")
-    private String urlBefore;
+    private String imageBeforeUrl;
 
+    @Column(name = "image_name_after")
+    private String imageAfterName;
 
+    @Column(name = "image_name_during")
+    private String imageDuringName;
+
+    @Column(name = "image_name_before")
+    private String imageBeforeName;
 
     public TreatmentStatic() {}
 
 
-    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, String advise, String urlAfter, String urlDuring, String urlBefore) {
+    public TreatmentStatic(int treatmentId, int patientId, String treatmentDesc, String preMenapause, String menapause, String recommendation, String advise, String imageAfterUrl, String imageDuringUrl, String imageBeforeUrl, String imageAfterName, String imageDuringName, String imageBeforeName) {
         this.treatmentId = treatmentId;
         this.patientId = patientId;
         this.treatmentDesc = treatmentDesc;
@@ -59,33 +66,60 @@ public class TreatmentStatic {
         this.menapause = menapause;
         this.recommendation = recommendation;
         this.advise = advise;
-        this.urlAfter = urlAfter;
-        this.urlDuring = urlDuring;
-        this.urlBefore = urlBefore;
+        this.imageAfterUrl = imageAfterUrl;
+        this.imageDuringUrl = imageDuringUrl;
+        this.imageBeforeUrl = imageBeforeUrl;
+        this.imageAfterName = imageAfterName;
+        this.imageDuringName = imageDuringName;
+        this.imageBeforeName = imageBeforeName;
     }
 
-    public String getUrlAfter() {
-        return urlAfter;
+    public String getImageAfterUrl() {
+        return imageAfterUrl;
     }
 
-    public void setUrlAfter(String urlAfter) {
-        this.urlAfter = urlAfter;
+    public void setImageAfterUrl(String imageAfterUrl) {
+        this.imageAfterUrl = imageAfterUrl;
     }
 
-    public String getUrlDuring() {
-        return urlDuring;
+    public String getImageDuringUrl() {
+        return imageDuringUrl;
     }
 
-    public void setUrlDuring(String urlDuring) {
-        this.urlDuring = urlDuring;
+    public void setImageDuringUrl(String imageDuringUrl) {
+        this.imageDuringUrl = imageDuringUrl;
     }
 
-    public String getUrlBefore() {
-        return urlBefore;
+    public String getImageBeforeUrl() {
+        return imageBeforeUrl;
     }
 
-    public void setUrlBefore(String urlBefore) {
-        this.urlBefore = urlBefore;
+    public void setImageBeforeUrl(String imageBeforeUrl) {
+        this.imageBeforeUrl = imageBeforeUrl;
+    }
+
+    public String getImageAfterName() {
+        return imageAfterName;
+    }
+
+    public void setImageAfterName(String imageAfterName) {
+        this.imageAfterName = imageAfterName;
+    }
+
+    public String getImageDuringName() {
+        return imageDuringName;
+    }
+
+    public void setImageDuringName(String imageDuringName) {
+        this.imageDuringName = imageDuringName;
+    }
+
+    public String getImageBeforeName() {
+        return imageBeforeName;
+    }
+
+    public void setImageBeforeName(String imageBeforeName) {
+        this.imageBeforeName = imageBeforeName;
     }
 
     public String getRecommendation() {
@@ -154,9 +188,12 @@ public class TreatmentStatic {
                 ", menapause='" + menapause + '\'' +"\n"+
                 ", recommendation='" + recommendation + '\''+"\n"+
                 ", advise='" + advise + '\'' +
-                ", urlAfter='" + urlAfter + '\'' +
-                ", urlBefore='" + urlBefore + '\'' +
-                ", urlDuring='" + urlDuring + '\'' +
+                ", urlAfter='" + imageAfterUrl + '\'' +
+                ", urlBefore='" + imageBeforeUrl + '\'' +
+                ", urlDuring='" + imageDuringUrl + '\'' +
+                ", nameAfter='" + imageAfterName + '\'' +
+                ", nameBefore='" + imageBeforeName + '\'' +
+                ", nameDuring='" + imageDuringName + '\'' +
                 '}';
     }
 }
