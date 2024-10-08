@@ -15,22 +15,28 @@ import org.springframework.stereotype.Component;
 @RequestMapping("/api")
 @Component
 public class LogInRestController {
-    private static final Logger logger=LoggerFactory.getLogger(LogInRestController.class);
-    private LogInService logInService;
+
+    private static final Logger logger = LoggerFactory.getLogger(LogInRestController.class);
+    private static final String LOGIN_LOG_MESSAGE = "Login : {}";
+    private static final String TOKEN_LOG_MESSAGE = "findToken : {}";
+
     @Autowired
-    public LogInRestController(LogInService logInService) {
-        this.logInService = logInService;
-    }
+    private LogInService logInService;
 
     @PostMapping("/login")
-    public LogInReqBody checkLogIn(@RequestBody LogIn logIn){
-      logger.info("Login : "+logIn);
-        return  logInService.checkLogIn(logIn);
+    public LogInReqBody logInUser(@RequestBody LogIn logIn) {
+        logMessage(LOGIN_LOG_MESSAGE, logIn);
+        return logInService.checkLogIn(logIn);
     }
+
     @GetMapping("/token/{token}")
-    public String findToken(@PathVariable String token){
-        logger.info("findToken : "+token);
+    public String validateToken(@PathVariable String token) {
+        logMessage(TOKEN_LOG_MESSAGE, token);
         return logInService.checkToken(token);
     }
 
+    private void logMessage(String message, Object value) {
+        logger.info(message, value);
+    }
 }
+

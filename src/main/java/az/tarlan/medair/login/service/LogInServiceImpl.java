@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class LogInServiceImpl implements LogInService {
-    private LogInDAO logInDAO;
+    private final LogInDAO logInDAO;
     @Autowired
     public LogInServiceImpl(LogInDAO logInDAO) {
         this.logInDAO = logInDAO;

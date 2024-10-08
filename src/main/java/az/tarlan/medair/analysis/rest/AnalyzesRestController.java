@@ -20,38 +20,43 @@ import java.util.List;
 @RequestMapping("/api")
 @Component
 public class AnalyzesRestController {
-    private AnalyzesService analyzesService;
+
+    private final AnalyzesService analyzesService;
+    private final Upload upload;
+
     @Value("${upload.path}")
     private String uploadPath;
+
     @Value("${server.ip}")
     private String serverIp;
-    private static final Logger logger= LoggerFactory.getLogger(AnalyzesRestController.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(AnalyzesRestController.class);
+    private static final String LOG_ANALYZE_REQ_BODY = "AnalyzesReqBody";
+
     @Autowired
-    public AnalyzesRestController(AnalyzesService analyzesService) {
+    public AnalyzesRestController(AnalyzesService analyzesService, Upload upload) {
         this.analyzesService = analyzesService;
+        this.upload = upload;
     }
 
     @GetMapping("/analysid")
     public int getAnalysesId(){
+        int newAnalysisId = analyzesService.getAnalysId();
+        logger.info("getAnalysesId : newAnalysisId = {}", newAnalysisId);
+        return newAnalysisId;
+    }
 
-        int newAnalysId = analyzesService.getAnalysId();
-        logger.info("getPatientId : \n newAnalysId = "+newAnalysId);
-        return newAnalysId ;
-    }
     @PostMapping("/analyses")
-    public AnalyzesReqBody addAnalyses(@RequestBody AnalyzesReqBody analizList) throws IOException {
-        logger.info("AnalyzesReqBody");
-        analyzesService.saveAnalyzes(analizList);
-        return analizList;
+    public AnalyzesReqBody addAnalyses(@RequestBody AnalyzesReqBody analysisRequestBody) throws IOException {
+        logger.info(LOG_ANALYZE_REQ_BODY);
+        analyzesService.saveAnalyzes(analysisRequestBody);
+        return analysisRequestBody;
     }
-    @PostMapping("/analysesImage")
-    public String addAnalyzesImage(@RequestParam("file") MultipartFile file) throws IOException {
-        logger.info("addAnalyzesImage");
-        System.out.println("addAnalyzesImage = ");
-        System.out.println("upload = "+uploadPath);
-        System.out.println("serverIp = "+serverIp);
-        Upload upload= new Upload();
-        return upload.UploadImage(file,uploadPath,serverIp);
+
+    @PostMapping("/analyses/image")
+    public String addAnalysesImage(@RequestParam("file") MultipartFile file) throws IOException {
+        logger.info("addAnalysesImage");
+        return uploadImage(file);
     }
 
     @GetMapping("/analyses/{patientId}")
@@ -60,4 +65,7 @@ public class AnalyzesRestController {
         return analyzesService.findPatientAnalyses(patientId);
     }
 
+    private String uploadImage(MultipartFile file) throws IOException {
+        return upload.UploadImage(file, uploadPath, serverIp);
+    }
 }

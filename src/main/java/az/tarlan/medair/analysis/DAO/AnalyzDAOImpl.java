@@ -2,24 +2,22 @@ package az.tarlan.medair.analysis.DAO;
 
 import az.tarlan.medair.analysis.entity.AnalyzesMedia;
 import az.tarlan.medair.analysis.entity.AnalyzesReqBody;
-import az.tarlan.medair.analysis.rest.AnalyzesRestController;
-import az.tarlan.medair.visits.entity.PatientVisits;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
 @Component
 public class AnalyzDAOImpl implements AnalyzDAO {
-    private EntityManager entityManager;
-    private static final Logger logger= LoggerFactory.getLogger(AnalyzDAOImpl.class);
+    private final EntityManager entityManager;
+    private static final Logger logger = LoggerFactory.getLogger(AnalyzDAOImpl.class);
+
     public AnalyzDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -28,7 +26,7 @@ public class AnalyzDAOImpl implements AnalyzDAO {
     public int getAnalysId() {
         logger.info("getAnalysId");
         Query theQuery = entityManager.createQuery(" Select max(analyzesId) from AnalyzesMedia ");
-        List list = theQuery.getResultList();
+        var list = theQuery.getResultList();
         if (list.get(0) == null) return 1;
         int analysId = (int) list.get(0);
         analysId = analysId + 1;
@@ -36,76 +34,54 @@ public class AnalyzDAOImpl implements AnalyzDAO {
     }
 
     @Override
-    public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
+    public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) {
         logger.info("saveAnalyzes");
-        int analyzId = 0;
-        System.out.println("saveAnalyzes");
-        AnalyzesMedia dbAnalyzesMedia = new AnalyzesMedia();
-        if (analyzesReqBody.getAnalyzesMediaList().size() > 0) {
-            Query theQuery = entityManager.createQuery("delete from AnalyzesMedia where  patientId=:patientId");
-            theQuery.setParameter("patientId", analyzesReqBody.getPatientId());
-            theQuery.executeUpdate();
-        }
-        for (int i = 0; i < analyzesReqBody.getAnalyzesMediaList().size(); i++) {
-            System.out.println("in for");
-            dbAnalyzesMedia.setPatientId(analyzesReqBody.getPatientId());
-            dbAnalyzesMedia.setAnalyzesDesc(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesDesc());
-            dbAnalyzesMedia.setAnalyzesType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesType());
-            dbAnalyzesMedia.setAnalyzesContentName(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesContentName());
-            dbAnalyzesMedia.setAnalyzesSubType(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesSubType());
-            dbAnalyzesMedia.setDate(analyzesReqBody.getAnalyzesMediaList().get(i).getDate());
-            dbAnalyzesMedia.setAnalyzesContentUrl(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesContentUrl());
-            System.out.println(dbAnalyzesMedia.toString());
-           AnalyzesMedia analyzesMedia = entityManager.merge(dbAnalyzesMedia);
-            if (analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesId() == 0)
-                dbAnalyzesMedia.setAnalyzesId(analyzesMedia.getAnalyzesId());
-//           n     dbAnalyzesMedia.setAnalyzesId(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesId());
-//
-        }
-        System.out.println("out for");
-        //update  with id in db ... so we can get generation id for save / insert
-//        dbBreastAnalyzes.setAnalyzId(dbBreastAnalyzes.getAnalyzId());
+        if (!analyzesReqBody.getAnalyzesMediaList().isEmpty())
+            cleanUpExistingAnalyzesMedia(analyzesReqBody.getPatientId());
 
+        for (AnalyzesMedia media : analyzesReqBody.getAnalyzesMediaList()) {
+            AnalyzesMedia dbAnalyzesMedia = createAnalyzesMedia(analyzesReqBody.getPatientId(), media);
+            AnalyzesMedia savedMedia = entityManager.merge(dbAnalyzesMedia);
+            if (media.getAnalyzesId() == 0) {
+                dbAnalyzesMedia.setAnalyzesId(savedMedia.getAnalyzesId());
+            }
+            logger.info(dbAnalyzesMedia.toString());
+        }
     }
 
-    //    @Override
-//    public void saveAnalyzes(AnalyzesReqBody analyzesReqBody) throws IOException {
-//        //System.out.println("saveAnalyzes");
-//        AnalyzesMedia dbAnalyzesMedia=new AnalyzesMedia();
-//        if (analyzesReqBody.getAnalyzesMediaList().size()>0){
-//            Query theQuery=entityManager.createQuery("delete from AnalyzesMedia where  patientId=:patientId");
-//            theQuery.setParameter("patientId",analyzesReqBody.getPatientId());
-//            theQuery.executeUpdate();
-//        }
-//        for(int i=0;i<analyzesReqBody.getAnalyzesMediaList().size();i++){
-////            dbAnalyzesMedia.setAnalyzesContentByte(analyzesReqBody.getAnalyzesMediaList().get(i).getBytes());
-////            dbAnalyzesMedia.setAnalyzesContentName(analyzesReqBody.getAnalyzesMediaList().get(i).getName());
-////            dbAnalyzesMedia.setAnalyzesContentOriginalFileName(analyzesReqBody.getAnalyzesMediaList().get(i).getOriginalFilename());
-////            dbAnalyzesMedia.setAnalyzesContentType(analyzesReqBody.getAnalyzesMediaList().get(i).getContentType());
-////            dbAnalyzesMedia.setAnalyzesContentSize(analyzesReqBody.getAnalyzesMediaList().get(i).getSize());
-//
-////        dbAnalyzesMedia =entityManager.merge(analyzesReqBody.getAnalyzesMediaList().get(i));
-//        dbAnalyzesMedia =entityManager.merge(dbAnalyzesMedia);
-//        if(analyzesReqBody.getAnalyzesMediaList().get(i).getAnalyzesId()==0)
-//        dbAnalyzesMedia.setAnalyzesId(dbAnalyzesMedia.getAnalyzesId());
-//                dbAnalyzesMedia.setPatientId(analyzesReqBody.getPatientId());
-//        }
-//        //update  with id in db ... so we can get generation id for save / insert
-////        dbBreastAnalyzes.setAnalyzId(dbBreastAnalyzes.getAnalyzId());
-//    }
+    private void cleanUpExistingAnalyzesMedia(int patientId) {
+        Query deleteQuery = entityManager.createQuery("delete from AnalyzesMedia where patientId = :patientId");
+        deleteQuery.setParameter("patientId", patientId);
+        deleteQuery.executeUpdate();
+    }
+
+    private AnalyzesMedia createAnalyzesMedia(int patientId, AnalyzesMedia media) {
+        AnalyzesMedia dbAnalyzesMedia = new AnalyzesMedia();
+        dbAnalyzesMedia.setPatientId(patientId);
+        dbAnalyzesMedia.setAnalyzesDesc(media.getAnalyzesDesc());
+        dbAnalyzesMedia.setAnalyzesType(media.getAnalyzesType());
+        dbAnalyzesMedia.setAnalyzesContentName(media.getAnalyzesContentName());
+        dbAnalyzesMedia.setAnalyzesSubType(media.getAnalyzesSubType());
+        dbAnalyzesMedia.setDate(media.getDate());
+        dbAnalyzesMedia.setAnalyzesContentUrl(media.getAnalyzesContentUrl());
+        return dbAnalyzesMedia;
+    }
+
+
     @Override
     public List<AnalyzesMedia> findPatientAnalyses(int patientId) {
         logger.info("findPatientAnalyses");
-        //System.out.println("2. findPatientAnalyses");
-        Query theQuery = entityManager.createQuery("From AnalyzesMedia where patientId = " + patientId);
-        List<AnalyzesMedia> analyzesMedia = null;
+        String FIND_ANALYSES_QUERY = "FROM AnalyzesMedia WHERE patientId = :patientId";
+        Query theQuery = entityManager.createQuery(FIND_ANALYSES_QUERY);
+        theQuery.setParameter("patientId", patientId);
+
+        List<AnalyzesMedia> analyzesMedia = Collections.emptyList();
         try {
             analyzesMedia = theQuery.getResultList();
         } catch (Exception e) {
-            //System.out.println("err");
+            logger.error("Error occurred while fetching analyses for patientId: {}", patientId, e);
         }
 
-//        //System.out.println("3. "+analyzesMedia.toString());
         return analyzesMedia;
     }
 }
